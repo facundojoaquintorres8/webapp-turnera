@@ -117,7 +117,6 @@ export class UpdateProfileComponent implements OnInit {
     });
     return {
       id: this.myForm.get(['id'])!.value,
-      organizationId: this.authService.getOrganizationId()!,
       active: this.myForm.get(['active'])!.value,
       description: this.myForm.get(['description'])!.value,
       permissions: permissionsSelected

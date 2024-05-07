@@ -11,7 +11,6 @@ export interface IAgenda {
 
 export interface ISaveAgenda {
   id: number;
-  organizationId: number;
   resource: IResource;
   startDate: string;
   endDate: string;
@@ -30,6 +29,7 @@ export interface ISaveAgenda {
   thursday: boolean;
   friday: boolean;
   saturday: boolean;
+  omitHolidays: boolean;
 }
 
 export enum RepeatTypeEnum {

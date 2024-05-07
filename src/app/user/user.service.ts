@@ -2,19 +2,16 @@ import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { SERVER_API_URL } from '../app.constants';
-import { AuthService } from '../auth/auth.service';
 import { IUser } from '../models/user.models';
 import { createRequestOption } from '../shared/request-util';
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
   public resourceUrl = SERVER_API_URL + 'api/users';
-  private organizationId = this.authService.getOrganizationId();
 
-  constructor(private http: HttpClient, private authService: AuthService) {}
+  constructor(private http: HttpClient) {}
 
   findAllByFilter(filter: any): Observable<HttpResponse<IUser[]>> {
-    filter['organizationId'] = this.organizationId;
     filter['sort'] = filter['sort'] ? filter['sort'] : ['ASC', 'firstName'];
     const options = createRequestOption(filter);
     return this.http.get<IUser[]>(`${this.resourceUrl}/findAllByFilter`, { params: options, observe: 'response' });

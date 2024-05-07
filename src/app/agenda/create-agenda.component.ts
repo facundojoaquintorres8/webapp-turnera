@@ -51,6 +51,7 @@ export class CreateAgendaComponent implements OnInit {
     thursday: [false],
     friday: [false],
     saturday: [false],
+    omitHolidays: [true]
   });
 
   constructor(
@@ -173,7 +174,6 @@ export class CreateAgendaComponent implements OnInit {
   private createFromForm(): ISaveAgenda {
     return {
       id: this.myForm.get(['id'])!.value,
-      organizationId: this.authService.getOrganizationId()!,
       resource: this.myForm.get(['resource'])!.value,
       startDate: formatDateFromNgbDateStruct(this.myForm.get(['startDate'])!.value)!,
       endDate: formatDateFromNgbDateStruct(this.myForm.get(['endDate'])!.value)!,
@@ -192,6 +192,7 @@ export class CreateAgendaComponent implements OnInit {
       thursday: this.myForm.get(['thursday'])!.value,
       friday: this.myForm.get(['friday'])!.value,
       saturday: this.myForm.get(['saturday'])!.value,
+      omitHolidays: this.myForm.get(['omitHolidays'])!.value
     };
   }
 

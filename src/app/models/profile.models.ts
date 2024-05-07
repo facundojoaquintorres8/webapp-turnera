@@ -1,6 +1,5 @@
 export interface IProfile {
   id: number;
-  organizationId: number;
   active: boolean;
   description: string;
   permissions: IPermission[];

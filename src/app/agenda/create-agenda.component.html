@@ -118,6 +118,18 @@
 
             <div class="col-lg-2">
                 <div class="form-group">
+                    <label for="omitHolidays" class="mt-30 d-flex">
+                        <input type="checkbox" class="checkbox mr-1" id="omitHolidays" name="omitHolidays"
+                            formControlName="omitHolidays">
+                        ¿Omitir feriados?
+                    </label>
+                </div>
+            </div>
+        </div>
+            
+        <div class="row">
+            <div class="col-lg-2">
+                <div class="form-group">
                     <label for="repeat" class="mt-30 d-flex">
                         <input type="checkbox" class="checkbox mr-1" id="repeat" name="repeat" formControlName="repeat"
                             (ngModelChange)="onRepeatChange()">

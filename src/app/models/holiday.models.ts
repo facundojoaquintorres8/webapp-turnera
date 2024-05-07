@@ -8,7 +8,6 @@ export interface IHoliday {
 
 export interface ISaveHoliday {
   id: number;
-  organizationId: number;
   active: boolean;
   date: string;
   description: string;

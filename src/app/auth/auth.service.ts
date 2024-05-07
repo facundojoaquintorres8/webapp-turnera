@@ -46,10 +46,6 @@ export class AuthService {
     return localStorage.getItem('jwt');
   }
 
-  public getOrganizationId(): number | null {
-    return this.getSessionUser()?.organizationId!;
-  }
-
   public getPermissions(): string[] {
     let sessionUserPermissions: string[] = [];
     const groupPermissionsByProfile = this.getSessionUser()?.profiles.map(x => x.permissions.map(y => y.code));

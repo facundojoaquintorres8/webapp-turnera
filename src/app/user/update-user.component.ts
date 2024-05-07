@@ -85,7 +85,6 @@ export class UpdateUserComponent implements OnInit {
   private createFromForm(): IUser {
     return {
       id: this.myForm.get(['id'])!.value,
-      organizationId: this.authService.getOrganizationId()!,
       active: this.myForm.get(['active'])!.value,
       firstName: this.myForm.get(['firstName'])!.value,
       lastName: this.myForm.get(['lastName'])!.value,

@@ -73,7 +73,6 @@ export class UpdateCustomerComponent implements OnInit {
   private createFromForm(): ICustomer {
     return {
       id: this.myForm.get(['id'])!.value,
-      organizationId: this.authService.getOrganizationId()!,
       businessName: this.myForm.get(['businessName'])!.value,
       brandName: this.myForm.get(['brandName'])!.value,
       cuit: this.myForm.get(['cuit'])!.value,

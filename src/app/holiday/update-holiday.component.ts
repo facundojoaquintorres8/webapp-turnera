@@ -67,7 +67,6 @@ export class UpdateHolidayComponent implements OnInit {
   private createFromForm(): ISaveHoliday {
     return {
       id: this.myForm.get(['id'])!.value,
-      organizationId: this.authService.getOrganizationId()!,
       active: this.myForm.get(['active'])!.value,
       date: formatDateFromNgbDateStruct(this.myForm.get(['date'])!.value)!,
       description: this.myForm.get(['description'])!.value,

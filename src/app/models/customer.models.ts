@@ -1,7 +1,6 @@
 
 export interface ICustomer {
   id: number;
-  organizationId: number;
   active: boolean;
   businessName: string;
   brandName?: string;

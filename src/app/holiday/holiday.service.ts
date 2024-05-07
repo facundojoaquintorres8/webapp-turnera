@@ -2,19 +2,16 @@ import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { SERVER_API_URL } from '../app.constants';
-import { AuthService } from '../auth/auth.service';
 import { IHoliday, ISaveHoliday } from '../models/holiday.models';
 import { createRequestOption } from '../shared/request-util';
 
 @Injectable({ providedIn: 'root' })
 export class HolidayService {
   public holidayUrl = SERVER_API_URL + 'api/holidays';
-  private organizationId = this.authService.getOrganizationId();
 
-  constructor(private http: HttpClient, private authService: AuthService) {}
+  constructor(private http: HttpClient) {}
 
   findAllByFilter(filter: any): Observable<HttpResponse<IHoliday[]>> {
-    filter['organizationId'] = this.organizationId;
     filter['sort'] = filter['sort'] ? filter['sort'] : ['ASC', 'date'];
     const options = createRequestOption(filter);
     return this.http.get<IHoliday[]>(`${this.holidayUrl}/findAllByFilter`, { params: options, observe: 'response' });
