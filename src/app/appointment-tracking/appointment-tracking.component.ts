@@ -25,6 +25,7 @@ import { AttendAppointmentModalComponent } from './attend-appointment-modal.comp
 import { BookAppointmentComponent } from './book-appointment-modal.component';
 import { CancelAppointmentModalComponent } from './cancel-appointment-modal.component';
 import { FinalizeAppointmentModalComponent } from './finalize-appointment-modal.component';
+import { IResponse } from '../models/response.models';
 
 @Component({
   selector: 'app-appointment-tracking',
@@ -97,15 +98,15 @@ export class AppointmentTrackingComponent implements OnInit {
     this.permissions = this.authService.getPermissions();
 
     this.resourceTypeService.findAllByFilter({}).subscribe(
-      (res: HttpResponse<any>) => this.resourcesTypes = res.body.content || []
+      (res: HttpResponse<IResponse>) => this.resourcesTypes = res.body?.data.content || []
     );
 
     this.resourceService.findAllByFilter({}).subscribe(
-      (res: HttpResponse<any>) => this.resources = res.body.content || []
+      (res: HttpResponse<IResponse>) => this.resources = res.body?.data.content || []
     );
 
     this.customerService.findAllByFilter({}).subscribe(
-      (res: HttpResponse<any>) => this.customers = res.body.content || []
+      (res: HttpResponse<IResponse>) => this.customers = res.body?.data.content || []
     );
 
     Object.keys(this.appointmentStatusObject).map(key =>
@@ -140,11 +141,11 @@ export class AppointmentTrackingComponent implements OnInit {
   onResourceTypeChange(): void {
     if (this.myFormFilter.get('resourceTypeId')?.value === null) { 
       this.resourceService.findAllByFilter({}).subscribe(
-        (res: HttpResponse<any>) => this.resources = res.body.content || []
+        (res: HttpResponse<IResponse>) => this.resources = res.body?.data.content || []
       );  
     } else {
       this.resourceService.findAllByFilter({ resourceTypeId: this.myFormFilter.get('resourceTypeId')?.value }).subscribe(
-        (res: HttpResponse<any>) => this.resources = res.body.content || []
+        (res: HttpResponse<IResponse>) => this.resources = res.body?.data.content || []
       );  
     }
   }

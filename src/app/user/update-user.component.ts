@@ -37,8 +37,8 @@ export class UpdateUserComponent implements OnInit {
 
   ngOnInit(): void {
     this.profileService.findAllByFilter({ active: true }).subscribe(
-      (res1: HttpResponse<any>) => {
-        this.profiles = res1.body.content || [];
+      (res1: HttpResponse<IResponse>) => {
+        this.profiles = res1.body?.data.content || [];
         const id = this.activatedRoute.snapshot.paramMap.get("id");
         if (id) {
           this.userService.find(parseInt(id)).subscribe(

@@ -11,6 +11,7 @@ import { formatDateFromNgbDateStruct, formatTimeFromNgbTimeStruct } from '../sha
 import { NgbDateStruct, NgbTimeStruct } from '@ng-bootstrap/ng-bootstrap';
 import * as moment from 'moment';
 import * as momentTimeZone from 'moment-timezone';
+import { IResponse } from '../models/response.models';
 
 @Component({
   selector: 'app-create-agenda',
@@ -63,7 +64,7 @@ export class CreateAgendaComponent implements OnInit {
 
   ngOnInit(): void {
     this.resourceService.findAllByFilter({ active: true }).subscribe(
-      (res: HttpResponse<any>) => this.resources = res.body.content!
+      (res: HttpResponse<IResponse>) => this.resources = res.body?.data.content!
     )
 
     this.myForm.get('zoneId')?.setValue(momentTimeZone.tz.guess());

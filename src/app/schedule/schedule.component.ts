@@ -18,6 +18,7 @@ import { IAgenda } from '../models/agenda.models';
 import { AppointmentStatusEnum } from '../models/appointment.model';
 import { checkPermission } from '../security/check-permissions';
 import { formatDateFromDate } from '../shared/date-format';
+import { IResponse } from '../models/response.models';
 
 @Component({
   selector: 'app-schedule',
@@ -92,8 +93,8 @@ export class ScheduleComponent implements OnInit {
   onCalendarChange(): void {
     this.loading = true;
     this.agendaService.findAllByFilter({ ignorePaginated: true, page: 0, ...this.createFromForm() }).subscribe(
-      (res: HttpResponse<any>) => {
-        this.events = res.body.content.map((x: IAgenda) => ({
+      (res: HttpResponse<IResponse>) => {
+        this.events = res.body?.data.content.map((x: IAgenda) => ({
           id: x.id,
           start: new Date(x.startDate),
           end: new Date(x.endDate),

@@ -45,8 +45,8 @@ export class UpdateResourceComponent implements OnInit {
 
     this.resourceTypeService.findAllByFilter({ active: true })
       .subscribe(
-        (res: HttpResponse<any>) => {
-          this.resourcesTypes = res.body.content || [];
+        (res: HttpResponse<IResponse>) => {
+          this.resourcesTypes = res.body?.data.content || [];
         }
       )
   }
