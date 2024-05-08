@@ -4,6 +4,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { IOrganization } from '../models/organization.models';
 import { OrganizationService } from './organization.service';
+import { IResponse } from '../models/response.models';
 
 @Component({
   selector: 'app-update-organization',
@@ -30,13 +31,12 @@ export class UpdateOrganizationComponent implements OnInit {
 
   ngOnInit(): void {
     this.organizationService.find().subscribe(
-      (res: HttpResponse<IOrganization>) => this.updateForm(res.body!)
+      (res: HttpResponse<IResponse>) => this.updateForm(res.body?.data)
     );
   }
 
   updateForm(organization: IOrganization): void {
     this.myForm.patchValue({
-      id: organization.id,
       businessName: organization.businessName,
       brandName: organization.brandName,
       cuit: organization.cuit,
@@ -58,7 +58,6 @@ export class UpdateOrganizationComponent implements OnInit {
 
   private createFromForm(): IOrganization {
     return {
-      id: this.myForm.get(['id'])!.value,
       businessName: this.myForm.get(['businessName'])!.value,
       brandName: this.myForm.get(['brandName'])!.value,
       cuit: this.myForm.get(['cuit'])!.value,
@@ -69,7 +68,7 @@ export class UpdateOrganizationComponent implements OnInit {
     };
   }
 
-  private subscribeToSaveResponse(result: Observable<HttpResponse<IOrganization>>): void {
+  private subscribeToSaveResponse(result: Observable<HttpResponse<IResponse>>): void {
     result.subscribe(
       () => this.previousState(),
       () => this.isSaving = false

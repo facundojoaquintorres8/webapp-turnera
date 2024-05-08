@@ -6,8 +6,9 @@ import { IAgenda } from '../models/agenda.models';
 import { AppointmentService } from './appointment.service';
 import { CustomerService } from '../customer/customer.service';
 import { ICustomer, IQuickCustomer } from '../models/customer.models';
-import { IAppointment, IAppointmentSave } from '../models/appointment.model';
+import { IAppointmentSave } from '../models/appointment.model';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { IResponse } from '../models/response.models';
 
 @Component({
   selector: 'app-book-appointment-modal',
@@ -85,7 +86,7 @@ export class BookAppointmentComponent implements OnInit {
     }
   }
 
-  private subscribeToSaveResponse(result: Observable<HttpResponse<IAppointment>>): void {
+  private subscribeToSaveResponse(result: Observable<HttpResponse<IResponse>>): void {
     result.subscribe(
       () => this.activeModal.close(),
       () => this.isSaving = false

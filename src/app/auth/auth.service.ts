@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { SERVER_API_URL } from '../app.constants';
 import { ILogin, ISessionUser } from '../models/login.models';
 import { IUser } from '../models/user.models';
+import { IResponse } from '../models/response.models';
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +14,8 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
-  login(login: ILogin): Observable<HttpResponse<ISessionUser>> {
-    return this.http.post<ISessionUser>(this.resourceUrl, login, { observe: 'response' });
+  login(login: ILogin): Observable<HttpResponse<IResponse>> {
+    return this.http.post<IResponse>(this.resourceUrl, login, { observe: 'response' });
   }
 
   public logout(): void {

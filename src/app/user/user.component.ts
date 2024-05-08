@@ -7,6 +7,8 @@ import { IHeader, InputTypeEnum } from '../component/table/table.models';
 import { IUser } from '../models/user.models';
 import { DeleteUserModalComponent } from './delete-user-modal.component';
 import { UserService } from './user.service';
+import { HttpRequest } from '@angular/common/http';
+import { IResponse } from '../models/response.models';
 
 @Component({
   selector: 'app-user',
@@ -42,7 +44,7 @@ export class UserComponent implements OnInit {
     ];
   }
 
-  query = (req?: any) => this.userService.findAllByFilter(req);
+  query = (req?: HttpRequest<IResponse>) => this.userService.findAllByFilter(req);
 
   delete(user: IUser): void {
     this.ngbModalRef = this.modalService.open(DeleteUserModalComponent, { size: 'lg', backdrop: 'static' });

@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { SERVER_API_URL } from '../app.constants';
 import { IOrganization } from '../models/organization.models';
+import { IResponse } from '../models/response.models';
 
 @Injectable({ providedIn: 'root' })
 export class OrganizationService {
@@ -10,11 +11,11 @@ export class OrganizationService {
 
   constructor(private http: HttpClient) {}
 
-  find(): Observable<HttpResponse<IOrganization>> {
-    return this.http.get<IOrganization>(`${this.resourceUrl}`, { observe: 'response' });
+  find(): Observable<HttpResponse<IResponse>> {
+    return this.http.get<IResponse>(`${this.resourceUrl}`, { observe: 'response' });
   }
 
-  update(organization: IOrganization): Observable<HttpResponse<IOrganization>> {
-    return this.http.put<IOrganization>(this.resourceUrl, organization, { observe: 'response' });
+  update(organization: IOrganization): Observable<HttpResponse<IResponse>> {
+    return this.http.put<IResponse>(this.resourceUrl, organization, { observe: 'response' });
   }
 }

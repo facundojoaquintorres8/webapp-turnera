@@ -8,6 +8,7 @@ import { AuthService } from '../auth/auth.service';
 import { IResource } from '../models/resource.models';
 import { ResourceTypeService } from '../resource-type/resource-type.service';
 import { IResourceType } from '../models/resourceType.models';
+import { IResponse } from '../models/response.models';
 
 @Component({
   selector: 'app-update-resource',
@@ -38,7 +39,7 @@ export class UpdateResourceComponent implements OnInit {
     const id = this.activatedRoute.snapshot.paramMap.get("id");
     if (id) {
       this.resourceService.find(parseInt(id)).subscribe(
-        (res: HttpResponse<IResource>) => this.updateForm(res.body!)
+        (res: HttpResponse<IResponse>) => this.updateForm(res.body?.data)
       );
     }
 
@@ -84,7 +85,7 @@ export class UpdateResourceComponent implements OnInit {
     };
   }
 
-  private subscribeToSaveResponse(result: Observable<HttpResponse<IResource>>): void {
+  private subscribeToSaveResponse(result: Observable<HttpResponse<IResponse>>): void {
     result.subscribe(
       () => this.previousState(),
       () => this.isSaving = false

@@ -5,8 +5,8 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { ToastService } from 'src/app/component/toast/toast.service';
 import { IPasswordResetRequest } from 'src/app/models/account.models';
-import { IUser } from 'src/app/models/user.models';
 import { AccountService } from '../account.service';
+import { IResponse } from 'src/app/models/response.models';
 
 @Component({
   selector: 'app-password-reset-request',
@@ -37,7 +37,7 @@ export class PasswordResetRequestComponent implements OnInit {
     this.subscribeToSaveResponse(this.accountService.passwordResetRequest(this.createFromForm()));
   }
 
-  private subscribeToSaveResponse(result: Observable<HttpResponse<IUser>>): void {
+  private subscribeToSaveResponse(result: Observable<HttpResponse<IResponse>>): void {
     result.subscribe(
       () => {
         this.toastService.changeMessage(

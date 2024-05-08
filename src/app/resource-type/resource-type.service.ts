@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { SERVER_API_URL } from '../app.constants';
 import { IResourceType } from '../models/resourceType.models';
 import { createRequestOption } from '../shared/request-util';
+import { IResponse } from '../models/response.models';
 
 @Injectable({ providedIn: 'root' })
 export class ResourceTypeService {
@@ -11,25 +12,25 @@ export class ResourceTypeService {
 
   constructor(private http: HttpClient) {}
 
-  findAllByFilter(filter: any): Observable<HttpResponse<IResourceType[]>> {
+  findAllByFilter(filter: any): Observable<HttpResponse<IResponse>> {
     filter['sort'] = filter['sort'] ? filter['sort'] : ['ASC', 'description'];
     const options = createRequestOption(filter);
-    return this.http.get<IResourceType[]>(`${this.resourceUrl}/findAllByFilter`, { params: options, observe: 'response' });
+    return this.http.get<IResponse>(`${this.resourceUrl}/findAllByFilter`, { params: options, observe: 'response' });
   }
 
-  find(id: number): Observable<HttpResponse<IResourceType>> {
-    return this.http.get<IResourceType>(`${this.resourceUrl}/${id}`, { observe: 'response' });
+  find(id: number): Observable<HttpResponse<IResponse>> {
+    return this.http.get<IResponse>(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
-  create(resourceType: IResourceType): Observable<HttpResponse<IResourceType>> {
-    return this.http.post<IResourceType>(this.resourceUrl, resourceType, { observe: 'response' });
+  create(resourceType: IResourceType): Observable<HttpResponse<IResponse>> {
+    return this.http.post<IResponse>(this.resourceUrl, resourceType, { observe: 'response' });
   }
 
-  update(resourceType: IResourceType): Observable<HttpResponse<IResourceType>> {
-    return this.http.put<IResourceType>(this.resourceUrl, resourceType, { observe: 'response' });
+  update(resourceType: IResourceType): Observable<HttpResponse<IResponse>> {
+    return this.http.put<IResponse>(this.resourceUrl, resourceType, { observe: 'response' });
   }
 
-  delete(id: number): Observable<HttpResponse<any>> {
-    return this.http.delete<any>(`${this.resourceUrl}/${id}`, { observe: 'response' });
+  delete(id: number): Observable<HttpResponse<IResponse>> {
+    return this.http.delete<IResponse>(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 }

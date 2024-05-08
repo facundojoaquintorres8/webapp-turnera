@@ -4,9 +4,9 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/auth/auth.service';
 import { IPasswordChange } from 'src/app/models/account.models';
-import { IUser } from 'src/app/models/user.models';
 import { matchValues } from 'src/app/shared/custom-validators';
 import { AccountService } from '../account.service';
+import { IResponse } from 'src/app/models/response.models';
 
 @Component({
   selector: 'app-password-change',
@@ -42,7 +42,7 @@ export class PasswordChangeComponent implements OnInit {
     this.subscribeToSaveResponse(this.accountService.passwordChange(this.createFromForm()));
   }
 
-  private subscribeToSaveResponse(result: Observable<HttpResponse<IUser>>): void {
+  private subscribeToSaveResponse(result: Observable<HttpResponse<IResponse>>): void {
     result.subscribe(
       () => this.previousState(),
       () => this.isSaving = false

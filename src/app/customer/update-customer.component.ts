@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { CustomerService } from './customer.service';
 import { AuthService } from '../auth/auth.service';
 import { ICustomer } from '../models/customer.models';
+import { IResponse } from '../models/response.models';
 
 @Component({
   selector: 'app-update-customer',
@@ -37,7 +38,7 @@ export class UpdateCustomerComponent implements OnInit {
     const id = this.activatedRoute.snapshot.paramMap.get("id");
     if (id) {
       this.customerService.find(parseInt(id)).subscribe(
-        (res: HttpResponse<ICustomer>) =>  this.updateForm(res.body!)
+        (res: HttpResponse<IResponse>) =>  this.updateForm(res.body?.data)
       );
     }
   }
@@ -84,7 +85,7 @@ export class UpdateCustomerComponent implements OnInit {
     };
   }
 
-  private subscribeToSaveResponse(result: Observable<HttpResponse<ICustomer>>): void {
+  private subscribeToSaveResponse(result: Observable<HttpResponse<IResponse>>): void {
     result.subscribe(
       () => this.previousState(),
       () => this.isSaving = false

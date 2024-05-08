@@ -21,13 +21,7 @@ export class TokenInterceptor implements HttpInterceptor {
         return next.handle(request).pipe(tap(
             (ok: any) => {
                 if (token && ok.type !== 0) {
-                    if (request.method === 'POST' && ok.status === 204) {
-                        this.toastService.changeMessage(
-                            {
-                                showInfoToast: true,
-                            }
-                        );
-                    } else if (request.method === 'POST' || request.method === 'PUT' || request.method === 'DELETE') {
+                    if (request.method === 'POST' || request.method === 'PUT' || request.method === 'DELETE') {
                         this.toastService.changeMessage(
                             {
                                 showSuccessToast: true,
@@ -38,6 +32,14 @@ export class TokenInterceptor implements HttpInterceptor {
             },
             (err: any) => {
                 if (err instanceof HttpErrorResponse) {
+                    if (err.status === 400) {
+                        this.toastService.changeMessage(
+                            {
+                                showErrorToast: true,
+                                errorMessage: err.error.message,
+                            }
+                        );
+                    }
                     if (err.status === 500) {
                         this.toastService.changeMessage(
                             {

@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { ProfileService } from './profile.service';
 import { AuthService } from '../auth/auth.service';
 import { IPermission, IProfile, PermissionByEntity } from '../models/profile.models';
+import { IResponse } from '../models/response.models';
 
 
 @Component({
@@ -35,8 +36,8 @@ export class UpdateProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.profileService.findAllPermissions().subscribe(
-      (res1: HttpResponse<IPermission[]>) => {
-        this.allPermissions = res1.body?.filter(x => x.code !== 'home.index') || [];
+      (res1: HttpResponse<IResponse>) => {
+        this.allPermissions = res1.body?.data.filter((x: IPermission) => x.code !== 'home.index') || [];
 
         this.allPermissions.forEach(permission => {
           const permissionSplit = permission.code.split('.');
@@ -53,8 +54,8 @@ export class UpdateProfileComponent implements OnInit {
         const id = this.activatedRoute.snapshot.paramMap.get("id");
         if (id) {
           this.profileService.find(parseInt(id)).subscribe(
-            (res2: HttpResponse<IProfile>) => {
-              this.updateForm(res2.body!, this.permissionsByEntities);
+            (res2: HttpResponse<IResponse>) => {
+              this.updateForm(res2.body?.data, this.permissionsByEntities);
             }
           );
         }
@@ -123,7 +124,7 @@ export class UpdateProfileComponent implements OnInit {
     };
   }
 
-  private subscribeToSaveResponse(result: Observable<HttpResponse<IProfile>>): void {
+  private subscribeToSaveResponse(result: Observable<HttpResponse<IResponse>>): void {
     result.subscribe(
       () => this.previousState(),
       () => this.isSaving = false

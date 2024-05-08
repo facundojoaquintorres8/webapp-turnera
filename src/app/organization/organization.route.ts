@@ -14,7 +14,7 @@ export const organizationRoutes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: ':id/edit',
+    path: 'edit',
     component: UpdateOrganizationComponent,
     data: {
       title: 'Editar mi Organización',

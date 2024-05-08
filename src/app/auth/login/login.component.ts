@@ -2,8 +2,9 @@ import { HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ILogin, ISessionUser } from 'src/app/models/login.models';
+import { ILogin } from 'src/app/models/login.models';
 import { AuthService } from '../auth.service';
+import { IResponse } from 'src/app/models/response.models';
 
 @Component({
   selector: 'app-login',
@@ -26,8 +27,8 @@ export class LoginComponent implements OnInit {
   login(): void {
     this.isSaving = true;
     this.authService.login(this.createFromForm()).subscribe(
-      (res: HttpResponse<ISessionUser>) => {
-        this.authService.onLoginSuccess(res.body!);
+      (res: HttpResponse<IResponse>) => {
+        this.authService.onLoginSuccess(res.body?.data);
         this.router.navigate(['/schedule']);
       },
       () => this.isSaving = false

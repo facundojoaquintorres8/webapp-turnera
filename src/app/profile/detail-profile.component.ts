@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { IPermission, IProfile, PermissionByEntity } from '../models/profile.models';
 import { ProfileService } from './profile.service';
+import { IResponse } from '../models/response.models';
 
 @Component({
   selector: 'app-detail-profile',
@@ -24,8 +25,8 @@ export class DetailProfileComponent implements OnInit {
     if (id) {
 
       this.profileService.findAllPermissions().subscribe(
-        (res1: HttpResponse<IPermission[]>) => {
-          this.allPermissions = res1.body?.filter(x => x.code !== 'home.index') || [];
+        (res1: HttpResponse<IResponse>) => {
+          this.allPermissions = res1.body?.data.filter((x: IPermission) => x.code !== 'home.index') || [];
   
           this.allPermissions.forEach(permission => {
             const permissionSplit = permission.code.split('.');
@@ -40,9 +41,9 @@ export class DetailProfileComponent implements OnInit {
           });
   
           this.profileService.find(parseInt(id)).subscribe(
-            (res2: HttpResponse<IProfile>) => {
-              this.profile = res2.body!;
-              this.updateForm(res2.body!, this.permissionsByEntities);
+            (res2: HttpResponse<IResponse>) => {
+              this.profile = res2.body?.data;
+              this.updateForm(res2.body?.data, this.permissionsByEntities);
             }
           );
         }

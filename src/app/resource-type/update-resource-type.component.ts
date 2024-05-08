@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { ResourceTypeService } from './resource-type.service';
 import { AuthService } from '../auth/auth.service';
 import { IResourceType } from '../models/resourceType.models';
+import { IResponse } from '../models/response.models';
 
 @Component({
   selector: 'app-update-resource-type',
@@ -31,7 +32,7 @@ export class UpdateResourceTypeComponent implements OnInit {
     const id = this.activatedRoute.snapshot.paramMap.get("id");
     if (id) {
       this.resourceTypeService.find(parseInt(id)).subscribe(
-        (res: HttpResponse<IResourceType>) => this.updateForm(res.body!)
+        (res: HttpResponse<IResponse>) => this.updateForm(res.body?.data)
       );
     }
   }
@@ -66,7 +67,7 @@ export class UpdateResourceTypeComponent implements OnInit {
     };
   }
 
-  private subscribeToSaveResponse(result: Observable<HttpResponse<IResourceType>>): void {
+  private subscribeToSaveResponse(result: Observable<HttpResponse<IResponse>>): void {
     result.subscribe(
       () => this.previousState(),
       () => this.isSaving = false

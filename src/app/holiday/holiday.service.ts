@@ -2,8 +2,9 @@ import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { SERVER_API_URL } from '../app.constants';
-import { IHoliday, ISaveHoliday } from '../models/holiday.models';
+import { ISaveHoliday } from '../models/holiday.models';
 import { createRequestOption } from '../shared/request-util';
+import { IResponse } from '../models/response.models';
 
 @Injectable({ providedIn: 'root' })
 export class HolidayService {
@@ -11,25 +12,25 @@ export class HolidayService {
 
   constructor(private http: HttpClient) {}
 
-  findAllByFilter(filter: any): Observable<HttpResponse<IHoliday[]>> {
+  findAllByFilter(filter: any): Observable<HttpResponse<IResponse>> {
     filter['sort'] = filter['sort'] ? filter['sort'] : ['ASC', 'date'];
     const options = createRequestOption(filter);
-    return this.http.get<IHoliday[]>(`${this.holidayUrl}/findAllByFilter`, { params: options, observe: 'response' });
+    return this.http.get<IResponse>(`${this.holidayUrl}/findAllByFilter`, { params: options, observe: 'response' });
   }
 
-  find(id: number): Observable<HttpResponse<IHoliday>> {
-    return this.http.get<IHoliday>(`${this.holidayUrl}/${id}`, { observe: 'response' });
+  find(id: number): Observable<HttpResponse<IResponse>> {
+    return this.http.get<IResponse>(`${this.holidayUrl}/${id}`, { observe: 'response' });
   }
 
-  create(holiday: ISaveHoliday): Observable<HttpResponse<any>> {
-    return this.http.post<IHoliday>(this.holidayUrl, holiday, { observe: 'response' });
+  create(holiday: ISaveHoliday): Observable<HttpResponse<IResponse>> {
+    return this.http.post<IResponse>(this.holidayUrl, holiday, { observe: 'response' });
   }
 
-  update(holiday: ISaveHoliday): Observable<HttpResponse<IHoliday>> {
-    return this.http.put<IHoliday>(this.holidayUrl, holiday, { observe: 'response' });
+  update(holiday: ISaveHoliday): Observable<HttpResponse<IResponse>> {
+    return this.http.put<IResponse>(this.holidayUrl, holiday, { observe: 'response' });
   }
 
-  delete(id: number): Observable<HttpResponse<any>> {
-    return this.http.delete<any>(`${this.holidayUrl}/${id}`, { observe: 'response' });
+  delete(id: number): Observable<HttpResponse<IResponse>> {
+    return this.http.delete<IResponse>(`${this.holidayUrl}/${id}`, { observe: 'response' });
   }
 }

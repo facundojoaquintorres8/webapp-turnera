@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { IHoliday } from '../models/holiday.models';
 import { HolidayService } from './holiday.service';
+import { IResponse } from '../models/response.models';
 
 @Component({
   selector: 'app-detail-holiday',
@@ -20,7 +21,7 @@ export class DetailHolidayComponent implements OnInit {
     const id = this.activatedRoute.snapshot.paramMap.get("id");
     if (id) {
       this.holidayService.find(parseInt(id)).subscribe(
-        (res: HttpResponse<IHoliday>) =>  this.holiday = res.body!
+        (res: HttpResponse<IResponse>) =>  this.holiday = res.body?.data
       );
     }
   }

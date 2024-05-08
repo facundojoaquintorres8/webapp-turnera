@@ -1,5 +1,4 @@
 export interface IOrganization {
-  id: number;
   businessName: string;
   brandName?: string;
   cuit?: string;

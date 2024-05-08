@@ -3,6 +3,7 @@ import { Component, Input, OnInit, TemplateRef } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { IHeader, InputTypeEnum } from './table.models';
+import { IResponse } from 'src/app/models/response.models';
 
 @Component({
     selector: 'app-table',
@@ -11,7 +12,7 @@ import { IHeader, InputTypeEnum } from './table.models';
 })
 export class TableComponent implements OnInit {
 
-    @Input() queryItems!: (req?: any) => Observable<HttpResponse<any[]>>;
+    @Input() queryItems!: (req?: any) => Observable<HttpResponse<IResponse>>;
     @Input() headers: IHeader[] = [];
     @Input() myForm!: FormGroup;
     @Input() sort!: string[];
@@ -48,9 +49,9 @@ export class TableComponent implements OnInit {
                 page: $event.page - 1
             }
         ).subscribe(
-            (res: HttpResponse<any>) => {
-                this.items = res.body.content || [];
-                this.totalPages = res.body.totalPages;
+            (res: HttpResponse<IResponse>) => {
+                this.items = res.body?.data.content || [];
+                this.totalPages = res.body?.data.totalPages;
                 this.totalPages
             }
         );

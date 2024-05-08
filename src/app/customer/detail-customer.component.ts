@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ICustomer } from '../models/customer.models';
 import { CustomerService } from './customer.service';
+import { IResponse } from '../models/response.models';
 
 @Component({
   selector: 'app-detail-customer',
@@ -20,7 +21,7 @@ export class DetailCustomerComponent implements OnInit {
     const id = this.activatedRoute.snapshot.paramMap.get("id");
     if (id) {
       this.customerService.find(parseInt(id)).subscribe(
-        (res: HttpResponse<ICustomer>) =>  this.customer = res.body!
+        (res: HttpResponse<IResponse>) =>  this.customer = res.body?.data
       );
     }
   }

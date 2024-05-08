@@ -8,6 +8,7 @@ import { UserService } from './user.service';
 import { AuthService } from '../auth/auth.service';
 import { IProfile } from '../models/profile.models';
 import { ProfileService } from '../profile/profile.service';
+import { IResponse } from '../models/response.models';
 
 @Component({
   selector: 'app-update-user',
@@ -41,8 +42,8 @@ export class UpdateUserComponent implements OnInit {
         const id = this.activatedRoute.snapshot.paramMap.get("id");
         if (id) {
           this.userService.find(parseInt(id)).subscribe(
-            (res2: HttpResponse<IUser>) => {
-              this.updateForm(res2.body!, this.profiles);
+            (res2: HttpResponse<IResponse>) => {
+              this.updateForm(res2.body?.data, this.profiles);
             }
           );
         }
@@ -93,7 +94,7 @@ export class UpdateUserComponent implements OnInit {
     };
   }
 
-  private subscribeToSaveResponse(result: Observable<HttpResponse<IUser>>): void {
+  private subscribeToSaveResponse(result: Observable<HttpResponse<IResponse>>): void {
     result.subscribe(
       () => this.previousState(),
       () => this.isSaving = false

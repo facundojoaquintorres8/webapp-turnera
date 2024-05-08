@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { IResource } from '../models/resource.models';
 import { ResourceService } from './resource.service';
+import { IResponse } from '../models/response.models';
 
 @Component({
   selector: 'app-detail-resource',
@@ -20,7 +21,7 @@ export class DetailResourceComponent implements OnInit {
     const id = this.activatedRoute.snapshot.paramMap.get("id");
     if (id) {
       this.resourceService.find(parseInt(id)).subscribe(
-        (res: HttpResponse<IResource>) =>  this.resource = res.body!
+        (res: HttpResponse<IResponse>) =>  this.resource = res.body?.data
       );
     }
   }

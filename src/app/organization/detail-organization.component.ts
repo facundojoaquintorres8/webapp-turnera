@@ -2,6 +2,7 @@ import { HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { IOrganization } from '../models/organization.models';
 import { OrganizationService } from './organization.service';
+import { IResponse } from '../models/response.models';
 
 @Component({
   selector: 'app-detail-organization',
@@ -16,7 +17,7 @@ export class DetailOrganizationComponent implements OnInit {
 
   ngOnInit(): void {
     this.organizationService.find().subscribe(
-      (res: HttpResponse<IOrganization>) => this.organization = res.body!
+      (res: HttpResponse<IResponse>) => this.organization = res.body?.data
     );
   }
 

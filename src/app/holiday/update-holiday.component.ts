@@ -8,6 +8,7 @@ import { AuthService } from '../auth/auth.service';
 import { IHoliday, ISaveHoliday } from '../models/holiday.models';
 import { formatDateFromNgbDateStruct, formatNgbDateStructFromDate } from '../shared/date-format';
 import * as moment from 'moment';
+import { IResponse } from '../models/response.models';
 
 @Component({
   selector: 'app-update-holiday',
@@ -35,7 +36,7 @@ export class UpdateHolidayComponent implements OnInit {
     const id = this.activatedRoute.snapshot.paramMap.get("id");
     if (id) {
       this.holidayService.find(parseInt(id)).subscribe(
-        (res: HttpResponse<IHoliday>) => this.updateForm(res.body!)
+        (res: HttpResponse<IResponse>) => this.updateForm(res.body?.data)
       );
     }
   }
@@ -74,7 +75,7 @@ export class UpdateHolidayComponent implements OnInit {
     };
   }
 
-  private subscribeToSaveResponse(result: Observable<HttpResponse<IHoliday>>): void {
+  private subscribeToSaveResponse(result: Observable<HttpResponse<IResponse>>): void {
     result.subscribe(
       () => this.previousState(),
       () => this.isSaving = false
