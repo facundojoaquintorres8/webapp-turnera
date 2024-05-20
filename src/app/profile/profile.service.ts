@@ -1,14 +1,14 @@
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { SERVER_API_URL } from '../app.constants';
 import { IProfile } from '../models/profile.models';
 import { createRequestOption } from '../shared/request-util';
 import { IResponse } from '../models/response.models';
+import { environment } from 'src/environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class ProfileService {
-  public resourceUrl = SERVER_API_URL + 'api/profiles';
+  public resourceUrl = environment.SERVER_API_URL + 'api/profiles';
 
   constructor(private http: HttpClient) {}
 
@@ -35,6 +35,6 @@ export class ProfileService {
   }
 
   findAllPermissions(): Observable<HttpResponse<IResponse>> {
-    return this.http.get<IResponse>(`${SERVER_API_URL}api/permissions`, { observe: 'response' });
+    return this.http.get<IResponse>(`${environment.SERVER_API_URL}api/permissions`, { observe: 'response' });
   }
 }

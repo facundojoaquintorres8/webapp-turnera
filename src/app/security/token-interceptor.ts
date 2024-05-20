@@ -32,6 +32,7 @@ export class TokenInterceptor implements HttpInterceptor {
             },
             (err: any) => {
                 if (err instanceof HttpErrorResponse) {
+                    console.log(err);
                     if (err.status === 400) {
                         this.toastService.changeMessage(
                             {
@@ -39,16 +40,10 @@ export class TokenInterceptor implements HttpInterceptor {
                                 errorMessage: err.error.message,
                             }
                         );
-                    }
-                    if (err.status === 500) {
-                        this.toastService.changeMessage(
-                            {
-                                showErrorToast: true,
-                                errorMessage: err.error.message,
-                            }
-                        );
-                    }
-                    if (err.status === 403) {
+                    } else if (err.status === 401) {
+                        this.authService.logout();
+                        this.router.navigate(['login']);
+                    } else if (err.status === 403) {
                         this.toastService.changeMessage(
                             {
                                 showErrorToast: true,
@@ -56,12 +51,15 @@ export class TokenInterceptor implements HttpInterceptor {
                             }
                         );
                         this.router.navigate(['login']);
+                    } else {
+                        this.toastService.changeMessage(
+                            {
+                                showErrorToast: true,
+                                errorMessage: "No se pudo realizar la operación. Intente más tarde.",
+                            }
+                        );
                     }
-                    if (err.status !== 401) {
-                        return;
-                    }
-                    this.authService.logout();
-                    this.router.navigate(['login']);
+
                 }
             }));
     }

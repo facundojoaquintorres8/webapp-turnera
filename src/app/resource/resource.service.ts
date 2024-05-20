@@ -1,14 +1,14 @@
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { SERVER_API_URL } from '../app.constants';
 import { IResource } from '../models/resource.models';
 import { createRequestOption } from '../shared/request-util';
 import { IResponse } from '../models/response.models';
+import { environment } from 'src/environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class ResourceService {
-  public resourceUrl = SERVER_API_URL + 'api/resources';
+  public resourceUrl = environment.SERVER_API_URL + 'api/resources';
 
   constructor(private http: HttpClient) {}
 

@@ -1,15 +1,15 @@
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { SERVER_API_URL } from '../app.constants';
 import { ICustomer } from '../models/customer.models';
 import { createRequestOption } from '../shared/request-util';
 import { IResponse } from '../models/response.models';
+import { environment } from 'src/environments/environment';
 
 
 @Injectable({ providedIn: 'root' })
 export class CustomerService {
-  public resourceUrl = SERVER_API_URL + 'api/customers';
+  public resourceUrl = environment.SERVER_API_URL + 'api/customers';
 
   constructor(private http: HttpClient) {}
 

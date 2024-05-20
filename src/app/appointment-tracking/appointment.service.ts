@@ -1,13 +1,13 @@
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { SERVER_API_URL } from '../app.constants';
 import { IAppointmentChangeStatus, IAppointmentSave } from '../models/appointment.model';
 import { IResponse } from '../models/response.models';
+import { environment } from 'src/environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class AppointmentService {
-  public resourceUrl = SERVER_API_URL + 'api/appointments';
+  public resourceUrl = environment.SERVER_API_URL + 'api/appointments';
 
   constructor(private http: HttpClient) {}
 

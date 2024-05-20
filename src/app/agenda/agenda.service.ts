@@ -1,15 +1,15 @@
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { SERVER_API_URL } from '../app.constants';
 import { ISaveAgenda } from '../models/agenda.models';
 import { createRequestOption } from '../shared/request-util';
 import * as momentTimeZone from 'moment-timezone';
 import { IResponse } from '../models/response.models';
+import { environment } from 'src/environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class AgendaService {
-  public resourceUrl = SERVER_API_URL + 'api/agendas';
+  public resourceUrl = environment.SERVER_API_URL + 'api/agendas';
   public viewDate: Date = new Date();
 
   constructor(private http: HttpClient) {}

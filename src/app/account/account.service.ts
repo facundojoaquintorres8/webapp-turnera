@@ -1,15 +1,15 @@
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { SERVER_API_URL } from '../app.constants';
 import { IActivateAccount, IPasswordChange, IPasswordReset, IPasswordResetRequest, IRegister } from '../models/account.models';
 import { IResponse } from '../models/response.models';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AccountService {
-  public resourceUrl = SERVER_API_URL + 'api/account';
+  public resourceUrl = environment.SERVER_API_URL + 'api/account';
 
   constructor(private http: HttpClient) {}
 

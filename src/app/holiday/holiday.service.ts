@@ -1,14 +1,14 @@
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { SERVER_API_URL } from '../app.constants';
 import { ISaveHoliday } from '../models/holiday.models';
 import { createRequestOption } from '../shared/request-util';
 import { IResponse } from '../models/response.models';
+import { environment } from 'src/environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class HolidayService {
-  public holidayUrl = SERVER_API_URL + 'api/holidays';
+  public holidayUrl = environment.SERVER_API_URL + 'api/holidays';
 
   constructor(private http: HttpClient) {}
 
