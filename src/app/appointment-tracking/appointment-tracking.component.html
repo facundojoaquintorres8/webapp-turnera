@@ -125,6 +125,11 @@
             <fa-icon icon="plus"></fa-icon>
           </button>
 
+          <button type="button" *ngIf="canAttend(agenda)" (click)="attend(agenda.lastAppointment)"
+            class="btn btn-info btn-icon mr-1" title="Atender">
+            <fa-icon icon="play"></fa-icon>
+          </button>
+
           <button type="button" *ngIf="canAbsent(agenda)" (click)="absent(agenda.lastAppointment)"
             class="btn btn-dark btn-icon mr-1" title="Ausentar">
             <fa-icon icon="user-slash"></fa-icon>
@@ -133,11 +138,6 @@
           <button type="button" *ngIf="canCancel(agenda)" (click)="cancel(agenda.lastAppointment)"
             class="btn btn-danger btn-icon mr-1" title="Cancelar">
             <fa-icon icon="ban"></fa-icon>
-          </button>
-
-          <button type="button" *ngIf="canAttend(agenda)" (click)="attend(agenda.lastAppointment)"
-            class="btn btn-info btn-icon mr-1" title="Atender">
-            <fa-icon icon="play"></fa-icon>
           </button>
 
           <button type="button" *ngIf="canFinalize(agenda)" (click)="finalize(agenda.lastAppointment)"

@@ -11,7 +11,7 @@ import { TableComponent } from '../component/table/table.component';
 import { IHeader, InputTypeEnum } from '../component/table/table.models';
 import { CustomerService } from '../customer/customer.service';
 import { IAgenda } from '../models/agenda.models';
-import { IAppointment } from '../models/appointment.model';
+import { AppointmentStatusEnum, IAppointment } from '../models/appointment.model';
 import { ICustomer } from '../models/customer.models';
 import { IListItem } from '../models/list.models';
 import { IResource } from '../models/resource.models';
@@ -42,6 +42,7 @@ export class AppointmentTrackingComponent implements OnInit {
   resources: IResource[] = [];
   customers: ICustomer[] = [];
   appointmentStatus: IListItem[] = [];
+  appointmentStatusEnum: any = AppointmentStatusEnum;
   today: Date = this.agendaService.viewDate;
   firstDayMonth: Date = new Date(this.today.getFullYear(), this.today.getMonth(), 1);
   lastDayMonth: Date = new Date(this.today.getFullYear(), this.today.getMonth() + 1, 0);
@@ -163,20 +164,20 @@ export class AppointmentTrackingComponent implements OnInit {
   appointmentStatusColor(lastAppointment: IAppointment): string {
     let result = 'badge badge-white border border-primary'; // Free
     if (lastAppointment) {
-      switch (lastAppointment.lastAppointmentStatus.status.toString()) {
-        case 'BOOKED':
+      switch (this.appointmentStatusEnum[lastAppointment.lastAppointmentStatus.status]) {
+        case AppointmentStatusEnum.BOOKED:
           result = 'badge badge-warning';
           break;
-        case 'ABSENT':
+        case AppointmentStatusEnum.ABSENT:
           result = 'badge badge-dark';
           break;
-        case 'CANCELLED':
+        case AppointmentStatusEnum.CANCELLED:
           result = 'badge badge-danger';
           break;
-        case 'IN_ATTENTION':
+        case AppointmentStatusEnum.IN_ATTENTION:
           result = 'badge badge-info';
           break;
-        case 'FINALIZED':
+        case AppointmentStatusEnum.FINALIZED:
           result = 'badge badge-success';
           break;
       }
@@ -185,27 +186,27 @@ export class AppointmentTrackingComponent implements OnInit {
   }
 
   canBook(agenda: IAgenda): boolean {
-    return (!agenda.lastAppointment || agenda.lastAppointment.lastAppointmentStatus.status.toString() === 'CANCELLED')
+    return (!agenda.lastAppointment || this.appointmentStatusEnum[agenda.lastAppointment.lastAppointmentStatus.status] === AppointmentStatusEnum.CANCELLED)
         && checkPermission(this.permissions, ['appointments.book']);
   }
 
   canAbsent(agenda: IAgenda): boolean {
-    return agenda.lastAppointment && agenda.lastAppointment.lastAppointmentStatus.status.toString() === 'BOOKED'
+    return agenda.lastAppointment && this.appointmentStatusEnum[agenda.lastAppointment.lastAppointmentStatus.status] === AppointmentStatusEnum.BOOKED
       && checkPermission(this.permissions, ['appointments.absent']);
   }
 
   canCancel(agenda: IAgenda): boolean {
-    return agenda.lastAppointment && agenda.lastAppointment.lastAppointmentStatus.status.toString() === 'BOOKED'
+    return agenda.lastAppointment && this.appointmentStatusEnum[agenda.lastAppointment.lastAppointmentStatus.status] === AppointmentStatusEnum.BOOKED
       && checkPermission(this.permissions, ['appointments.cancel']);
   }
 
   canAttend(agenda: IAgenda): boolean {
-    return agenda.lastAppointment && agenda.lastAppointment.lastAppointmentStatus.status.toString() === 'BOOKED'
+    return agenda.lastAppointment && this.appointmentStatusEnum[agenda.lastAppointment.lastAppointmentStatus.status] === AppointmentStatusEnum.BOOKED
       && checkPermission(this.permissions, ['appointments.attend']);
   }
 
   canFinalize(agenda: IAgenda): boolean {
-    return agenda.lastAppointment && agenda.lastAppointment.lastAppointmentStatus.status.toString() === 'IN_ATTENTION'
+    return agenda.lastAppointment && this.appointmentStatusEnum[agenda.lastAppointment.lastAppointmentStatus.status] === AppointmentStatusEnum.IN_ATTENTION
       && checkPermission(this.permissions, ['appointments.finalize']);
   }
 
@@ -214,7 +215,7 @@ export class AppointmentTrackingComponent implements OnInit {
   }
 
   canDesactivate(agenda: IAgenda): boolean {
-    return !agenda.lastAppointment || agenda.lastAppointment.lastAppointmentStatus.status.toString() === 'CANCELLED'
+    return !agenda.lastAppointment || this.appointmentStatusEnum[agenda.lastAppointment.lastAppointmentStatus.status] === AppointmentStatusEnum.CANCELLED
       && checkPermission(this.permissions, ['agendas.write']);
   }
 

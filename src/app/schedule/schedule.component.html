@@ -57,38 +57,32 @@
 </ng-template>
 
 <ng-template #popContent>
-  <button type="button" *ngIf="canBook()" (click)="book()"
-    class="btn btn-warning m-1" title="Reservar turno">
+  <button type="button" *ngIf="canBook()" (click)="book()" class="btn btn-warning m-1" title="Reservar turno">
     <fa-icon icon="plus"></fa-icon>&nbsp;Reservar
   </button>
-
-  <button type="button" *ngIf="canAbsent()"
-    (click)="absent()" class="btn btn-dark m-1" title="Ausentar">
-    <fa-icon icon="user-slash"></fa-icon>&nbsp;Ausentar
-  </button>
-
-  <button type="button" *ngIf="canCancel()"
-    (click)="cancel()" class="btn btn-danger m-1" title="Cancelar">
-    <fa-icon icon="ban"></fa-icon>&nbsp;Cancelar
-  </button>
-
-  <button type="button" *ngIf="canAttend()"
-    (click)="attend()" class="btn btn-info m-1" title="Atender">
+  
+  <button type="button" *ngIf="canAttend()" (click)="attend()" class="btn btn-info m-1" title="Atender">
     <fa-icon icon="play"></fa-icon>&nbsp;Atender
   </button>
-
-  <button type="button" *ngIf="canFinalize()"
-    (click)="finalize()" class="btn btn-success m-1" title="Finalizar">
+  
+  <button type="button" *ngIf="canAbsent()" (click)="absent()" class="btn btn-dark m-1" title="Ausentar">
+    <fa-icon icon="user-slash"></fa-icon>&nbsp;Ausentar
+  </button>
+  
+  <button type="button" *ngIf="canCancel()" (click)="cancel()" class="btn btn-danger m-1" title="Cancelar">
+    <fa-icon icon="ban"></fa-icon>&nbsp;Cancelar
+  </button>
+  
+  <button type="button" *ngIf="canFinalize()" (click)="finalize()" class="btn btn-success m-1" title="Finalizar">
     <fa-icon icon="stop"></fa-icon>&nbsp;Finalizar
   </button>
-
-  <button type="button" *ngIf="canDelete()" (click)="delete()"
-    class="btn btn-danger m-1" title="Eliminar disponibilidad">
+  
+  <button type="button" *ngIf="canDelete()" (click)="delete()" class="btn btn-danger m-1" title="Eliminar disponibilidad">
     <fa-icon icon="times"></fa-icon>&nbsp;Eliminar
   </button>
-
-  <button type="button" *ngIf="canDesactivate()" (click)="desactivate()"
-    class="btn btn-danger m-1" title="Desactivar disponibilidad">
+  
+  <button type="button" *ngIf="canDesactivate()" (click)="desactivate()" class="btn btn-danger m-1"
+    title="Desactivar disponibilidad">
     <fa-icon icon="calendar-times"></fa-icon>&nbsp;Desactivar
   </button>
 </ng-template>
@@ -97,7 +91,7 @@
     {{ agendaSelected.startDate | date: 'dd/MM/yyyy HH:mm' }}<br>
     {{ agendaSelected.resource.description }}<br>
     <span *ngIf="agendaSelected.lastAppointment 
-          && appointmentStatus[agendaSelected.lastAppointment.lastAppointmentStatus.status] !== appointmentStatus.CANCELLED">
+          && appointmentStatusEnum[agendaSelected.lastAppointment.lastAppointmentStatus.status] !== appointmentStatusEnum.CANCELLED">
       {{ agendaSelected.lastAppointment.customerBusinessName }} ({{ appointmentStatusTranslate[agendaSelected.lastAppointment.lastAppointmentStatus.status] }})
     </span>
   </span>

@@ -38,7 +38,7 @@ export class ScheduleComponent implements OnInit {
 
 
   
-  appointmentStatus: any = AppointmentStatusEnum;
+  appointmentStatusEnum: any = AppointmentStatusEnum;
   appointmentStatusTranslate = {
     FREE: "Libre",
     BOOKED: "Reservado",
@@ -113,7 +113,7 @@ export class ScheduleComponent implements OnInit {
 
   private getEventTitle(agenda: IAgenda): string {
     let title = this.datePipe.transform(agenda.startDate, 'dd/MM/yyyy HH:mm') + '\n' + agenda.resource.description;
-    if (agenda.lastAppointment && this.appointmentStatus[agenda.lastAppointment.lastAppointmentStatus.status] !== AppointmentStatusEnum.CANCELLED) {
+    if (agenda.lastAppointment && this.appointmentStatusEnum[agenda.lastAppointment.lastAppointmentStatus.status] !== AppointmentStatusEnum.CANCELLED) {
       title = title + '\n' + agenda.lastAppointment.customerBusinessName + ' (' + this.appointmentStatusTranslate[agenda.lastAppointment.lastAppointmentStatus.status] + ')';
     }
     return title;
@@ -142,7 +142,7 @@ export class ScheduleComponent implements OnInit {
   getColor(event: CalendarEvent): string {
     let result = 'btn-outline-primary'; // Free or Cancelled
     if (event['lastAppointmentStatus']) {
-      switch (this.appointmentStatus[event['lastAppointmentStatus']]) {
+      switch (this.appointmentStatusEnum[event['lastAppointmentStatus']]) {
         case AppointmentStatusEnum.BOOKED:
           result = 'btn-warning';
           break;
@@ -163,7 +163,7 @@ export class ScheduleComponent implements OnInit {
   getFirstLetterFromStatus(event: CalendarEvent): string {
     let result = 'L';
     if (event['lastAppointmentStatus']) {
-      switch (this.appointmentStatus[event['lastAppointmentStatus']]) {
+      switch (this.appointmentStatusEnum[event['lastAppointmentStatus']]) {
         case AppointmentStatusEnum.BOOKED:
           result = 'R';
           break;
@@ -187,27 +187,27 @@ export class ScheduleComponent implements OnInit {
 
   // Agenda-Appointments
   canBook(): boolean {
-    return this.agendaSelected !== undefined && (!this.agendaSelected.lastAppointment || this.appointmentStatus[this.agendaSelected.lastAppointment.lastAppointmentStatus.status] === AppointmentStatusEnum.CANCELLED)
+    return this.agendaSelected !== undefined && (!this.agendaSelected.lastAppointment || this.appointmentStatusEnum[this.agendaSelected.lastAppointment.lastAppointmentStatus.status] === AppointmentStatusEnum.CANCELLED)
       && new Date(this.agendaSelected.startDate) > new Date() && checkPermission(this.permissions, ['appointments.book']);
   }
 
   canAbsent(): boolean {
-    return this.agendaSelected !== undefined && this.agendaSelected.lastAppointment && this.appointmentStatus[this.agendaSelected.lastAppointment.lastAppointmentStatus.status] === AppointmentStatusEnum.BOOKED
+    return this.agendaSelected !== undefined && this.agendaSelected.lastAppointment && this.appointmentStatusEnum[this.agendaSelected.lastAppointment.lastAppointmentStatus.status] === AppointmentStatusEnum.BOOKED
       && checkPermission(this.permissions, ['appointments.absent']);
   }
 
   canCancel(): boolean {
-    return this.agendaSelected !== undefined && this.agendaSelected.lastAppointment && this.appointmentStatus[this.agendaSelected.lastAppointment.lastAppointmentStatus.status] === AppointmentStatusEnum.BOOKED
+    return this.agendaSelected !== undefined && this.agendaSelected.lastAppointment && this.appointmentStatusEnum[this.agendaSelected.lastAppointment.lastAppointmentStatus.status] === AppointmentStatusEnum.BOOKED
       && checkPermission(this.permissions, ['appointments.cancel']);
   }
 
   canAttend(): boolean {
-    return this.agendaSelected !== undefined && this.agendaSelected.lastAppointment && this.appointmentStatus[this.agendaSelected.lastAppointment.lastAppointmentStatus.status] === AppointmentStatusEnum.BOOKED
+    return this.agendaSelected !== undefined && this.agendaSelected.lastAppointment && this.appointmentStatusEnum[this.agendaSelected.lastAppointment.lastAppointmentStatus.status] === AppointmentStatusEnum.BOOKED
       && checkPermission(this.permissions, ['appointments.attend']);
   }
 
   canFinalize(): boolean {
-    return this.agendaSelected !== undefined && this.agendaSelected.lastAppointment && this.appointmentStatus[this.agendaSelected.lastAppointment.lastAppointmentStatus.status] === AppointmentStatusEnum.IN_ATTENTION
+    return this.agendaSelected !== undefined && this.agendaSelected.lastAppointment && this.appointmentStatusEnum[this.agendaSelected.lastAppointment.lastAppointmentStatus.status] === AppointmentStatusEnum.IN_ATTENTION
       && checkPermission(this.permissions, ['appointments.finalize']);
   }
 
@@ -216,7 +216,7 @@ export class ScheduleComponent implements OnInit {
   }
 
   canDesactivate(): boolean {
-    return this.agendaSelected !== undefined && (!this.agendaSelected.lastAppointment || this.appointmentStatus[this.agendaSelected.lastAppointment.lastAppointmentStatus.status] === AppointmentStatusEnum.CANCELLED)
+    return this.agendaSelected !== undefined && (!this.agendaSelected.lastAppointment || this.appointmentStatusEnum[this.agendaSelected.lastAppointment.lastAppointmentStatus.status] === AppointmentStatusEnum.CANCELLED)
       && checkPermission(this.permissions, ['agendas.write']);
   }
 
