@@ -36,15 +36,9 @@ export class ScheduleComponent implements OnInit {
   loading!: boolean;
   agendaSelected?: IAgenda;
 
-  appointmentStatus = {
-    ABSENT: AppointmentStatusEnum.ABSENT,
-    BOOKED: AppointmentStatusEnum.BOOKED,
-    CANCELLED: AppointmentStatusEnum.CANCELLED,
-    FINALIZED: AppointmentStatusEnum.FINALIZED,
-    FREE: AppointmentStatusEnum.FREE,
-    IN_ATTENTION: AppointmentStatusEnum.IN_ATTENTION,
-  }
 
+  
+  appointmentStatus: any = AppointmentStatusEnum;
   appointmentStatusTranslate = {
     FREE: "Libre",
     BOOKED: "Reservado",
@@ -193,27 +187,27 @@ export class ScheduleComponent implements OnInit {
 
   // Agenda-Appointments
   canBook(): boolean {
-    return this.agendaSelected !== undefined && (!this.agendaSelected.lastAppointment || this.agendaSelected.lastAppointment.lastAppointmentStatus.status.toString() === 'CANCELLED')
+    return this.agendaSelected !== undefined && (!this.agendaSelected.lastAppointment || this.appointmentStatus[this.agendaSelected.lastAppointment.lastAppointmentStatus.status] === AppointmentStatusEnum.CANCELLED)
       && new Date(this.agendaSelected.startDate) > new Date() && checkPermission(this.permissions, ['appointments.book']);
   }
 
   canAbsent(): boolean {
-    return this.agendaSelected !== undefined && this.agendaSelected.lastAppointment && this.agendaSelected.lastAppointment.lastAppointmentStatus.status.toString() === 'BOOKED'
+    return this.agendaSelected !== undefined && this.agendaSelected.lastAppointment && this.appointmentStatus[this.agendaSelected.lastAppointment.lastAppointmentStatus.status] === AppointmentStatusEnum.BOOKED
       && checkPermission(this.permissions, ['appointments.absent']);
   }
 
   canCancel(): boolean {
-    return this.agendaSelected !== undefined && this.agendaSelected.lastAppointment && this.agendaSelected.lastAppointment.lastAppointmentStatus.status.toString() === 'BOOKED'
+    return this.agendaSelected !== undefined && this.agendaSelected.lastAppointment && this.appointmentStatus[this.agendaSelected.lastAppointment.lastAppointmentStatus.status] === AppointmentStatusEnum.BOOKED
       && checkPermission(this.permissions, ['appointments.cancel']);
   }
 
   canAttend(): boolean {
-    return this.agendaSelected !== undefined && this.agendaSelected.lastAppointment && this.agendaSelected.lastAppointment.lastAppointmentStatus.status.toString() === 'BOOKED'
+    return this.agendaSelected !== undefined && this.agendaSelected.lastAppointment && this.appointmentStatus[this.agendaSelected.lastAppointment.lastAppointmentStatus.status] === AppointmentStatusEnum.BOOKED
       && checkPermission(this.permissions, ['appointments.attend']);
   }
 
   canFinalize(): boolean {
-    return this.agendaSelected !== undefined && this.agendaSelected.lastAppointment && this.agendaSelected.lastAppointment.lastAppointmentStatus.status.toString() === 'IN_ATTENTION'
+    return this.agendaSelected !== undefined && this.agendaSelected.lastAppointment && this.appointmentStatus[this.agendaSelected.lastAppointment.lastAppointmentStatus.status] === AppointmentStatusEnum.IN_ATTENTION
       && checkPermission(this.permissions, ['appointments.finalize']);
   }
 
@@ -222,7 +216,7 @@ export class ScheduleComponent implements OnInit {
   }
 
   canDesactivate(): boolean {
-    return this.agendaSelected !== undefined && (!this.agendaSelected.lastAppointment || this.agendaSelected.lastAppointment.lastAppointmentStatus.status.toString() === 'CANCELLED')
+    return this.agendaSelected !== undefined && (!this.agendaSelected.lastAppointment || this.appointmentStatus[this.agendaSelected.lastAppointment.lastAppointmentStatus.status] === AppointmentStatusEnum.CANCELLED)
       && checkPermission(this.permissions, ['agendas.write']);
   }
 

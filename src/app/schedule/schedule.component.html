@@ -96,7 +96,8 @@
   <span *ngIf="agendaSelected">
     {{ agendaSelected.startDate | date: 'dd/MM/yyyy HH:mm' }}<br>
     {{ agendaSelected.resource.description }}<br>
-    <span *ngIf="agendaSelected.lastAppointment">
+    <span *ngIf="agendaSelected.lastAppointment 
+          && appointmentStatus[agendaSelected.lastAppointment.lastAppointmentStatus.status] !== appointmentStatus.CANCELLED">
       {{ agendaSelected.lastAppointment.customerBusinessName }} ({{ appointmentStatusTranslate[agendaSelected.lastAppointment.lastAppointmentStatus.status] }})
     </span>
   </span>
