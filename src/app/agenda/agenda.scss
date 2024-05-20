@@ -1,8 +1,4 @@
 @media (min-width: 991px) {
-  ::ng-deep .ngb-tp {
-    margin-top: 29px;
-  }
-
   .mt-30 {
     margin-top: 30px;
     margin-bottom: 0;
@@ -27,6 +23,7 @@
 .checkbox {
   height: 26px;
   width: 26px;
+  cursor: pointer;
 }
 
 .grid-container {

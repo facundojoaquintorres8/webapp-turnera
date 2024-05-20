@@ -3,12 +3,11 @@ import { HttpResponse } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { AgendaService } from './agenda.service';
-import { AuthService } from '../auth/auth.service';
 import { ISaveAgenda, RepeatTypeEnum } from '../models/agenda.models';
 import { IResource } from '../models/resource.models';
 import { ResourceService } from '../resource/resource.service';
 import { formatDateFromNgbDateStruct, formatTimeFromNgbTimeStruct } from '../shared/date-format';
-import { NgbDateStruct, NgbTimeStruct } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import * as moment from 'moment';
 import * as momentTimeZone from 'moment-timezone';
 import { IResponse } from '../models/response.models';
@@ -24,21 +23,19 @@ export class CreateAgendaComponent implements OnInit {
   resources!: IResource[];
   repeatTypes: any = RepeatTypeEnum;
   showDaysOfWeek!: boolean;
-  repeatingMonthDay!: string;
+  dayOfTheMonthText!: string;
 
   private now: Date = new Date();
   private today: NgbDateStruct = { year: this.now.getFullYear(), month: this.now.getMonth() + 1, day: this.now.getDate() }
 
-  public minDate = (): NgbDateStruct => { return this.myForm.get(['startDate'])!.value };
-  public minDateToFinalize = (): NgbDateStruct => { return this.myForm.get(['endDate'])!.value };
+  public minDateToFinalize = (): NgbDateStruct => { return this.myForm.get(['startDate'])!.value };
 
   myForm = this.fb.group({
     id: [],
     resource: [null, [Validators.required]],
     startDate: [this.today, [Validators.required]],
-    endDate: [this.today, [Validators.required]],
     startHour: [{ hour: 8, minute: 0, second: 0 }, [Validators.required]],
-    endHour: [{ hour: 9, minute: 0, second: 0 }, [Validators.required]],
+    endHour: [{ hour: 18, minute: 0, second: 0 }, [Validators.required]],
     zoneId: [null],
     segmented: [null],
     duration: [null],
@@ -59,7 +56,6 @@ export class CreateAgendaComponent implements OnInit {
     private agendaService: AgendaService,
     private resourceService: ResourceService,
     private fb: FormBuilder,
-    private authService: AuthService,
   ) { }
 
   ngOnInit(): void {
@@ -70,62 +66,24 @@ export class CreateAgendaComponent implements OnInit {
     this.myForm.get('zoneId')?.setValue(momentTimeZone.tz.guess());
   }
 
-  previousState(): void { // TODO: descomentar post pruebas de back
-    // window.history.back();
+  previousState(): void {
+    window.history.back();
   }
 
-  areValidTimes(): boolean {
-    const startHour = this.myForm.get(['startHour'])!.value as NgbTimeStruct;
-    const endHour = this.myForm.get(['endHour'])!.value as NgbTimeStruct;
-    const startDate = this.myForm.get(['startDate'])!.value as NgbDateStruct;
-    const endDate = this.myForm.get(['endDate'])!.value as NgbDateStruct;
-    if (startHour && endHour) {
-      if (endHour.hour === 0 && endHour.minute === 0) {
-        return true;
-      }
-      if (startHour.hour > endHour.hour) { // TODO: Ajustar que falla...
-        const startDateMoment = moment();
-        startDateMoment.date(startDate.day);
-        startDateMoment.month(startDate.month - 1);
-        startDateMoment.year(startDate.year);
-        const endDateMoment = moment();
-        endDateMoment.date(endDate.day);
-        endDateMoment.month(endDate.month - 1);
-        endDateMoment.year(endDate.year);
-
-        console.log(startDateMoment.isSameOrAfter(endDateMoment));
-        if (startDateMoment.isSameOrAfter(endDateMoment)) {
-          console.log(startDateMoment);
-          console.log(endDateMoment);
-          return false;
-        }
-      }
-      if (startHour.hour === endHour.hour && (startHour.minute === endHour.minute || startHour.minute > endHour.minute)) {
-        return false;
-      }
-    }
-    return true;
-  }
-
-  hasAnyDaySelected(): boolean { // TODO:
-    return true;
-    // return (this.showDaysOfWeek && (this.myForm.get(['sunday'])!.value || this.myForm.get(['monday'])!.value ||
-    //   this.myForm.get(['tuesday'])!.value || this.myForm.get(['wednesday'])!.value ||
-    //   this.myForm.get(['thursday'])!.value || this.myForm.get(['friday'])!.value ||
-    //   this.myForm.get(['saturday'])!.value)) || !this.showDaysOfWeek;
+  hasAnyDaySelected(): boolean {
+    return (this.showDaysOfWeek && (this.myForm.get(['sunday'])!.value || this.myForm.get(['monday'])!.value ||
+      this.myForm.get(['tuesday'])!.value || this.myForm.get(['wednesday'])!.value ||
+      this.myForm.get(['thursday'])!.value || this.myForm.get(['friday'])!.value ||
+      this.myForm.get(['saturday'])!.value)) || !this.showDaysOfWeek;
   }
 
   onStartDateChange(): void {
-    if (this.myForm.get(['startDate'])!.value && this.myForm.get(['endDate'])!.value
-      && (moment(this.myForm.get(['startDate'])!.value).diff(moment(this.myForm.get(['endDate'])!.value)) > 0
-        || Number.isNaN(moment(this.myForm.get(['startDate'])!.value).diff(moment(this.myForm.get(['endDate'])!.value))))) {
-      this.myForm.get('endDate')?.setValue(null);
+    if (this.myForm.get(['startDate'])!.value && this.myForm.get(['finalize'])!.value
+      && (moment(this.myForm.get(['startDate'])!.value).diff(moment(this.myForm.get(['finalize'])!.value)) > 0
+        || Number.isNaN(moment(this.myForm.get(['startDate'])!.value).diff(moment(this.myForm.get(['finalize'])!.value))))) {
+      this.myForm.get('finalize')?.setValue(null);
     }
-
-    this.repeatingMonthDay = '';
-    if (RepeatTypeEnum[this.myForm.get('repeatType')!.value] === RepeatTypeEnum.MONTHLY && this.myForm.get(['startDate'])!.value) {
-      this.repeatingMonthDay = 'Mensualmente cada ' + parseInt(moment(formatDateFromNgbDateStruct(this.myForm.get(['startDate'])!.value)).format('DD'), 10);
-    }
+    this.setDayOfTheMonth();
   }
 
   onSegmentedChange(): void {
@@ -153,23 +111,29 @@ export class CreateAgendaComponent implements OnInit {
 
   onRepeatTypeChange(): void {
     this.showDaysOfWeek = RepeatTypeEnum[this.myForm.get('repeatType')!.value] === RepeatTypeEnum.WEEKLY;
-
-    this.repeatingMonthDay = '';
-    if (RepeatTypeEnum[this.myForm.get('repeatType')!.value] === RepeatTypeEnum.MONTHLY && this.myForm.get(['startDate'])!.value) {
-      this.repeatingMonthDay = 'Mensualmente cada ' + parseInt(moment(formatDateFromNgbDateStruct(this.myForm.get(['startDate'])!.value)).format('DD'), 10);
-    }
+    this.setDayOfTheMonth();
   }
 
   originalOrder = (): number => {
     return 0;
   }
 
-  save(): void { // TODO: Descomentar después de probar el back solo
-    // if (!this.areValidTimes()) {
-    //   return;
-    // }
+  save(): void {
     this.isSaving = true;
     this.subscribeToSaveResponse(this.agendaService.create(this.createFromForm()));
+  }
+
+  private setDayOfTheMonth(): void {
+    this.dayOfTheMonthText = '';
+    if (RepeatTypeEnum[this.myForm.get('repeatType')!.value] === RepeatTypeEnum.MONTHLY && this.myForm.get(['startDate'])!.value) {
+      const startDate = moment(formatDateFromNgbDateStruct(this.myForm.get(['startDate'])!.value));
+      const dayOfTheMonth: number = parseInt(startDate.format('DD'), 10);
+      if (startDate.daysInMonth() === dayOfTheMonth) {
+        this.dayOfTheMonthText = 'Mensualmente cada último día del mes';
+      } else {
+        this.dayOfTheMonthText = `Mensualmente cada ${dayOfTheMonth}`;
+      }
+    }
   }
 
   private createFromForm(): ISaveAgenda {
@@ -177,7 +141,6 @@ export class CreateAgendaComponent implements OnInit {
       id: this.myForm.get(['id'])!.value,
       resource: this.myForm.get(['resource'])!.value,
       startDate: formatDateFromNgbDateStruct(this.myForm.get(['startDate'])!.value)!,
-      endDate: formatDateFromNgbDateStruct(this.myForm.get(['endDate'])!.value)!,
       startHour: formatTimeFromNgbTimeStruct(this.myForm.get(['startHour'])!.value)!,
       endHour: formatTimeFromNgbTimeStruct(this.myForm.get(['endHour'])!.value)!,
       zoneId: this.myForm.get(['zoneId'])!.value,

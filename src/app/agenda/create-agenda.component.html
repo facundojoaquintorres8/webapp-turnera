@@ -21,7 +21,7 @@
 
             <div class="col-lg-2">
                 <div class="form-group">
-                    <label class="form-control-label required">Inicio</label>
+                    <label class="form-control-label required">Fecha inicio</label>
                     <div class="input-group">
                         <input class="form-control" placeholder="yyyy-mm-dd" name="startDate"
                             formControlName="startDate" ngbDatepicker #startDate="ngbDatepicker" [firstDayOfWeek]="7"
@@ -44,6 +44,7 @@
             </div>
             <div class="col-lg-2">
                 <div class="form-group">
+                    <label class="form-control-label required">Hora inicio</label>
                     <ngb-timepicker name="startHour" id="startHour" formControlName="startHour" [spinners]="false">
                     </ngb-timepicker>
                     <div
@@ -56,27 +57,7 @@
             </div>
             <div class="col-lg-2">
                 <div class="form-group">
-                    <label class="form-control-label required">Fin</label>
-                    <div class="input-group">
-                        <input class="form-control" placeholder="yyyy-mm-dd" name="endDate" formControlName="endDate"
-                            ngbDatepicker #endDate="ngbDatepicker" [firstDayOfWeek]="7" [minDate]="minDate()">
-                        <div class="input-group-append">
-                            <button class="btn btn-primary" (click)="endDate.toggle()" type="button"
-                                title="Abrir Calendario">
-                                <fa-icon icon="calendar"></fa-icon>
-                            </button>
-                        </div>
-                    </div>
-                    <div
-                        *ngIf="myForm.get('endDate')!.invalid && (myForm.get('endDate')!.dirty || myForm.get('endDate')!.touched)">
-                        <small class="form-text text-danger" *ngIf="myForm.get('endDate')?.errors?.required">
-                            El campo es requerido.
-                        </small>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-2">
-                <div class="form-group">
+                    <label class="form-control-label required">Hora fin</label>
                     <ngb-timepicker name="endHour" id="endHour" formControlName="endHour" [spinners]="false">
                     </ngb-timepicker>
                     <div
@@ -147,13 +128,13 @@
                             *ngFor="let repeatType of repeatTypes | keyvalue: originalOrder">{{ repeatType.value }}
                         </option>
                     </select>
-                    <small class="text-info">{{ repeatingMonthDay }}</small>
+                    <small class="text-info">{{ dayOfTheMonthText }}</small>
                 </div>
             </div>
 
             <div class="col-lg-2">
                 <div class="form-group" *ngIf="myForm.get('repeat')!.value">
-                    <label class="form-control-label required">Finaliza</label>
+                    <label class="form-control-label required">Hasta</label>
                     <div class="input-group">
                         <input class="form-control" placeholder="yyyy-mm-dd" name="finalize" formControlName="finalize"
                             ngbDatepicker #finalize="ngbDatepicker" [firstDayOfWeek]="7" [minDate]="minDateToFinalize()">
@@ -164,8 +145,8 @@
                         </div>
                     </div>
                     <div
-                        *ngIf="myForm.get('endDate')!.invalid && (myForm.get('endDate')!.dirty || myForm.get('endDate')!.touched)">
-                        <small class="form-text text-danger" *ngIf="myForm.get('endDate')?.errors?.required">
+                        *ngIf="myForm.get('finalize')!.invalid && (myForm.get('finalize')!.dirty || myForm.get('finalize')!.touched)">
+                        <small class="form-text text-danger" *ngIf="myForm.get('finalize')?.errors?.required">
                             El campo es requerido.
                         </small>
                     </div>
@@ -187,7 +168,7 @@
 
             <div class="sunday">
                 <div class="form-group">
-                    <label for="sunday" class="mt-30 d-flex">
+                    <label for="sunday" class="mt-30 d-flex pointer">
                         <input type="checkbox" class="checkbox mr-1" id="sunday" name="sunday" formControlName="sunday">
                         Domingo
                     </label>
@@ -195,7 +176,7 @@
             </div>
             <div class="monday">
                 <div class="form-group">
-                    <label for="monday" class="mt-30 d-flex">
+                    <label for="monday" class="mt-30 d-flex pointer">
                         <input type="checkbox" class="checkbox mr-1" id="monday" name="monday" formControlName="monday">
                         Lunes
                     </label>
@@ -203,7 +184,7 @@
             </div>
             <div class="tuesday">
                 <div class="form-group">
-                    <label for="tuesday" class="mt-30 d-flex">
+                    <label for="tuesday" class="mt-30 d-flex pointer">
                         <input type="checkbox" class="checkbox mr-1" id="tuesday" name="tuesday"
                             formControlName="tuesday">
                         Martes
@@ -212,7 +193,7 @@
             </div>
             <div class="wednesday">
                 <div class="form-group">
-                    <label for="wednesday" class="mt-30 d-flex">
+                    <label for="wednesday" class="mt-30 d-flex pointer">
                         <input type="checkbox" class="checkbox mr-1" id="wednesday" name="wednesday"
                             formControlName="wednesday">
                         Miércoles
@@ -221,7 +202,7 @@
             </div>
             <div class="thursday">
                 <div class="form-group">
-                    <label for="thursday" class="mt-30 d-flex">
+                    <label for="thursday" class="mt-30 d-flex pointer">
                         <input type="checkbox" class="checkbox mr-1" id="thursday" name="thursday"
                             formControlName="thursday">
                         Jueves
@@ -230,7 +211,7 @@
             </div>
             <div class="friday">
                 <div class="form-group">
-                    <label for="friday" class="mt-30 d-flex">
+                    <label for="friday" class="mt-30 d-flex pointer">
                         <input type="checkbox" class="checkbox mr-1" id="friday" name="friday" formControlName="friday">
                         Viernes
                     </label>
@@ -238,7 +219,7 @@
             </div>
             <div class="saturday">
                 <div class="form-group">
-                    <label for="saturday" class="mt-30 d-flex">
+                    <label for="saturday" class="mt-30 d-flex pointer">
                         <input type="checkbox" class="checkbox mr-1" id="saturday" name="saturday"
                             formControlName="saturday">
                         Sábado
@@ -251,13 +232,9 @@
             <button type="button" class="btn btn-secondary" (click)="previousState()" title="Cancelar">
                 <fa-icon icon="ban"></fa-icon>&nbsp;Cancelar
             </button>
-            <!-- <button type="submit" [disabled]="myForm.invalid || isSaving || !hasAnyDaySelected() || !areValidTimes()" 
+            <button type="submit" [disabled]="myForm.invalid || isSaving || !hasAnyDaySelected()" 
                  class="btn btn-primary">
                 <fa-icon icon="save"></fa-icon>&nbsp;Guardar
-            </button> -->
-
-            <button type="submit" title="PRUEBA BACK" class="btn btn-primary">
-                <fa-icon icon="save"></fa-icon>&nbsp;Sin validaciones
             </button>
         </div>
     </form>
