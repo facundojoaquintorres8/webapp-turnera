@@ -27,7 +27,7 @@ export class FinalizeAppointmentModalComponent {
 
   confirm(): void {
     this.isSaving = true;
-    this.appointmentService.cancel(this.createFromForm()).subscribe(
+    this.appointmentService.finalize(this.createFromForm()).subscribe(
       () => this.activeModal.close(),
       () => this.isSaving = false
     );
