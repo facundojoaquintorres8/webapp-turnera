@@ -19,6 +19,7 @@ import { AppointmentStatusEnum } from '../models/appointment.model';
 import { checkPermission } from '../security/check-permissions';
 import { formatDateFromDate } from '../shared/date-format';
 import { IResponse } from '../models/response.models';
+import { CalendarViewEnum } from '../models/schedule.models';
 
 @Component({
   selector: 'app-schedule',
@@ -35,8 +36,6 @@ export class ScheduleComponent implements OnInit {
   today: string = this.datePipe.transform(new Date(), 'dd/MM/yyyy') + '';
   loading!: boolean;
   agendaSelected?: IAgenda;
-
-
   
   appointmentStatusEnum: any = AppointmentStatusEnum;
   appointmentStatusTranslate = {
@@ -86,9 +85,22 @@ export class ScheduleComponent implements OnInit {
 
   onCalendarChange(): void {
     this.loading = true;
-    this.agendaService.findAllByFilter({ ignorePaginated: true, page: 0, ...this.createFromForm() }).subscribe(
-      (res: HttpResponse<IResponse>) => {
-        this.events = res.body?.data.content.map((x: IAgenda) => ({
+    // this.agendaService.findAllByFilter({ ignorePaginated: true, page: 0, ...this.createFromForm() }).subscribe(
+    //   (res: HttpResponse<IResponse>) => {
+    //     this.events = res.body?.data.content.map((x: IAgenda) => ({
+    //       id: x.id,
+    //       start: new Date(x.startDate),
+    //       end: new Date(x.endDate),
+    //       title: this.getEventTitle(x),
+    //       agenda: x,
+    //       lastAppointmentStatus: x.lastAppointment ? x.lastAppointment.lastAppointmentStatus.status : null
+    //     }));
+    //     this.loading = false;
+    //   }
+    // );
+    this.agendaService.getAgendasForAMonth({ page: 0, ...this.createFromForm() }).subscribe(
+      (res: HttpResponse<IResponse>) => { // TODO: mappear agendas
+        this.events = res.body?.data.map((x: IAgenda) => ({
           id: x.id,
           start: new Date(x.startDate),
           end: new Date(x.endDate),
@@ -103,11 +115,10 @@ export class ScheduleComponent implements OnInit {
 
   private createFromForm(): any {
     const from = new Date(this.agendaService.viewDate.getFullYear(), this.agendaService.viewDate.getMonth(), 1);
-    const to = new Date(this.agendaService.viewDate.getFullYear(), this.agendaService.viewDate.getMonth() + 1, 0);
     return {
       from: formatDateFromDate(from),
-      to: formatDateFromDate(to),
-      active: true
+      active: true,
+      calendarView: CalendarViewEnum[CalendarViewEnum.MONTH] // TODO: modificar cuando haga el calendario diario y semanal
     };
   }
 

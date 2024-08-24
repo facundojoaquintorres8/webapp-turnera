@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Subject } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class ToastService {
 
   public showToast!: IToast;
-  public subject = new Subject<any>();
   private messageSource = new BehaviorSubject(this.showToast);
   public currentMessage = this.messageSource.asObservable();
 

@@ -14,6 +14,14 @@ export class AgendaService {
 
   constructor(private http: HttpClient) {}
 
+  
+  getAgendasForAMonth(filter: any): Observable<HttpResponse<IResponse>> {
+    filter['sort'] = filter['sort'] ? filter['sort'] : ['ASC', 'startDate'];
+    filter['zoneId'] = momentTimeZone.tz.guess();
+    const options = createRequestOption(filter);
+    return this.http.get<IResponse>(`${this.resourceUrl}/getAgendasForAMonth`, { params: options, observe: 'response' });
+  }
+
   findAllByFilter(filter: any): Observable<HttpResponse<IResponse>> {
     filter['sort'] = filter['sort'] ? filter['sort'] : ['ASC', 'startDate'];
     filter['zoneId'] = momentTimeZone.tz.guess();
