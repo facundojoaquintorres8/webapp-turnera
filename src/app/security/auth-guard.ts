@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Router, CanActivate, ActivatedRouteSnapshot } from '@angular/router';
+import { Router, ActivatedRouteSnapshot } from '@angular/router';
 import { AuthService } from '../auth/auth.service';
 import { ToastService } from '../component/toast/toast.service';
 import { checkPermission } from './check-permissions';
 
 @Injectable()
-export class AuthGuard implements CanActivate {
+export class AuthGuard  {
 
     constructor(private router: Router, private authService: AuthService, private toastService: ToastService) { }
 
