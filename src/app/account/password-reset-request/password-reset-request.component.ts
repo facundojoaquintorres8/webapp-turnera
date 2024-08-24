@@ -1,6 +1,6 @@
 import { HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { ToastService } from 'src/app/component/toast/toast.service';
@@ -21,7 +21,7 @@ export class PasswordResetRequestComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private accountService: AccountService,
     private toastService: ToastService,
   ) { }

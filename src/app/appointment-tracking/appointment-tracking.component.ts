@@ -1,6 +1,6 @@
 import { HttpResponse } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormBuilder, Validators } from '@angular/forms';
 import { NgbDateStruct, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { AgendaService } from '../agenda/agenda.service';
 import { DeleteAgendaModalComponent } from '../agenda/delete-agenda-modal.component';
@@ -80,7 +80,7 @@ export class AppointmentTrackingComponent implements OnInit {
   constructor(
     private agendaService: AgendaService,
     private modalService: NgbModal,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private resourceTypeService: ResourceTypeService,
     private resourceService: ResourceService,
     private customerService: CustomerService,

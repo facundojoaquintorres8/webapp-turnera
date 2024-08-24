@@ -3,7 +3,7 @@ import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { DeleteCustomerModalComponent } from './delete-customer-modal.component';
 import { CustomerService } from './customer.service';
 import { ICustomer } from '../models/customer.models';
-import { FormBuilder } from '@angular/forms';
+import { UntypedFormBuilder } from '@angular/forms';
 import { IHeader, InputTypeEnum } from '../component/table/table.models';
 import { TableComponent } from '../component/table/table.component';
 
@@ -28,7 +28,7 @@ export class CustomerComponent implements OnInit {
   constructor(
     private customerService: CustomerService,
     private modalService: NgbModal,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
   ) { }
 
   ngOnInit(): void {

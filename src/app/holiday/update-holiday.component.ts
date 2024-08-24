@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
-import { FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { HolidayService } from './holiday.service';
@@ -28,7 +28,7 @@ export class UpdateHolidayComponent implements OnInit {
   constructor(
     private holidayService: HolidayService,
     private activatedRoute: ActivatedRoute,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private authService: AuthService,
   ) { }
 

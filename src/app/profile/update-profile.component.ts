@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
-import { FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { ProfileService } from './profile.service';
@@ -30,7 +30,7 @@ export class UpdateProfileComponent implements OnInit {
   constructor(
     private profileService: ProfileService,
     private activatedRoute: ActivatedRoute,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private authService: AuthService,
   ) { }
 

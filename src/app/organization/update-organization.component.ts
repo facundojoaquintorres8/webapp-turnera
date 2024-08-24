@@ -1,6 +1,6 @@
 import { HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormBuilder, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { IOrganization } from '../models/organization.models';
 import { OrganizationService } from './organization.service';
@@ -26,7 +26,7 @@ export class UpdateOrganizationComponent implements OnInit {
 
   constructor(
     private organizationService: OrganizationService,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
   ) { }
 
   ngOnInit(): void {

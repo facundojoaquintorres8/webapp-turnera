@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
-import { FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormBuilder, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { AgendaService } from './agenda.service';
 import { ISaveAgenda, RepeatTypeEnum } from '../models/agenda.models';
@@ -55,7 +55,7 @@ export class CreateAgendaComponent implements OnInit {
   constructor(
     private agendaService: AgendaService,
     private resourceService: ResourceService,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
   ) { }
 
   ngOnInit(): void {

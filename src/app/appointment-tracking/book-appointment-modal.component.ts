@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
-import { FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormBuilder, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { IAgenda } from '../models/agenda.models';
 import { AppointmentService } from './appointment.service';
@@ -31,7 +31,7 @@ export class BookAppointmentComponent implements OnInit {
   constructor(
     private appointmentService: AppointmentService,
     private customerService: CustomerService,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private activeModal: NgbActiveModal
   ) { }
 

@@ -1,6 +1,6 @@
 import { HttpResponse } from '@angular/common/http';
 import { Component, Input, OnInit, TemplateRef } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { UntypedFormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { IHeader, InputTypeEnum } from './table.models';
 import { IResponse } from 'src/app/models/response.models';
@@ -14,7 +14,7 @@ export class TableComponent implements OnInit {
 
     @Input() queryItems!: (req?: any) => Observable<HttpResponse<IResponse>>;
     @Input() headers: IHeader[] = [];
-    @Input() myForm!: FormGroup;
+    @Input() myForm!: UntypedFormGroup;
     @Input() sort!: string[];
     @Input() hasButtons: boolean = false;
     @Input() page: number = 1;

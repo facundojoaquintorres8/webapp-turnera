@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { UntypedFormGroup } from '@angular/forms';
 import { IHeader, InputTypeEnum } from './table.models';
 
 @Component({
@@ -9,7 +9,7 @@ import { IHeader, InputTypeEnum } from './table.models';
 export class TableHeaderComponent {
 
     @Output() executeQuery: EventEmitter<{ page: number, sort?: string[] }> = new EventEmitter();
-    @Input() myForm!: FormGroup;
+    @Input() myForm!: UntypedFormGroup;
     @Input() header!: IHeader;
     @Input() sort!: string[];
 

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { UntypedFormBuilder } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { IAppointment, IAppointmentChangeStatus } from '../models/appointment.model';
 import { AppointmentService } from './appointment.service';
@@ -17,7 +17,7 @@ export class AbsentAppointmentModalComponent {
 
   constructor(
     private appointmentService: AppointmentService,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private activeModal: NgbActiveModal
   ) { }
 

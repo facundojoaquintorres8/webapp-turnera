@@ -1,6 +1,6 @@
 import { HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ILogin } from 'src/app/models/login.models';
 import { AuthService } from '../auth.service';
@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
     password: [null, [Validators.required]],
   });
 
-  constructor(private router: Router, private fb: FormBuilder, private authService: AuthService) { }
+  constructor(private router: Router, private fb: UntypedFormBuilder, private authService: AuthService) { }
 
   ngOnInit(): void {
     this.authService.logout();

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
-import { FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { ResourceService } from './resource.service';
@@ -31,7 +31,7 @@ export class UpdateResourceComponent implements OnInit {
     private resourceService: ResourceService,
     private resourceTypeService: ResourceTypeService,
     private activatedRoute: ActivatedRoute,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private authService: AuthService,
   ) { }
 

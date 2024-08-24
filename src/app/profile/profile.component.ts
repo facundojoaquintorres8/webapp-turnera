@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { UntypedFormBuilder } from '@angular/forms';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { TableComponent } from '../component/table/table.component';
 import { IHeader, InputTypeEnum } from '../component/table/table.models';
@@ -24,7 +24,7 @@ export class ProfileComponent implements OnInit {
   constructor(
     private profileService: ProfileService,
     private modalService: NgbModal,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
   ) { }
 
   ngOnInit(): void {
