@@ -7,8 +7,7 @@ import { DeleteAgendaModalComponent } from './delete-agenda-modal.component';
 import { DesactivateAgendaModalComponent } from './desactivate-agenda-modal.component';
 
 @NgModule({
-  declarations: [CreateAgendaComponent, DeleteAgendaModalComponent, DesactivateAgendaModalComponent],
-  imports: [SharedModule, RouterModule.forChild(agendaRoutes)],
-  entryComponents: [DeleteAgendaModalComponent, DesactivateAgendaModalComponent]
+    declarations: [CreateAgendaComponent, DeleteAgendaModalComponent, DesactivateAgendaModalComponent],
+    imports: [SharedModule, RouterModule.forChild(agendaRoutes)]
 })
 export class AgendaModule { }

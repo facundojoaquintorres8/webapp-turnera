@@ -8,8 +8,7 @@ import { UpdateCustomerComponent } from './update-customer.component';
 import { DeleteCustomerModalComponent } from './delete-customer-modal.component';
 
 @NgModule({
-  declarations: [CustomerComponent, DetailCustomerComponent, UpdateCustomerComponent, DeleteCustomerModalComponent],
-  imports: [SharedModule, RouterModule.forChild(customerRoutes)],
-  entryComponents: [DeleteCustomerModalComponent]
+    declarations: [CustomerComponent, DetailCustomerComponent, UpdateCustomerComponent, DeleteCustomerModalComponent],
+    imports: [SharedModule, RouterModule.forChild(customerRoutes)]
 })
 export class CustomerModule {}

@@ -8,8 +8,7 @@ import { DeleteHolidayModalComponent } from './delete-holiday-modal.component';
 import { holidayRoutes } from './holiday.route';
 
 @NgModule({
-  declarations: [HolidayComponent, DetailHolidayComponent, UpdateHolidayComponent, DeleteHolidayModalComponent],
-  imports: [SharedModule, RouterModule.forChild(holidayRoutes)],
-  entryComponents: [DeleteHolidayModalComponent]
+    declarations: [HolidayComponent, DetailHolidayComponent, UpdateHolidayComponent, DeleteHolidayModalComponent],
+    imports: [SharedModule, RouterModule.forChild(holidayRoutes)]
 })
 export class HolidayModule {}

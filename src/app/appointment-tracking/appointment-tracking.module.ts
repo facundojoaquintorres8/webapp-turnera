@@ -10,22 +10,14 @@ import { AttendAppointmentModalComponent } from './attend-appointment-modal.comp
 import { FinalizeAppointmentModalComponent } from './finalize-appointment-modal.component';
 
 @NgModule({
-  declarations: [
-    AppointmentTrackingComponent,
-    BookAppointmentComponent,
-    AbsentAppointmentModalComponent,
-    CancelAppointmentModalComponent,
-    AttendAppointmentModalComponent,
-    FinalizeAppointmentModalComponent,
-  ],
-  imports: [SharedModule, RouterModule.forChild(appointmentTrackingRoutes)],
-  entryComponents: [
-    AppointmentTrackingComponent,
-    BookAppointmentComponent,
-    AbsentAppointmentModalComponent,
-    CancelAppointmentModalComponent,
-    AttendAppointmentModalComponent,
-    FinalizeAppointmentModalComponent,
-  ],
+    declarations: [
+        AppointmentTrackingComponent,
+        BookAppointmentComponent,
+        AbsentAppointmentModalComponent,
+        CancelAppointmentModalComponent,
+        AttendAppointmentModalComponent,
+        FinalizeAppointmentModalComponent,
+    ],
+    imports: [SharedModule, RouterModule.forChild(appointmentTrackingRoutes)]
 })
 export class AppointmentTrackingModule {}

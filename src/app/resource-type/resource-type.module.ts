@@ -8,8 +8,7 @@ import { UpdateResourceTypeComponent } from './update-resource-type.component';
 import { DeleteResourceTypeModalComponent } from './delete-resource-type-modal.component';
 
 @NgModule({
-  declarations: [ResourceTypeComponent, DetailResourceTypeComponent, UpdateResourceTypeComponent, DeleteResourceTypeModalComponent],
-  imports: [SharedModule, RouterModule.forChild(resourceTypeRoutes)],
-  entryComponents: [DeleteResourceTypeModalComponent]
+    declarations: [ResourceTypeComponent, DetailResourceTypeComponent, UpdateResourceTypeComponent, DeleteResourceTypeModalComponent],
+    imports: [SharedModule, RouterModule.forChild(resourceTypeRoutes)]
 })
 export class ResourceTypeModule {}

@@ -8,8 +8,7 @@ import { DeleteProfileModalComponent } from './delete-profile-modal.component';
 import { profileRoutes } from './profile.route';
 
 @NgModule({
-  declarations: [ProfileComponent, DetailProfileComponent, UpdateProfileComponent, DeleteProfileModalComponent],
-  imports: [SharedModule, RouterModule.forChild(profileRoutes)],
-  entryComponents: [DeleteProfileModalComponent]
+    declarations: [ProfileComponent, DetailProfileComponent, UpdateProfileComponent, DeleteProfileModalComponent],
+    imports: [SharedModule, RouterModule.forChild(profileRoutes)]
 })
 export class ProfileModule {}

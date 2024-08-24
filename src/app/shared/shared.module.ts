@@ -11,21 +11,20 @@ import { TableHeaderComponent } from '../component/table/table-header.component'
 import { ObservationModalComponent } from '../component/observation-modal/observation-modal.component';
 
 @NgModule({
-  declarations: [TableComponent, TableHeaderComponent, PaginateComponent, ObservationModalComponent],
-  imports: [CommonModule, PermissionModule, FontAwesomeModule, ReactiveFormsModule, NgbModule],
-  exports: [
-    FormsModule,
-    CommonModule,
-    NgbModule,
-    FontAwesomeModule,
-    ReactiveFormsModule,
-    PermissionModule,
-    TableComponent,
-    TableHeaderComponent,
-    PaginateComponent,
-    ObservationModalComponent,
-  ],
-  entryComponents: [ObservationModalComponent]
+    declarations: [TableComponent, TableHeaderComponent, PaginateComponent, ObservationModalComponent],
+    imports: [CommonModule, PermissionModule, FontAwesomeModule, ReactiveFormsModule, NgbModule],
+    exports: [
+        FormsModule,
+        CommonModule,
+        NgbModule,
+        FontAwesomeModule,
+        ReactiveFormsModule,
+        PermissionModule,
+        TableComponent,
+        TableHeaderComponent,
+        PaginateComponent,
+        ObservationModalComponent,
+    ]
 })
 export class SharedModule {
   constructor(iconLibrary: FaIconLibrary) {

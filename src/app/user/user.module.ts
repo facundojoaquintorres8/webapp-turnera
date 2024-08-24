@@ -9,8 +9,7 @@ import { DeleteUserModalComponent } from './delete-user-modal.component';
 import { PasswordChangeComponent } from '../account/password-change/password-change.component';
 
 @NgModule({
-  declarations: [UserComponent, DetailUserComponent, UpdateUserComponent, DeleteUserModalComponent, PasswordChangeComponent],
-  imports: [SharedModule, RouterModule.forChild(userRoutes)],
-  entryComponents: [DeleteUserModalComponent]
+    declarations: [UserComponent, DetailUserComponent, UpdateUserComponent, DeleteUserModalComponent, PasswordChangeComponent],
+    imports: [SharedModule, RouterModule.forChild(userRoutes)]
 })
 export class UserModule {}
