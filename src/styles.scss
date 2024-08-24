@@ -1,8 +1,8 @@
 @import './../node_modules/bootstrap/dist/css/bootstrap-grid.min.css';
 /* Importing Bootstrap SCSS file. */
-@import '~bootstrap/scss/bootstrap';
+@import 'bootstrap/scss/bootstrap';
 
-@import '~angular-calendar/css/angular-calendar.css';
+@import 'angular-calendar/css/angular-calendar.css';
 
 body {
   font-family: Helvetica, sans-serif;

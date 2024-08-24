@@ -7,7 +7,7 @@ import { NavbarComponent } from './layout/navbar/navbar.component';
 import { FooterComponent } from './layout/footer/footer.component';
 import { PrivateLayoutComponent } from './layout/private/private-layout.component';
 import { PublicLayoutComponent } from './layout/public/public-layout.component';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { TokenInterceptor } from './security/token-interceptor';
 import { ToastComponent } from './component/toast/toast.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -23,31 +23,25 @@ const APP_CONTAINERS = [
 
 registerLocaleData(localeEsAr, 'es');
 
-@NgModule({
-  declarations: [
-    AppComponent,
-    ...APP_CONTAINERS,
-    NavbarComponent,
-    FooterComponent,
-    ToastComponent,
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    FontAwesomeModule,
-    PermissionModule,
-  ],
-  exports: [ToastComponent],
-  providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: TokenInterceptor,
-      multi: true
-    },
-    { provide: LOCALE_ID, useValue: 'es' },
-    AuthGuard
-  ],
-  bootstrap: [AppComponent]
-})
+@NgModule({ declarations: [
+        AppComponent,
+        ...APP_CONTAINERS,
+        NavbarComponent,
+        FooterComponent,
+        ToastComponent,
+    ],
+    exports: [ToastComponent],
+    bootstrap: [AppComponent], imports: [BrowserModule,
+        AppRoutingModule,
+        FontAwesomeModule,
+        PermissionModule], providers: [
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: TokenInterceptor,
+            multi: true
+        },
+        { provide: LOCALE_ID, useValue: 'es' },
+        AuthGuard,
+        provideHttpClient(withInterceptorsFromDi())
+    ] })
 export class AppModule {}
