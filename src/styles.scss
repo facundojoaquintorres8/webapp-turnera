@@ -1,6 +1,4 @@
-@import './../node_modules/bootstrap/dist/css/bootstrap-grid.min.css';
-/* Importing Bootstrap SCSS file. */
-@import 'bootstrap/scss/bootstrap';
+@import "../node_modules/angular-calendar/css/angular-calendar.css";
 
 body {
   font-family: Helvetica, sans-serif;
@@ -36,6 +34,7 @@ body {
   border-top: lightgray 0.1rem solid;
   text-align: right;
   padding-top: 0.5rem !important;
+  margin-top: 1rem;
 
   .btn {
     margin-left: 0.5rem !important;

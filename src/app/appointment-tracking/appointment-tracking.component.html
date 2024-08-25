@@ -81,7 +81,7 @@
       <div class="col-lg-8">
         <div class="form-group">
           <label class="form-control-label">&nbsp;</label>
-          <div class="text-right">
+          <div class="text-end">
             <button type="button" (click)="clear()" class="btn btn-secondary mr-2" [disabled]="isSearching"
               title="Limpiar">
               <fa-icon icon="broom"></fa-icon>&nbsp;Limpiar
@@ -120,7 +120,7 @@
           </ng-container>
         </td>
 
-        <td class="text-right">
+        <td class="text-end">
           <button type="button" *ngIf="canBook(agenda)" (click)="book(agenda)" class="btn btn-warning btn-icon mr-1"
             title="Reservar turno">
             <fa-icon icon="plus"></fa-icon>

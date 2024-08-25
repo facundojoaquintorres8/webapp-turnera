@@ -83,7 +83,7 @@
             <div class="col-lg-2">
                 <div class="form-group" *ngIf="myForm.get('segmented')!.value">
                     <label class="form-control-label required" for="duration">Duración (min.)</label>
-                    <input type="number" class="form-control text-right" name="duration" id="duration"
+                    <input type="number" class="form-control text-end" name="duration" id="duration"
                         formControlName="duration" pattern="[0-9]*" />
                     <div
                         *ngIf="myForm.get('duration')!.invalid && (myForm.get('duration')!.dirty || myForm.get('duration')!.touched)">

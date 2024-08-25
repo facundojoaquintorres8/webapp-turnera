@@ -123,7 +123,8 @@ export class ScheduleComponent implements OnInit {
   }
 
   private getEventTitle(agenda: IAgenda): string {
-    let title = this.datePipe.transform(agenda.startDate, 'dd/MM/yyyy HH:mm') + '\n' + agenda.resource.description;
+    let title = 'TODO: Arreglar, no trae el recurso del back es por mis cambios';
+    // let title = this.datePipe.transform(agenda.startDate, 'dd/MM/yyyy HH:mm') + '\n' + agenda.resource.description;
     if (agenda.lastAppointment && this.appointmentStatusEnum[agenda.lastAppointment.lastAppointmentStatus.status] !== AppointmentStatusEnum.CANCELLED) {
       title = 'TODO: Arreglar, no le gusta al angular nuevo';
       // title = title + '\n' + agenda.lastAppointment.customerBusinessName + ' (' + this.appointmentStatusTranslate[agenda.lastAppointment.lastAppointmentStatus.status] + ')';
