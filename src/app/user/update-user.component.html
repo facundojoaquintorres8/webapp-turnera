@@ -52,10 +52,9 @@
         </div>
         <div class="row">
             <div class="col-lg-1" *ngIf="myForm.get('id')!.value">
-                <div class="form-group">
-                    <label class="form-control-label" for="active">Activo</label>
-                    <input type="checkbox" class="form-control checkbox-size-5" name="active" id="active"
-                        formControlName="active" />
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" name="active" id="active" formControlName="active" />
+                    <label class="form-check-label" for="active">Activo</label>
                 </div>
             </div>
         </div>
@@ -65,9 +64,9 @@
             <div class="col-lg-1 pointer" *ngFor="let profile of profiles"
                 (click)="selectProfile(profile)">
                 <span class="lead">
-                    <span class="badge badge-pill" [class.badge-primary]="profile.selected"
-                        [class.badge-light]="!profile.selected" [class.border]="!profile.selected"
-                        [class.border-dark]="!profile.selected">{{ profile.description }}</span>
+                    <span class="badge rounded-pill" [class.bg-primary]="profile.selected"
+                        [class.bg-light]="!profile.selected" [class.text-dark]="!profile.selected"
+                        [class.border]="!profile.selected" [class.border-dark]="!profile.selected">{{ profile.description }}</span>
                 </span>
             </div>
         </div>

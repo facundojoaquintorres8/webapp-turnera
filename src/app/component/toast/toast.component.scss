@@ -1,19 +1,11 @@
 .toast {
     position: fixed;
-    right: 2%;
-    opacity: 1;
+    right: 0.2rem;
     min-width: 400px;
     max-width: none;
     z-index: 100000;
 }
 
-.close {
-    opacity: 1;
-    text-shadow: none;
-    color: white;
-}
-
 .toast-header {
-    background-color: darkslategrey;
-    color: white;
+    color: darkslategrey;
 }

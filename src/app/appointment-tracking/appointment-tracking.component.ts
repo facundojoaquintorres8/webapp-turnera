@@ -163,23 +163,23 @@ export class AppointmentTrackingComponent implements OnInit {
   }
 
   appointmentStatusColor(lastAppointment: IAppointment): string {
-    let result = 'badge badge-white border border-primary'; // Free
+    let result = 'badge bg-white border border-primary'; // Free
     if (lastAppointment) {
       switch (this.appointmentStatusEnum[lastAppointment.lastAppointmentStatus.status]) {
         case AppointmentStatusEnum.BOOKED:
-          result = 'badge badge-warning';
+          result = 'badge bg-warning';
           break;
         case AppointmentStatusEnum.ABSENT:
-          result = 'badge badge-dark';
+          result = 'badge bg-dark';
           break;
         case AppointmentStatusEnum.CANCELLED:
-          result = 'badge badge-danger';
+          result = 'badge bg-danger';
           break;
         case AppointmentStatusEnum.IN_ATTENTION:
-          result = 'badge badge-info';
+          result = 'badge bg-info';
           break;
         case AppointmentStatusEnum.FINALIZED:
-          result = 'badge badge-success';
+          result = 'badge bg-success';
           break;
       }
     }

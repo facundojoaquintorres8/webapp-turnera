@@ -20,7 +20,7 @@
             <div class="col-lg-1" *ngIf="myForm.get('id')!.value">
                 <div class="form-group">
                     <label class="form-control-label" for="active">Activo</label>
-                    <input type="checkbox" class="form-control checkbox-size-5" name="active" id="active"
+                    <input type="checkbox" class="form-check-input" name="active" id="active"
                         formControlName="active" />
                 </div>
             </div>
@@ -45,50 +45,50 @@
             <div class="row">
                 <ng-container *ngFor="let permissionByEntity of permissionsByEntities">
                     <div class="col-lg-3 d-flex border">
-                        <input type="checkbox" class="form-control checkbox-size-5 w-25" name="selectAll" id="selectAll"
+                        <input type="checkbox" class="form-check-input" name="selectAll" id="selectAll"
                             (change)="selectAllEntity(permissionByEntity)" [checked]="permissionByEntity.selected" />
-                        <span class="lead" [ngSwitch]="permissionByEntity.name"
+                        <span class="lead pointer" [ngSwitch]="permissionByEntity.name"
                             (click)="selectAllEntity(permissionByEntity)">
                             <span *ngSwitchCase="'users'"
-                                class="badge badge-pill badge-light border border-dark">Usuarios</span>
+                                class="badge rounded-pill bg-light text-dark border border-dark">Usuarios</span>
                             <span *ngSwitchCase="'profiles'"
-                                class="badge badge-pill badge-light border border-dark">Perfiles</span>
+                                class="badge rounded-pill bg-light text-dark border border-dark">Perfiles</span>
                             <span *ngSwitchCase="'organizations'"
-                                class="badge badge-pill badge-light border border-dark">Mi Organización</span>
+                                class="badge rounded-pill bg-light text-dark border border-dark">Mi Organización</span>
                             <span *ngSwitchCase="'customers'"
-                                class="badge badge-pill badge-light border border-dark">Clientes</span>
+                                class="badge rounded-pill bg-light text-dark border border-dark">Clientes</span>
                             <span *ngSwitchCase="'resourcesTypes'"
-                                class="badge badge-pill badge-light border border-dark">Tipos de
+                                class="badge rounded-pill bg-light text-dark border border-dark">Tipos de
                                 Recursos</span>
                             <span *ngSwitchCase="'resources'"
-                                class="badge badge-pill badge-light border border-dark">Recursos</span>
+                                class="badge rounded-pill bg-light text-dark border border-dark">Recursos</span>
                             <span *ngSwitchCase="'agendas'"
-                                class="badge badge-pill badge-light border border-dark">Disponibilidades</span>
+                                class="badge rounded-pill bg-light text-dark border border-dark">Disponibilidades</span>
                             <span *ngSwitchCase="'appointments'"
-                                class="badge badge-pill badge-light border border-dark">Turnos</span>
+                                class="badge rounded-pill bg-light text-dark border border-dark">Turnos</span>
                             <span *ngSwitchCase="'holidays'"
-                                class="badge badge-pill badge-light border border-dark">Feriados</span>
+                                class="badge rounded-pill bg-light text-dark border border-dark">Feriados</span>
                         </span>
                     </div>
                     <div class="col-lg-3 border">
                         <div class="row" *ngFor="let action of permissionByEntity.actions; let index = index">
                             <div class="col-lg-12 d-flex">
-                                <input type="checkbox" class="form-control checkbox-size-5 w-25"
+                                <input type="checkbox" class="form-check-input"
                                     name="select + {{index}}" id="select + {{index}}"
                                     (change)="select(action.permission, permissionByEntity)"
                                     [checked]="action.permission.selected" />
                                 <span class="lead pointer" [ngSwitch]="action.action"
                                     (click)="select(action.permission, permissionByEntity)">
-                                    <span *ngSwitchCase="'read'" class="badge badge-pill badge-info">Ver</span>
+                                    <span *ngSwitchCase="'read'" class="badge rounded-pill bg-info">Ver</span>
                                     <span *ngSwitchCase="'write'"
-                                        class="badge badge-pill badge-primary">Actualizar</span>
-                                    <span *ngSwitchCase="'delete'" class="badge badge-pill badge-danger">Eliminar</span>
-                                    <span *ngSwitchCase="'book'" class="badge badge-pill badge-warning">Reservar</span>
-                                    <span *ngSwitchCase="'absent'" class="badge badge-pill badge-dark">Ausentar</span>
-                                    <span *ngSwitchCase="'cancel'" class="badge badge-pill badge-danger">Cancelar</span>
-                                    <span *ngSwitchCase="'attend'" class="badge badge-pill badge-info">Atender</span>
+                                        class="badge rounded-pill bg-primary">Actualizar</span>
+                                    <span *ngSwitchCase="'delete'" class="badge rounded-pill bg-danger">Eliminar</span>
+                                    <span *ngSwitchCase="'book'" class="badge rounded-pill bg-warning">Reservar</span>
+                                    <span *ngSwitchCase="'absent'" class="badge rounded-pill bg-dark">Ausentar</span>
+                                    <span *ngSwitchCase="'cancel'" class="badge rounded-pill bg-danger">Cancelar</span>
+                                    <span *ngSwitchCase="'attend'" class="badge rounded-pill bg-info">Atender</span>
                                     <span *ngSwitchCase="'finalize'"
-                                        class="badge badge-pill badge-success">Finalizar</span>
+                                        class="badge rounded-pill bg-success">Finalizar</span>
                                 </span>
                             </div>
                         </div>

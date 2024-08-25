@@ -32,7 +32,6 @@ export class TokenInterceptor implements HttpInterceptor {
             },
             (err: any) => {
                 if (err instanceof HttpErrorResponse) {
-                    console.log(err);
                     if (err.status === 400) {
                         this.toastService.changeMessage(
                             {

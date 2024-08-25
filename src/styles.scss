@@ -46,12 +46,6 @@ body {
   color: #dc3545;
 }
 
-.checkbox-size-5 {
-  font-size: 5px;
-  margin-left: -20px;
-  cursor: pointer;
-}
-
 .appointmentStatus {
   width: 75px;
 }
@@ -82,4 +76,12 @@ button {
   font-size: 0.875rem !important;
   line-height: 1.5 !important;
   border-radius: 0.2rem !important;
+}
+
+.form-check-input {
+  cursor: pointer;
+}
+
+.badge {
+  user-select: none;
 }
