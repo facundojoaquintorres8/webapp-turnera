@@ -52,10 +52,10 @@
                 <div class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button"
                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <fa-icon icon="user"></fa-icon>
-                    {{ user?.firstName }}
+                    {{ user.firstName }}
                 </div>
                 <div class="dropdown-menu dropdown-menu-right mt-0" aria-labelledby="navbarDropdown">
-                    <small class="dropdown-item text-muted disabled">({{ user?.username }})</small>
+                    <small class="dropdown-item text-muted disabled">({{ user.username }})</small>
                     <a *hasPermission="['organizations.read']" class="dropdown-item" href="/organizations">Mi
                         Organización</a>
                     <a class="dropdown-item" href="/users/password-change">Cambiar Contraseña</a>

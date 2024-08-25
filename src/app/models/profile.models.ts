@@ -3,12 +3,14 @@ export interface IProfile {
   active: boolean;
   description: string;
   permissions: IPermission[];
+  selected?: boolean;
 }
 
 export interface IPermission {
   id: number;
   description: string;
   code: string;
+  selected?: boolean;
 }
 
 export interface PermissionByEntity {

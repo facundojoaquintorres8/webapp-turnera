@@ -2,8 +2,6 @@
 /* Importing Bootstrap SCSS file. */
 @import 'bootstrap/scss/bootstrap';
 
-@import 'angular-calendar/css/angular-calendar.css';
-
 body {
   font-family: Helvetica, sans-serif;
 }
@@ -33,13 +31,6 @@ body {
   margin-right: auto;
   width: 40%;
 }
-
-// .public-layout {
-//     height: 100vh;
-//     display: flex;
-//     align-items: center;
-//     justify-content: center;
-// }
 
 .button-form {
   border-top: lightgray 0.1rem solid;

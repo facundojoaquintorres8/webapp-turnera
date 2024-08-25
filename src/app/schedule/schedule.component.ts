@@ -3,7 +3,7 @@ import { HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import { CalendarEvent, CalendarMonthViewBeforeRenderEvent, CalendarView } from 'angular-calendar';
+import { CalendarMonthViewBeforeRenderEvent, CalendarView } from 'angular-calendar';
 import { MonthViewDay } from 'calendar-utils';
 import { AgendaService } from '../agenda/agenda.service';
 import { DeleteAgendaModalComponent } from '../agenda/delete-agenda-modal.component';
@@ -19,7 +19,7 @@ import { AppointmentStatusEnum } from '../models/appointment.model';
 import { checkPermission } from '../security/check-permissions';
 import { formatDateFromDate } from '../shared/date-format';
 import { IResponse } from '../models/response.models';
-import { CalendarViewEnum } from '../models/schedule.models';
+import { CalendarViewEnum, ICalendarEvent } from '../models/schedule.models';
 
 @Component({
   selector: 'app-schedule',
@@ -31,7 +31,7 @@ export class ScheduleComponent implements OnInit {
 
   permissions: string[] = [];
   canViewAgendas: boolean = false;
-  events: CalendarEvent[] = [];
+  events: ICalendarEvent[] = [];
   view: CalendarView = CalendarView.Month;
   today: string = this.datePipe.transform(new Date(), 'dd/MM/yyyy') + '';
   loading!: boolean;
@@ -69,11 +69,11 @@ export class ScheduleComponent implements OnInit {
     }
   }
 
-  handleEvent(event: CalendarEvent): void {
-    if (this.agendaSelected === event['agenda']) {
+  handleEvent(event: ICalendarEvent): void {
+    if (this.agendaSelected === event.agenda) {
       this.agendaSelected = undefined;
     } else {
-      this.agendaSelected = event['agenda'];      
+      this.agendaSelected = event.agenda;      
     }
   }
 
@@ -125,7 +125,8 @@ export class ScheduleComponent implements OnInit {
   private getEventTitle(agenda: IAgenda): string {
     let title = this.datePipe.transform(agenda.startDate, 'dd/MM/yyyy HH:mm') + '\n' + agenda.resource.description;
     if (agenda.lastAppointment && this.appointmentStatusEnum[agenda.lastAppointment.lastAppointmentStatus.status] !== AppointmentStatusEnum.CANCELLED) {
-      title = title + '\n' + agenda.lastAppointment.customerBusinessName + ' (' + this.appointmentStatusTranslate[agenda.lastAppointment.lastAppointmentStatus.status] + ')';
+      title = 'TODO: Arreglar, no le gusta al angular nuevo';
+      // title = title + '\n' + agenda.lastAppointment.customerBusinessName + ' (' + this.appointmentStatusTranslate[agenda.lastAppointment.lastAppointmentStatus.status] + ')';
     }
     return title;
   }
@@ -142,18 +143,14 @@ export class ScheduleComponent implements OnInit {
     });
   }
 
-  quantityAppointmentsReserved(events: CalendarEvent[]): number {
-    return !events.length ? 0 : events.filter(x => !x['available']).length;
-  }
-
-  isYesterdayEvent(event: CalendarEvent, day: MonthViewDay): boolean {
+  isYesterdayEvent(event: ICalendarEvent, day: MonthViewDay): boolean {
     return event.end?.getHours() === 0 && day.day !== event.start.getDay();
   }
 
-  getColor(event: CalendarEvent): string {
+  getColor(event: ICalendarEvent): string {
     let result = 'btn-outline-primary'; // Free or Cancelled
-    if (event['lastAppointmentStatus']) {
-      switch (this.appointmentStatusEnum[event['lastAppointmentStatus']]) {
+    if (event.lastAppointmentStatus) {
+      switch (this.appointmentStatusEnum[event.lastAppointmentStatus]) {
         case AppointmentStatusEnum.BOOKED:
           result = 'btn-warning';
           break;
@@ -171,10 +168,10 @@ export class ScheduleComponent implements OnInit {
     return result;
   }
 
-  getFirstLetterFromStatus(event: CalendarEvent): string {
+  getFirstLetterFromStatus(event: ICalendarEvent): string {
     let result = 'L';
-    if (event['lastAppointmentStatus']) {
-      switch (this.appointmentStatusEnum[event['lastAppointmentStatus']]) {
+    if (event.lastAppointmentStatus) {
+      switch (this.appointmentStatusEnum[event.lastAppointmentStatus]) {
         case AppointmentStatusEnum.BOOKED:
           result = 'R';
           break;

@@ -65,9 +65,9 @@
             <div class="col-lg-1 pointer" *ngFor="let profile of profiles"
                 (click)="selectProfile(profile)">
                 <span class="lead">
-                    <span class="badge badge-pill" [class.badge-primary]="profile['selected']"
-                        [class.badge-light]="!profile['selected']" [class.border]="!profile['selected']"
-                        [class.border-dark]="!profile['selected']">{{ profile.description }}</span>
+                    <span class="badge badge-pill" [class.badge-primary]="profile.selected"
+                        [class.badge-light]="!profile.selected" [class.border]="!profile.selected"
+                        [class.border-dark]="!profile.selected">{{ profile.description }}</span>
                 </span>
             </div>
         </div>

@@ -108,10 +108,11 @@
         <td>{{ agenda.endDate | date: 'dd/MM/yyyy HH:mm' }}</td>
         <td>{{ agenda.lastAppointment ? agenda.lastAppointment.customerBusinessName : '-'}}</td>
         <td>
-          <span class="{{ appointmentStatusColor(agenda.lastAppointment) }} appointmentStatus">
+          <!-- TODO: arreglar lista porque no le gusta al angular nuevo -->
+          <!-- <span class="{{ appointmentStatusColor(agenda.lastAppointment) }} appointmentStatus">
             {{ agenda.lastAppointment ? appointmentStatusObject[agenda.lastAppointment.lastAppointmentStatus.status] :
             appointmentStatusObject.FREE }}
-          </span>
+          </span> -->
           <ng-container *ngIf="agenda.lastAppointment && agenda.lastAppointment.lastAppointmentStatus.observations">
             <fa-icon icon="comment-dots" class="text-info ml-1 pointer"
               (click)="seeObservations(agenda.lastAppointment.lastAppointmentStatus.observations)"

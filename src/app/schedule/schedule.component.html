@@ -92,7 +92,8 @@
     {{ agendaSelected.resource.description }}<br>
     <span *ngIf="agendaSelected.lastAppointment 
           && appointmentStatusEnum[agendaSelected.lastAppointment.lastAppointmentStatus.status] !== appointmentStatusEnum.CANCELLED">
-      {{ agendaSelected.lastAppointment.customerBusinessName }} ({{ appointmentStatusTranslate[agendaSelected.lastAppointment.lastAppointmentStatus.status] }})
+          <!-- TODO: Arreglar, no le gusta al angular nuevo -->
+      <!-- {{ agendaSelected.lastAppointment.customerBusinessName }} ({{ appointmentStatusTranslate[agendaSelected.lastAppointment.lastAppointmentStatus.status] }}) -->
     </span>
   </span>
 </ng-template>

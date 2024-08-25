@@ -1,6 +1,6 @@
 import { HttpResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
-import { UntypedFormBuilder, Validators } from '@angular/forms';
+import { Component } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { ToastService } from 'src/app/component/toast/toast.service';
@@ -12,7 +12,7 @@ import { IResponse } from 'src/app/models/response.models';
   selector: 'app-password-reset-request',
   templateUrl: './password-reset-request.component.html'
 })
-export class PasswordResetRequestComponent implements OnInit {
+export class PasswordResetRequestComponent {
   isSaving = false;
 
   myForm = this.fb.group({
@@ -21,12 +21,10 @@ export class PasswordResetRequestComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private fb: UntypedFormBuilder,
+    private fb: FormBuilder,
     private accountService: AccountService,
     private toastService: ToastService,
   ) { }
-
-  ngOnInit(): void { }
 
   previousState(): void {
     window.history.back();

@@ -1,6 +1,6 @@
 import { HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { UntypedFormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { IOrganization } from '../models/organization.models';
 import { OrganizationService } from './organization.service';
@@ -14,19 +14,19 @@ export class UpdateOrganizationComponent implements OnInit {
   isSaving = false;
 
   myForm = this.fb.group({
-    id: [],
-    businessName: [null, [Validators.required]],
-    brandName: [null],
-    cuit: [null, [Validators.maxLength(11)]],
-    address: [null],
-    phone1: [null, [Validators.maxLength(50)]],
-    phone2: [null, [Validators.maxLength(50)]],
-    defaultEmail: [null, [Validators.required, Validators.email, Validators.maxLength(100)]],
+    id: [0],
+    businessName: ['', [Validators.required]],
+    brandName: [''],
+    cuit: ['', [Validators.maxLength(11)]],
+    address: [''],
+    phone1: ['', [Validators.maxLength(50)]],
+    phone2: ['', [Validators.maxLength(50)]],
+    defaultEmail: ['', [Validators.required, Validators.email, Validators.maxLength(100)]],
   });
 
   constructor(
     private organizationService: OrganizationService,
-    private fb: UntypedFormBuilder,
+    private fb: FormBuilder,
   ) { }
 
   ngOnInit(): void {

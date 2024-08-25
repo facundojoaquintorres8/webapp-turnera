@@ -76,7 +76,7 @@
                                 <input type="checkbox" class="form-control checkbox-size-5 w-25"
                                     name="select + {{index}}" id="select + {{index}}"
                                     (change)="select(action.permission, permissionByEntity)"
-                                    [checked]="action.permission['selected']" />
+                                    [checked]="action.permission.selected" />
                                 <span class="lead pointer" [ngSwitch]="action.action"
                                     (click)="select(action.permission, permissionByEntity)">
                                     <span *ngSwitchCase="'read'" class="badge badge-pill badge-info">Ver</span>

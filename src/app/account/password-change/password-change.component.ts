@@ -1,6 +1,6 @@
 import { HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { UntypedFormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/auth/auth.service';
 import { IPasswordChange } from 'src/app/models/account.models';
@@ -22,7 +22,7 @@ export class PasswordChangeComponent implements OnInit {
   });
 
   constructor(
-    private fb: UntypedFormBuilder,
+    private fb: FormBuilder,
     private accountService: AccountService,
     private authService: AuthService,
   ) {}

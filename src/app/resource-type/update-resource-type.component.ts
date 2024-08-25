@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
-import { UntypedFormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { ResourceTypeService } from './resource-type.service';
-import { AuthService } from '../auth/auth.service';
 import { IResourceType } from '../models/resourceType.models';
 import { IResponse } from '../models/response.models';
 
@@ -16,16 +15,15 @@ export class UpdateResourceTypeComponent implements OnInit {
   isSaving = false;
 
   myForm = this.fb.group({
-    id: [],
-    description: [null, [Validators.required]],
-    active: [null],
+    id: [0],
+    description: ['', [Validators.required]],
+    active: [false],
   });
 
   constructor(
     private resourceTypeService: ResourceTypeService,
     private activatedRoute: ActivatedRoute,
-    private fb: UntypedFormBuilder,
-    private authService: AuthService,
+    private fb: FormBuilder,
   ) { }
 
   ngOnInit(): void {

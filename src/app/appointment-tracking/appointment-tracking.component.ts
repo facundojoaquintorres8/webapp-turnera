@@ -1,6 +1,6 @@
 import { HttpResponse } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { UntypedFormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { NgbDateStruct, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { AgendaService } from '../agenda/agenda.service';
 import { DeleteAgendaModalComponent } from '../agenda/delete-agenda-modal.component';
@@ -57,9 +57,9 @@ export class AppointmentTrackingComponent implements OnInit {
   }
 
   myFormFilter = this.fb.group({
-    resourceTypeId: [null],
-    resourceId: [null],
-    customerId: [null],
+    resourceTypeId: [0],
+    resourceId: [0],
+    customerId: [0],
     from: [formatNgbDateStructFromDate(this.firstDayMonth), [Validators.required]],
     to: [formatNgbDateStructFromDate(this.lastDayMonth), [Validators.required]],
   });
@@ -80,7 +80,7 @@ export class AppointmentTrackingComponent implements OnInit {
   constructor(
     private agendaService: AgendaService,
     private modalService: NgbModal,
-    private fb: UntypedFormBuilder,
+    private fb: FormBuilder,
     private resourceTypeService: ResourceTypeService,
     private resourceService: ResourceService,
     private customerService: CustomerService,
@@ -110,9 +110,10 @@ export class AppointmentTrackingComponent implements OnInit {
       (res: HttpResponse<IResponse>) => this.customers = res.body?.data.content || []
     );
 
-    Object.keys(this.appointmentStatusObject).map(key =>
-      this.appointmentStatus.push({ id: key, value: this.appointmentStatusObject[key] })
-    );
+    // TODO: arreglar lista porque no le gusta al angular nuevo
+    // Object.keys(this.appointmentStatusObject).map(key =>
+    //   this.appointmentStatus.push({ id: key, value: this.appointmentStatusObject[key] })
+    // );
   }
 
   clear(): void {
@@ -153,8 +154,8 @@ export class AppointmentTrackingComponent implements OnInit {
 
   onResourceChange(): void {
     if (this.myFormFilter.get('resourceId')?.value !== null) {
-      const resource = this.resources.find(x => x.id == this.myFormFilter.get('resourceId')?.value);
-      this.myFormFilter.get('resourceTypeId')?.setValue(resource?.resourceType?.id);
+      const resource = this.resources.find(x => x.id == this.myFormFilter.get('resourceId')!.value);
+      this.myFormFilter.get('resourceTypeId')?.setValue(resource!.resourceType.id);
       this.myFormFilter.get('resourceTypeId')?.disable();
     } else {
       this.myFormFilter.get('resourceTypeId')?.enable();

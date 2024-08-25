@@ -13,7 +13,7 @@
       <fa-icon icon="arrow-left"></fa-icon>&nbsp;Volver
   </button>
 
-    <button *hasPermission="['resourcesTypes.write']" type="button" [routerLink]="['../../', resourceType?.id, 'edit']" class="btn btn-primary" title="Editar">
+    <button *hasPermission="['resourcesTypes.write']" type="button" [routerLink]="['../../', resourceType.id, 'edit']" class="btn btn-primary" title="Editar">
       <fa-icon icon="pencil-alt"></fa-icon>&nbsp;Editar
     </button>
   </div>

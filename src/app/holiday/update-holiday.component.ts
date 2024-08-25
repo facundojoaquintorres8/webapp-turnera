@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
-import { UntypedFormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { HolidayService } from './holiday.service';
-import { AuthService } from '../auth/auth.service';
 import { IHoliday, ISaveHoliday } from '../models/holiday.models';
 import { formatDateFromNgbDateStruct, formatNgbDateStructFromDate } from '../shared/date-format';
-import * as moment from 'moment';
+import moment from 'moment';
 import { IResponse } from '../models/response.models';
 
 @Component({
@@ -18,18 +17,17 @@ export class UpdateHolidayComponent implements OnInit {
   isSaving = false;
 
   myForm = this.fb.group({
-    id: [],
-    date: [null, [Validators.required]],
-    description: [null, [Validators.required]],
-    useInAgenda: [true],
-    active: [null],
+    id: [0],
+    date: [formatNgbDateStructFromDate(new Date()), [Validators.required]],
+    description: ['', [Validators.required]],
+    useInAgenda: [false],
+    active: [false],
   });
 
   constructor(
     private holidayService: HolidayService,
     private activatedRoute: ActivatedRoute,
-    private fb: UntypedFormBuilder,
-    private authService: AuthService,
+    private fb: FormBuilder,
   ) { }
 
   ngOnInit(): void {

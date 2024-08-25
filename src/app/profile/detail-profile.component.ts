@@ -62,9 +62,9 @@ export class DetailProfileComponent implements OnInit {
   }
 
   private select(permission: IPermission, permissionByEntity: PermissionByEntity): void {
-    permission['selected'] = !permission['selected'];
+    permission.selected = !permission.selected;
     permissionByEntity.selected = permissionByEntity.actions.every((x: any) => {
-      return x.permission['selected'];
+      return x.permission.selected;
     });
   }
 

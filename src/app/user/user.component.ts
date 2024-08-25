@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { UntypedFormBuilder } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from '../auth/auth.service';
 import { TableComponent } from '../component/table/table.component';
@@ -32,7 +32,7 @@ export class UserComponent implements OnInit {
     private userService: UserService,
     private authService: AuthService,
     private modalService: NgbModal,
-    private fb: UntypedFormBuilder,
+    private fb: FormBuilder,
   ) { }
 
   ngOnInit(): void {

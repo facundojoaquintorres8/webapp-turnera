@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
-import { UntypedFormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { ProfileService } from './profile.service';
-import { AuthService } from '../auth/auth.service';
 import { IPermission, IProfile, PermissionByEntity } from '../models/profile.models';
 import { IResponse } from '../models/response.models';
 
@@ -22,16 +21,15 @@ export class UpdateProfileComponent implements OnInit {
   permissionsByEntities: PermissionByEntity[] = [];
 
   myForm = this.fb.group({
-    id: [],
-    description: [null, [Validators.required]],
-    active: [null],
+    id: [0],
+    description: ['', [Validators.required]],
+    active: [false],
   });
 
   constructor(
     private profileService: ProfileService,
     private activatedRoute: ActivatedRoute,
-    private fb: UntypedFormBuilder,
-    private authService: AuthService,
+    private fb: FormBuilder,
   ) { }
 
   ngOnInit(): void {
@@ -64,9 +62,9 @@ export class UpdateProfileComponent implements OnInit {
   }
 
   select(permission: IPermission, permissionByEntity: PermissionByEntity): void {
-    permission['selected'] = !permission['selected'];
+    permission.selected = !permission.selected;
     permissionByEntity.selected = permissionByEntity.actions.every((x: any) => {
-      return x.permission['selected'];
+      return x.permission.selected;
     });
   }
 
@@ -74,7 +72,7 @@ export class UpdateProfileComponent implements OnInit {
     permissionByEntity.selected = !permissionByEntity.selected;
     const permissionByEntityExisting = this.permissionsByEntities.find(x => x === permissionByEntity);
     permissionByEntityExisting?.actions.forEach(p => {
-      p.permission['selected'] = permissionByEntity.selected;
+      p.permission.selected = permissionByEntity.selected;
     });
   }
 
@@ -111,7 +109,7 @@ export class UpdateProfileComponent implements OnInit {
     const permissionsSelected: IPermission[] = [];
     this.permissionsByEntities.forEach(pbye => {
       pbye.actions.forEach(action => {
-        if (action.permission['selected']) {
+        if (action.permission.selected) {
           permissionsSelected.push(action.permission);
         }
       });

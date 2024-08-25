@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
-import { UntypedFormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { CustomerService } from './customer.service';
-import { AuthService } from '../auth/auth.service';
 import { ICustomer } from '../models/customer.models';
 import { IResponse } from '../models/response.models';
 
@@ -16,22 +15,21 @@ export class UpdateCustomerComponent implements OnInit {
   isSaving = false;
 
   myForm = this.fb.group({
-    id: [],
-    businessName: [null, [Validators.required]],
-    brandName: [null],
-    cuit: [null, [Validators.maxLength(11)]],
-    address: [null],
-    phone1: [null, [Validators.required, Validators.maxLength(50)]],
-    phone2: [null, [Validators.maxLength(50)]],
-    email: [null, [Validators.required, Validators.email, Validators.maxLength(100)]],
-    active: [null],
+    id: [0],
+    businessName: ['', [Validators.required]],
+    brandName: [''],
+    cuit: ['', [Validators.maxLength(11)]],
+    address: [''],
+    phone1: ['', [Validators.required, Validators.maxLength(50)]],
+    phone2: ['', [Validators.maxLength(50)]],
+    email: ['', [Validators.required, Validators.email, Validators.maxLength(100)]],
+    active: [false],
   });
 
   constructor(
     private customerService: CustomerService,
     private activatedRoute: ActivatedRoute,
-    private fb: UntypedFormBuilder,
-    private authService: AuthService,
+    private fb: FormBuilder,
   ) {}
 
   ngOnInit(): void {

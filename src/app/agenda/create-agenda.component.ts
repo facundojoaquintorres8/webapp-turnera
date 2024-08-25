@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
-import { UntypedFormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { AgendaService } from './agenda.service';
 import { ISaveAgenda, RepeatTypeEnum } from '../models/agenda.models';
@@ -8,7 +8,7 @@ import { IResource } from '../models/resource.models';
 import { ResourceService } from '../resource/resource.service';
 import { formatDateFromNgbDateStruct, formatTimeFromNgbTimeStruct } from '../shared/date-format';
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
-import * as moment from 'moment';
+import moment from 'moment';
 import * as momentTimeZone from 'moment-timezone';
 import { IResponse } from '../models/response.models';
 
@@ -36,11 +36,11 @@ export class CreateAgendaComponent implements OnInit {
     startDate: [this.today, [Validators.required]],
     startHour: [{ hour: 8, minute: 0, second: 0 }, [Validators.required]],
     endHour: [{ hour: 18, minute: 0, second: 0 }, [Validators.required]],
-    zoneId: [null],
+    zoneId: [''],
     segmented: [null],
     duration: [null],
     repeat: [null],
-    repeatType: [null],
+    repeatType: [''],
     finalize: [null],
     sunday: [false],
     monday: [false],
@@ -55,7 +55,7 @@ export class CreateAgendaComponent implements OnInit {
   constructor(
     private agendaService: AgendaService,
     private resourceService: ResourceService,
-    private fb: UntypedFormBuilder,
+    private fb: FormBuilder,
   ) { }
 
   ngOnInit(): void {
@@ -102,7 +102,7 @@ export class CreateAgendaComponent implements OnInit {
       }
       this.myForm.controls['repeatType'].setValidators([Validators.required]);
       this.myForm.controls['finalize'].setValidators([Validators.required]);
-      this.showDaysOfWeek = RepeatTypeEnum[this.myForm.get('repeatType')!.value] === RepeatTypeEnum.WEEKLY;
+      this.showDaysOfWeek = RepeatTypeEnum[this.myForm.get('repeatType')!.value as keyof typeof RepeatTypeEnum] === RepeatTypeEnum.WEEKLY;
     } else {
       this.myForm.controls['repeatType'].clearValidators();
       this.myForm.controls['finalize'].clearValidators();
@@ -110,7 +110,7 @@ export class CreateAgendaComponent implements OnInit {
   }
 
   onRepeatTypeChange(): void {
-    this.showDaysOfWeek = RepeatTypeEnum[this.myForm.get('repeatType')!.value] === RepeatTypeEnum.WEEKLY;
+    this.showDaysOfWeek = RepeatTypeEnum[this.myForm.get('repeatType')!.value as keyof typeof RepeatTypeEnum] === RepeatTypeEnum.WEEKLY;
     this.setDayOfTheMonth();
   }
 
@@ -125,7 +125,7 @@ export class CreateAgendaComponent implements OnInit {
 
   private setDayOfTheMonth(): void {
     this.dayOfTheMonthText = '';
-    if (RepeatTypeEnum[this.myForm.get('repeatType')!.value] === RepeatTypeEnum.MONTHLY && this.myForm.get(['startDate'])!.value) {
+    if (RepeatTypeEnum[this.myForm.get('repeatType')!.value as keyof typeof RepeatTypeEnum] === RepeatTypeEnum.MONTHLY && this.myForm.get(['startDate'])!.value) {
       const startDate = moment(formatDateFromNgbDateStruct(this.myForm.get(['startDate'])!.value));
       const dayOfTheMonth: number = parseInt(startDate.format('DD'), 10);
       if (startDate.daysInMonth() === dayOfTheMonth) {

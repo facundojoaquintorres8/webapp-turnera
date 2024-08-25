@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
-import { UntypedFormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { IUser } from '../models/user.models';
 import { UserService } from './user.service';
-import { AuthService } from '../auth/auth.service';
 import { IProfile } from '../models/profile.models';
 import { ProfileService } from '../profile/profile.service';
 import { IResponse } from '../models/response.models';
@@ -20,18 +19,17 @@ export class UpdateUserComponent implements OnInit {
   profiles: IProfile[] = [];
 
   myForm = this.fb.group({
-    id: [],
-    firstName: [null, [Validators.required]],
-    lastName: [null, [Validators.required]],
-    email: [null, [Validators.required, Validators.email, Validators.maxLength(100)]],
-    active: [null],
+    id: [0],
+    firstName: ['', [Validators.required]],
+    lastName: ['', [Validators.required]],
+    email: ['', [Validators.required, Validators.email, Validators.maxLength(100)]],
+    active: [false],
   });
 
   constructor(
     private userService: UserService,
     private activatedRoute: ActivatedRoute,
-    private fb: UntypedFormBuilder,
-    private authService: AuthService,
+    private fb: FormBuilder,
     private profileService: ProfileService,
   ) {}
 
@@ -54,7 +52,7 @@ export class UpdateUserComponent implements OnInit {
   updateForm(user: IUser, allProfiles: IProfile[]): void {
     const profilesIds = user.profiles.map(x => x.id);
     allProfiles.forEach(p => {
-      p['selected'] = profilesIds.find(x => x === p.id) !== undefined;
+      p.selected = profilesIds.find(x => x === p.id) !== undefined;
     });
     this.myForm.patchValue({
       id: user.id,
@@ -66,7 +64,7 @@ export class UpdateUserComponent implements OnInit {
   }
 
   selectProfile(profile: IProfile): void {
-    profile['selected'] = !profile['selected'];
+    profile.selected = !profile.selected;
   }
 
   previousState(): void {
@@ -90,7 +88,7 @@ export class UpdateUserComponent implements OnInit {
       firstName: this.myForm.get(['firstName'])!.value,
       lastName: this.myForm.get(['lastName'])!.value,
       username: this.myForm.get(['email'])!.value,
-      profiles: this.profiles.filter(x => x['selected'])
+      profiles: this.profiles.filter(x => x.selected)
     };
   }
 

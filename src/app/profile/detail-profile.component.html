@@ -45,30 +45,30 @@
           <div class="row" *ngFor="let action of permissionByEntity.actions">
             <div class="col-lg-12 d-flex">
               <span class="lead" [ngSwitch]="action.action">
-                <span *ngSwitchCase="'read'" class="badge badge-pill" [class.badge-info]="action.permission['selected']"
-                  [class.badge-ligth]="!action.permission['selected']"
-                  [class.text-line-through]="!action.permission['selected']">Ver</span>
+                <span *ngSwitchCase="'read'" class="badge badge-pill" [class.badge-info]="action.permission.selected"
+                  [class.badge-ligth]="!action.permission.selected"
+                  [class.text-line-through]="!action.permission.selected">Ver</span>
                 <span *ngSwitchCase="'write'" class="badge badge-pill"
-                  [class.badge-primary]="action.permission['selected']" [class.badge-ligth]="!action.permission['selected']"
-                  [class.text-line-through]="!action.permission['selected']">Actualizar</span>
+                  [class.badge-primary]="action.permission.selected" [class.badge-ligth]="!action.permission.selected"
+                  [class.text-line-through]="!action.permission.selected">Actualizar</span>
                 <span *ngSwitchCase="'delete'" class="badge badge-pill"
-                  [class.badge-danger]="action.permission['selected']" [class.badge-ligth]="!action.permission['selected']"
-                  [class.text-line-through]="!action.permission['selected']">Eliminar</span>
+                  [class.badge-danger]="action.permission.selected" [class.badge-ligth]="!action.permission.selected"
+                  [class.text-line-through]="!action.permission.selected">Eliminar</span>
                 <span *ngSwitchCase="'book'" class="badge badge-pill"
-                  [class.badge-warning]="action.permission['selected']" [class.badge-ligth]="!action.permission['selected']"
-                  [class.text-line-through]="!action.permission['selected']">Reservar</span>
-                <span *ngSwitchCase="'absent'" class="badge badge-pill" [class.badge-dark]="action.permission['selected']"
-                  [class.badge-ligth]="!action.permission['selected']"
-                  [class.text-line-through]="!action.permission['selected']">Ausentar</span>
+                  [class.badge-warning]="action.permission.selected" [class.badge-ligth]="!action.permission.selected"
+                  [class.text-line-through]="!action.permission.selected">Reservar</span>
+                <span *ngSwitchCase="'absent'" class="badge badge-pill" [class.badge-dark]="action.permission.selected"
+                  [class.badge-ligth]="!action.permission.selected"
+                  [class.text-line-through]="!action.permission.selected">Ausentar</span>
                 <span *ngSwitchCase="'cancel'" class="badge badge-pill"
-                  [class.badge-danger]="action.permission['selected']" [class.badge-ligth]="!action.permission['selected']"
-                  [class.text-line-through]="!action.permission['selected']">Cancelar</span>
-                <span *ngSwitchCase="'attend'" class="badge badge-pill" [class.badge-info]="action.permission['selected']"
-                  [class.badge-ligth]="!action.permission['selected']"
-                  [class.text-line-through]="!action.permission['selected']">Atender</span>
+                  [class.badge-danger]="action.permission.selected" [class.badge-ligth]="!action.permission.selected"
+                  [class.text-line-through]="!action.permission.selected">Cancelar</span>
+                <span *ngSwitchCase="'attend'" class="badge badge-pill" [class.badge-info]="action.permission.selected"
+                  [class.badge-ligth]="!action.permission.selected"
+                  [class.text-line-through]="!action.permission.selected">Atender</span>
                 <span *ngSwitchCase="'finalize'" class="badge badge-pill"
-                  [class.badge-success]="action.permission['selected']" [class.badge-ligth]="!action.permission['selected']"
-                  [class.text-line-through]="!action.permission['selected']">Finalizar</span>
+                  [class.badge-success]="action.permission.selected" [class.badge-ligth]="!action.permission.selected"
+                  [class.text-line-through]="!action.permission.selected">Finalizar</span>
               </span>
             </div>
           </div>
@@ -82,7 +82,7 @@
       <fa-icon icon="arrow-left"></fa-icon>&nbsp;Volver
     </button>
 
-    <button *hasPermission="['profiles.write']" type="button" [routerLink]="['../../', profile?.id, 'edit']"
+    <button *hasPermission="['profiles.write']" type="button" [routerLink]="['../../', profile.id, 'edit']"
       class="btn btn-primary" title="Editar">
       <fa-icon icon="pencil-alt"></fa-icon>&nbsp;Editar
     </button>
