@@ -2,7 +2,7 @@
   <h2>
     <button *hasPermission="['holidays.write']" type="button" [routerLink]="['new']" class="btn btn-primary btn-icon"
       title="Crear Feriado">
-      <i class="bi bi-plus"></i>
+      <i class="bi bi-plus-lg"></i>
     </button> Feriados
   </h2>
 
@@ -34,7 +34,7 @@
 
           <button *hasPermission="['holidays.delete']" type="button" (click)="delete(holiday)"
             class="btn btn-danger btn-icon ms-1" title="Eliminar">
-            <i class="bi bi-x"></i>
+            <i class="bi bi-trash"></i>
           </button>
         </td>
       </tr>

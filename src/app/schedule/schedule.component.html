@@ -58,7 +58,7 @@
 
 <ng-template #popContent>
   <button type="button" *ngIf="canBook()" (click)="book()" class="btn btn-warning m-1" title="Reservar turno">
-    <i class="bi bi-plus"></i>&nbsp;Reservar
+    <i class="bi bi-plus-lg"></i>&nbsp;Reservar
   </button>
   
   <button type="button" *ngIf="canAttend()" (click)="attend()" class="btn btn-info m-1" title="Atender">
@@ -78,7 +78,7 @@
   </button>
   
   <button type="button" *ngIf="canDelete()" (click)="delete()" class="btn btn-danger m-1" title="Eliminar disponibilidad">
-    <i class="bi bi-x"></i>&nbsp;Eliminar
+    <i class="bi bi-trash"></i>&nbsp;Eliminar
   </button>
   
   <button type="button" *ngIf="canDesactivate()" (click)="desactivate()" class="btn btn-danger m-1"

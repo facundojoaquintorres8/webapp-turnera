@@ -123,7 +123,7 @@
         <td class="text-end">
           <button type="button" *ngIf="canBook(agenda)" (click)="book(agenda)" class="btn btn-warning btn-icon ms-1"
             title="Reservar turno">
-            <i class="bi bi-plus"></i>
+            <i class="bi bi-plus-lg"></i>
           </button>
 
           <button type="button" *ngIf="canAttend(agenda)" (click)="attend(agenda.lastAppointment)"
@@ -148,7 +148,7 @@
 
           <button type="button" *ngIf="canDelete(agenda)" (click)="delete(agenda)" class="btn btn-danger btn-icon ms-1"
             title="Eliminar disponibilidad">
-            <i class="bi bi-x"></i>
+            <i class="bi bi-trash"></i>
           </button>
 
           <button type="button" *ngIf="canDesactivate(agenda)" (click)="desactivate(agenda)"

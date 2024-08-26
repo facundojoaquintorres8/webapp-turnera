@@ -57,18 +57,14 @@ body {
 .btn-icon {
   width: 30px;
   height: 30px;
+  i {
+    margin-left: -2px;
+    font-size: medium;
+  }
 }
 
-button > fa-icon > svg {
-  font-size: smaller !important;
-}
-
-strong > fa-icon > svg {
-  font-size: smaller !important;
-}
-
-.close {
-  font-size: x-large !important;
+i {
+  font-size: large;
 }
 
 button {

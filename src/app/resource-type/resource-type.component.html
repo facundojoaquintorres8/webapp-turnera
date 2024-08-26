@@ -2,7 +2,7 @@
   <h2>
     <button *hasPermission="['resourcesTypes.write']" type="button" [routerLink]="['new']"
       class="btn btn-primary btn-icon" title="Crear Tipo de Recurso">
-      <i class="bi bi-plus"></i>
+      <i class="bi bi-plus-lg"></i>
     </button> Tipos de Recursos
   </h2>
 
@@ -29,7 +29,7 @@
 
           <button *hasPermission="['resourcesTypes.delete']" type="button" (click)="delete(resourceType)"
             class="btn btn-danger btn-icon ms-1" title="Eliminar">
-            <i class="bi bi-x"></i>
+            <i class="bi bi-trash"></i>
           </button>
         </td>
       </tr>

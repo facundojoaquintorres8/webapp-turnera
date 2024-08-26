@@ -2,7 +2,7 @@
   <h2>
     <button *hasPermission="['users.write']" type="button" [routerLink]="['new']" class="btn btn-primary btn-icon"
       title="Crear Usuario">
-      <i class="bi bi-plus"></i>
+      <i class="bi bi-plus-lg"></i>
     </button> Usuarios
   </h2>
 
@@ -38,7 +38,7 @@
           <button *hasPermission="['users.delete']" [disabled]="sessionUser.id === user.id" type="button"
             (click)="delete(user)" class="btn btn-danger btn-icon ms-1"
             [title]="sessionUser.id === user.id ? 'No puede eliminar su propio Usuario' : 'Eliminar'">
-            <i class="bi bi-x"></i>
+            <i class="bi bi-trash"></i>
           </button>
         </td>
       </tr>

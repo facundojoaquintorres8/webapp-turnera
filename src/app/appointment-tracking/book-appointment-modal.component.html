@@ -10,7 +10,7 @@
                 <div class="form-group">
                     <label class="form-control-label required" for="customer">
                         <button *hasPermission="['customers.write']" type="button" (click)="newCustomer()" class="btn btn-primary btn-icon" title="Agregar nuevo">
-                            <i class="bi bi-plus"></i>
+                            <i class="bi bi-plus-lg"></i>
                         </button> Cliente
                     </label>
                     <select class="form-control" name="customer" id="customer" formControlName="customer">
@@ -88,7 +88,7 @@
         </button>
 
         <button type="submit" [disabled]="myForm.invalid || isSaving" class="btn btn-primary" title="Reservar">
-            <i class="bi bi-save"></i>&nbsp;Reservar
+            <i class="bi bi-floppy"></i>&nbsp;Reservar
         </button>
     </div>
 </form>

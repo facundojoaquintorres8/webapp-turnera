@@ -2,7 +2,7 @@
   <h2>
     <button *hasPermission="['profiles.write']" type="button" [routerLink]="['new']" class="btn btn-primary btn-icon"
       title="Crear Perfil">
-      <i class="bi bi-plus"></i>
+      <i class="bi bi-plus-lg"></i>
     </button> Perfiles
   </h2>
 
@@ -29,7 +29,7 @@
 
           <button *hasPermission="['profiles.delete']" type="button" (click)="delete(profile)"
             class="btn btn-danger btn-icon ms-1" title="Eliminar">
-            <i class="bi bi-x"></i>
+            <i class="bi bi-trash"></i>
           </button>
         </td>
       </tr>
