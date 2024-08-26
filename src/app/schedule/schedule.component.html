@@ -31,7 +31,7 @@
   <div class="position-relative">
     <div *ngIf="loading"
       class="calendar-loading bg-dark position-absolute w-100 h-100 d-flex justify-content-center align-items-center">
-      <div class="spinner-border text-light" role="status"></div>
+      <div class="spinner-border text-light"></div>
     </div>
     <mwl-calendar-month-view [viewDate]="agendaService.viewDate" [events]="events"
       (beforeViewRender)="beforeMonthViewRender($event)" [cellTemplate]="customCellTemplate">
