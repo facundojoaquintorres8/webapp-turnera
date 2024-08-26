@@ -2,7 +2,7 @@
   <h2>
     <button *hasPermission="['holidays.write']" type="button" [routerLink]="['new']" class="btn btn-primary btn-icon"
       title="Crear Feriado">
-      <fa-icon icon="plus"></fa-icon>
+      <i class="bi bi-plus"></i>
     </button> Feriados
   </h2>
 
@@ -14,27 +14,27 @@
         <td>{{ holiday.date | date: 'dd/MM/yyyy' }}</td>
         <td>{{ holiday.description }}</td>
         <td>
-          <fa-icon *ngIf="holiday.useInAgenda" [icon]="['far', 'check-square']" class="text-success"></fa-icon>
-          <fa-icon *ngIf="!holiday.useInAgenda" [icon]="['far', 'square']" class="text-danger outline"></fa-icon>
+          <i *ngIf="holiday.useInAgenda" class="bi bi-check-square text-success"></i>
+          <i *ngIf="!holiday.useInAgenda" class="bi bi-square text-danger outline"></i>
         </td>
         <td>
-          <fa-icon *ngIf="holiday.active" [icon]="['far', 'check-square']" class="text-success"></fa-icon>
-          <fa-icon *ngIf="!holiday.active" [icon]="['far', 'square']" class="text-danger outline"></fa-icon>
+          <i *ngIf="holiday.active" class="bi bi-check-square text-success"></i>
+          <i *ngIf="!holiday.active" class="bi bi-square text-danger outline"></i>
         </td>
         <td class="text-end">
           <button *hasPermission="['holidays.read']" type="button" [routerLink]="[holiday.id, 'view']"
-            class="btn btn-info btn-icon mr-1" title="Ver">
-            <fa-icon icon="eye"></fa-icon>
+            class="btn btn-info btn-icon ms-1" title="Ver">
+            <i class="bi bi-eye"></i>
           </button>
 
           <button *hasPermission="['holidays.write']" type="button" [routerLink]="[holiday.id, 'edit']"
-            class="btn btn-primary btn-icon mr-1" title="Editar">
-            <fa-icon icon="pencil-alt"></fa-icon>
+            class="btn btn-primary btn-icon ms-1" title="Editar">
+            <i class="bi bi-pencil"></i>
           </button>
 
           <button *hasPermission="['holidays.delete']" type="button" (click)="delete(holiday)"
-            class="btn btn-danger btn-icon mr-1" title="Eliminar">
-            <fa-icon icon="times"></fa-icon>
+            class="btn btn-danger btn-icon ms-1" title="Eliminar">
+            <i class="bi bi-x"></i>
           </button>
         </td>
       </tr>

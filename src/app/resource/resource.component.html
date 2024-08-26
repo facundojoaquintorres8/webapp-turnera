@@ -2,7 +2,7 @@
   <h2>
     <button *hasPermission="['resources.write']" type="button" [routerLink]="['new']" class="btn btn-primary btn-icon"
       title="Crear Recurso">
-      <fa-icon icon="plus"></fa-icon>
+      <i class="bi bi-plus"></i>
     </button> Recursos
   </h2>
 
@@ -15,23 +15,23 @@
         <td>{{ resource.code ? resource.code : '-' }}</td>
         <td>{{ resource.resourceType.description }}</td>
         <td>
-          <fa-icon *ngIf="resource.active" [icon]="['far', 'check-square']" class="text-success"></fa-icon>
-          <fa-icon *ngIf="!resource.active" [icon]="['far', 'square']" class="text-danger outline"></fa-icon>
+          <i *ngIf="resource.active" class="bi bi-check-square text-success"></i>
+          <i *ngIf="!resource.active" class="bi bi-square text-danger outline"></i>
         </td>
         <td class="text-end">
           <button *hasPermission="['resources.read']" type="button" [routerLink]="[resource.id, 'view']"
-            class="btn btn-info btn-icon mr-1" title="Ver">
-            <fa-icon icon="eye"></fa-icon>
+            class="btn btn-info btn-icon ms-1" title="Ver">
+            <i class="bi bi-eye"></i>
           </button>
 
           <button *hasPermission="['resources.write']" type="button" [routerLink]="[resource.id, 'edit']"
-            class="btn btn-primary btn-icon mr-1" title="Editar">
-            <fa-icon icon="pencil-alt"></fa-icon>
+            class="btn btn-primary btn-icon ms-1" title="Editar">
+            <i class="bi bi-pencil"></i>
           </button>
 
           <button *hasPermission="['resources.delete']" type="button" (click)="delete(resource)"
-            class="btn btn-danger btn-icon mr-1" title="Eliminar">
-            <fa-icon icon="times"></fa-icon>
+            class="btn btn-danger btn-icon ms-1" title="Eliminar">
+            <i class="bi bi-x"></i>
           </button>
         </td>
       </tr>

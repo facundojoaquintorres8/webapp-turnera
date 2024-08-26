@@ -10,7 +10,6 @@ import { PublicLayoutComponent } from './layout/public/public-layout.component';
 import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { TokenInterceptor } from './security/token-interceptor';
 import { ToastComponent } from './component/toast/toast.component';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import localeEsAr from '@angular/common/locales/es-AR';
 import { registerLocaleData } from '@angular/common';
 import { PermissionModule } from './security/permission.module';
@@ -33,7 +32,6 @@ registerLocaleData(localeEsAr, 'es');
     exports: [ToastComponent],
     bootstrap: [AppComponent], imports: [BrowserModule,
         AppRoutingModule,
-        FontAwesomeModule,
         PermissionModule], providers: [
         {
             provide: HTTP_INTERCEPTORS,

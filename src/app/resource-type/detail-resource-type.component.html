@@ -10,11 +10,11 @@
 
   <div class="button-form">
     <button type="button" class="btn btn-secondary" (click)="previousState()" title="Volver">
-      <fa-icon icon="arrow-left"></fa-icon>&nbsp;Volver
+      <i class="bi bi-arrow-left-short"></i>&nbsp;Volver
   </button>
 
     <button *hasPermission="['resourcesTypes.write']" type="button" [routerLink]="['../../', resourceType.id, 'edit']" class="btn btn-primary" title="Editar">
-      <fa-icon icon="pencil-alt"></fa-icon>&nbsp;Editar
+      <i class="bi bi-pencil"></i>&nbsp;Editar
     </button>
   </div>
 </div>

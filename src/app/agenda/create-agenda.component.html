@@ -29,7 +29,7 @@
                         <div class="input-group-append">
                             <button class="btn btn-primary" (click)="startDate.toggle()" type="button"
                                 title="Abrir Calendario">
-                                <fa-icon icon="calendar"></fa-icon>
+                                <i class="bi bi-calendar3"></i>
                             </button>
                         </div>
                     </div>
@@ -73,7 +73,7 @@
             <div class="col-lg-2">
                 <div class="form-group">
                     <label for="segmented" class="mt-30 d-flex">
-                        <input type="checkbox" class="checkbox mr-1" id="segmented" name="segmented"
+                        <input type="checkbox" class="checkbox ms-1" id="segmented" name="segmented"
                             formControlName="segmented" (ngModelChange)="onSegmentedChange()">
                         ¿Segmentado?
                     </label>
@@ -100,7 +100,7 @@
             <div class="col-lg-2">
                 <div class="form-group">
                     <label for="omitHolidays" class="mt-30 d-flex">
-                        <input type="checkbox" class="checkbox mr-1" id="omitHolidays" name="omitHolidays"
+                        <input type="checkbox" class="checkbox ms-1" id="omitHolidays" name="omitHolidays"
                             formControlName="omitHolidays">
                         ¿Omitir feriados?
                     </label>
@@ -112,7 +112,7 @@
             <div class="col-lg-2">
                 <div class="form-group">
                     <label for="repeat" class="mt-30 d-flex">
-                        <input type="checkbox" class="checkbox mr-1" id="repeat" name="repeat" formControlName="repeat"
+                        <input type="checkbox" class="checkbox ms-1" id="repeat" name="repeat" formControlName="repeat"
                             (ngModelChange)="onRepeatChange()">
                         ¿Se repite?
                     </label>
@@ -140,7 +140,7 @@
                             ngbDatepicker #finalize="ngbDatepicker" [firstDayOfWeek]="7" [minDate]="minDateToFinalize()">
                         <div class="input-group-append">
                             <button class="btn btn-primary" (click)="finalize.toggle()" type="button" title="Abrir Calendario">
-                                <fa-icon icon="calendar"></fa-icon>
+                                <i class="bi bi-calendar3"></i>
                             </button>
                         </div>
                     </div>
@@ -169,7 +169,7 @@
             <div class="sunday">
                 <div class="form-group">
                     <label for="sunday" class="mt-30 d-flex pointer">
-                        <input type="checkbox" class="checkbox mr-1" id="sunday" name="sunday" formControlName="sunday">
+                        <input type="checkbox" class="checkbox ms-1" id="sunday" name="sunday" formControlName="sunday">
                         Domingo
                     </label>
                 </div>
@@ -177,7 +177,7 @@
             <div class="monday">
                 <div class="form-group">
                     <label for="monday" class="mt-30 d-flex pointer">
-                        <input type="checkbox" class="checkbox mr-1" id="monday" name="monday" formControlName="monday">
+                        <input type="checkbox" class="checkbox ms-1" id="monday" name="monday" formControlName="monday">
                         Lunes
                     </label>
                 </div>
@@ -185,7 +185,7 @@
             <div class="tuesday">
                 <div class="form-group">
                     <label for="tuesday" class="mt-30 d-flex pointer">
-                        <input type="checkbox" class="checkbox mr-1" id="tuesday" name="tuesday"
+                        <input type="checkbox" class="checkbox ms-1" id="tuesday" name="tuesday"
                             formControlName="tuesday">
                         Martes
                     </label>
@@ -194,7 +194,7 @@
             <div class="wednesday">
                 <div class="form-group">
                     <label for="wednesday" class="mt-30 d-flex pointer">
-                        <input type="checkbox" class="checkbox mr-1" id="wednesday" name="wednesday"
+                        <input type="checkbox" class="checkbox ms-1" id="wednesday" name="wednesday"
                             formControlName="wednesday">
                         Miércoles
                     </label>
@@ -203,7 +203,7 @@
             <div class="thursday">
                 <div class="form-group">
                     <label for="thursday" class="mt-30 d-flex pointer">
-                        <input type="checkbox" class="checkbox mr-1" id="thursday" name="thursday"
+                        <input type="checkbox" class="checkbox ms-1" id="thursday" name="thursday"
                             formControlName="thursday">
                         Jueves
                     </label>
@@ -212,7 +212,7 @@
             <div class="friday">
                 <div class="form-group">
                     <label for="friday" class="mt-30 d-flex pointer">
-                        <input type="checkbox" class="checkbox mr-1" id="friday" name="friday" formControlName="friday">
+                        <input type="checkbox" class="checkbox ms-1" id="friday" name="friday" formControlName="friday">
                         Viernes
                     </label>
                 </div>
@@ -220,7 +220,7 @@
             <div class="saturday">
                 <div class="form-group">
                     <label for="saturday" class="mt-30 d-flex pointer">
-                        <input type="checkbox" class="checkbox mr-1" id="saturday" name="saturday"
+                        <input type="checkbox" class="checkbox ms-1" id="saturday" name="saturday"
                             formControlName="saturday">
                         Sábado
                     </label>
@@ -230,11 +230,11 @@
 
         <div class="button-form mt-4">
             <button type="button" class="btn btn-secondary" (click)="previousState()" title="Cancelar">
-                <fa-icon icon="ban"></fa-icon>&nbsp;Cancelar
+                <i class="bi bi-ban"></i>&nbsp;Cancelar
             </button>
             <button type="submit" [disabled]="myForm.invalid || isSaving || !hasAnyDaySelected()" 
                  class="btn btn-primary">
-                <fa-icon icon="save"></fa-icon>&nbsp;Guardar
+                <i class="bi bi-save"></i>&nbsp;Guardar
             </button>
         </div>
     </form>

@@ -2,7 +2,7 @@
   <h2>
     <button *hasPermission="['agendas.write']" type="button" [routerLink]="['./../agendas','new']"
       class="btn btn-primary btn-icon" title="Agregar Disponibilidades">
-      <fa-icon icon="calendar-plus"></fa-icon>
+      <i class="bi bi-calendar-plus"></i>
     </button> Calendario
   </h2>
 
@@ -11,7 +11,7 @@
       <div class="btn-group">
         <div class="btn btn-primary" mwlCalendarPreviousView [view]="view" [(viewDate)]="agendaService.viewDate"
           (viewDateChange)="closeOpenMonthViewDay()">
-          <fa-icon icon="arrow-left"></fa-icon>
+          <i class="bi bi-arrow-left-short"></i>
         </div>
         <div class="btn btn-outline-primary" mwlCalendarToday [(viewDate)]="agendaService.viewDate" title="{{today}}"
           (click)="onCalendarChange()">
@@ -19,7 +19,7 @@
         </div>
         <div class="btn btn-primary" mwlCalendarNextView [view]="view" [(viewDate)]="agendaService.viewDate"
           (viewDateChange)="closeOpenMonthViewDay()">
-          <fa-icon icon="arrow-right"></fa-icon>
+          <i class="bi bi-arrow-right-short"></i>
         </div>
       </div>
     </div>
@@ -45,11 +45,11 @@
     <span class="cal-day-badge" *ngIf="day.badgeTotal > 0">{{ getTotalBadge(day) }}</span>
     <span class="cal-day-number">{{ day.date | calendarDate:'monthViewDayNumber': 'es' }}</span>
   </div>
-  <div class="cal-events pl-2">
+  <div class="cal-events ps-2">
     <ng-container *ngFor="let item of day.events; let index = index">
       <button *ngIf="index < 10 && !isYesterdayEvent(item, day)" (click)="handleEvent(item)" type="button"
         [ngbPopover]="popContent" [popoverTitle]="popTitle" [openDelay]="100"
-        class="btn mr-1 mb-1 font-xx-small {{getColor(item)}}" title="{{ item.title }}">
+        class="btn ms-1 mb-1 font-xx-small {{getColor(item)}}" title="{{ item.title }}">
         {{ getFirstLetterFromStatus(item) }}
       </button>
     </ng-container>
@@ -58,32 +58,32 @@
 
 <ng-template #popContent>
   <button type="button" *ngIf="canBook()" (click)="book()" class="btn btn-warning m-1" title="Reservar turno">
-    <fa-icon icon="plus"></fa-icon>&nbsp;Reservar
+    <i class="bi bi-plus"></i>&nbsp;Reservar
   </button>
   
   <button type="button" *ngIf="canAttend()" (click)="attend()" class="btn btn-info m-1" title="Atender">
-    <fa-icon icon="play"></fa-icon>&nbsp;Atender
+    <i class="bi bi-play"></i>&nbsp;Atender
   </button>
   
   <button type="button" *ngIf="canAbsent()" (click)="absent()" class="btn btn-dark m-1" title="Ausentar">
-    <fa-icon icon="user-slash"></fa-icon>&nbsp;Ausentar
+    <i class="bi bi-person-slash"></i>&nbsp;Ausentar
   </button>
   
   <button type="button" *ngIf="canCancel()" (click)="cancel()" class="btn btn-danger m-1" title="Cancelar">
-    <fa-icon icon="ban"></fa-icon>&nbsp;Cancelar
+    <i class="bi bi-ban"></i>&nbsp;Cancelar
   </button>
   
   <button type="button" *ngIf="canFinalize()" (click)="finalize()" class="btn btn-success m-1" title="Finalizar">
-    <fa-icon icon="stop"></fa-icon>&nbsp;Finalizar
+    <i class="bi bi-person-check-fill"></i>&nbsp;Finalizar
   </button>
   
   <button type="button" *ngIf="canDelete()" (click)="delete()" class="btn btn-danger m-1" title="Eliminar disponibilidad">
-    <fa-icon icon="times"></fa-icon>&nbsp;Eliminar
+    <i class="bi bi-x"></i>&nbsp;Eliminar
   </button>
   
   <button type="button" *ngIf="canDesactivate()" (click)="desactivate()" class="btn btn-danger m-1"
     title="Desactivar disponibilidad">
-    <fa-icon icon="calendar-times"></fa-icon>&nbsp;Desactivar
+    <i class="bi bi-calendar-x"></i>&nbsp;Desactivar
   </button>
 </ng-template>
 <ng-template #popTitle>

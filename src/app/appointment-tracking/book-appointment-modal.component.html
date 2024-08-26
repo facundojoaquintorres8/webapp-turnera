@@ -1,7 +1,7 @@
 <form name="myForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="myForm">
     <div class="modal-header">
         <h4 class="modal-title">Reservar Turno</h4>
-        <button type="button" class="close" data-dismiss="modal" (click)="cancel()" title="Cancelar">&times;</button>
+        <button type="button" class="btn-close" (click)="cancel()" title="Cancelar"></button>
     </div>
 
     <div class="modal-body">
@@ -10,7 +10,7 @@
                 <div class="form-group">
                     <label class="form-control-label required" for="customer">
                         <button *hasPermission="['customers.write']" type="button" (click)="newCustomer()" class="btn btn-primary btn-icon" title="Agregar nuevo">
-                            <fa-icon icon="plus"></fa-icon>
+                            <i class="bi bi-plus"></i>
                         </button> Cliente
                     </label>
                     <select class="form-control" name="customer" id="customer" formControlName="customer">
@@ -76,7 +76,7 @@
             </div>
             <div class="col-lg-12 text-end">
                 <button type="button" class="btn btn-secondary" (click)="cancelNewCustomer()" title="Cargar Existente">
-                    <fa-icon icon="arrow-left"></fa-icon>&nbsp;Cargar Existente
+                    <i class="bi bi-arrow-left-short"></i>&nbsp;Cargar Existente
                 </button>        
             </div>
         </div>
@@ -84,11 +84,11 @@
 
     <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="cancel()" title="Cancelar">
-            <fa-icon icon="ban"></fa-icon>&nbsp;Cancelar
+            <i class="bi bi-ban"></i>&nbsp;Cancelar
         </button>
 
         <button type="submit" [disabled]="myForm.invalid || isSaving" class="btn btn-primary" title="Reservar">
-            <fa-icon icon="save"></fa-icon>&nbsp;Reservar
+            <i class="bi bi-save"></i>&nbsp;Reservar
         </button>
     </div>
 </form>

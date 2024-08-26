@@ -2,7 +2,7 @@
   <h2>
     <button *hasPermission="['profiles.write']" type="button" [routerLink]="['new']" class="btn btn-primary btn-icon"
       title="Crear Perfil">
-      <fa-icon icon="plus"></fa-icon>
+      <i class="bi bi-plus"></i>
     </button> Perfiles
   </h2>
 
@@ -13,23 +13,23 @@
       <tr *ngFor="let profile of items">
         <td>{{ profile.description }}</td>
         <td>
-          <fa-icon *ngIf="profile.active" [icon]="['far', 'check-square']" class="text-success"></fa-icon>
-          <fa-icon *ngIf="!profile.active" [icon]="['far', 'square']" class="text-danger outline"></fa-icon>
+          <i *ngIf="profile.active" class="bi bi-check-square text-success"></i>
+          <i *ngIf="!profile.active" class="bi bi-square text-danger outline"></i>
         </td>
         <td class="text-end">
           <button *hasPermission="['profiles.read']" type="button" [routerLink]="[profile.id, 'view']"
-            class="btn btn-info btn-icon mr-1" title="Ver">
-            <fa-icon icon="eye"></fa-icon>
+            class="btn btn-info btn-icon ms-1" title="Ver">
+            <i class="bi bi-eye"></i>
           </button>
 
           <button *hasPermission="['profiles.write']" type="button" [routerLink]="[profile.id, 'edit']"
-            class="btn btn-primary btn-icon mr-1" title="Editar">
-            <fa-icon icon="pencil-alt"></fa-icon>
+            class="btn btn-primary btn-icon ms-1" title="Editar">
+            <i class="bi bi-pencil"></i>
           </button>
 
           <button *hasPermission="['profiles.delete']" type="button" (click)="delete(profile)"
-            class="btn btn-danger btn-icon mr-1" title="Eliminar">
-            <fa-icon icon="times"></fa-icon>
+            class="btn btn-danger btn-icon ms-1" title="Eliminar">
+            <i class="bi bi-x"></i>
           </button>
         </td>
       </tr>

@@ -2,7 +2,7 @@
   <h2>
     <button *hasPermission="['users.write']" type="button" [routerLink]="['new']" class="btn btn-primary btn-icon"
       title="Crear Usuario">
-      <fa-icon icon="plus"></fa-icon>
+      <i class="bi bi-plus"></i>
     </button> Usuarios
   </h2>
 
@@ -21,24 +21,24 @@
           {{ user.username }}
         </td>
         <td>
-          <fa-icon *ngIf="user.active" [icon]="['far', 'check-square']" class="text-success"></fa-icon>
-          <fa-icon *ngIf="!user.active" [icon]="['far', 'square']" class="text-danger outline"></fa-icon>
+          <i *ngIf="user.active" class="bi bi-check-square text-success"></i>
+          <i *ngIf="!user.active" class="bi bi-square text-danger outline"></i>
         </td>
         <td class="text-end">
           <button *hasPermission="['users.read']" type="button" [routerLink]="[user.id, 'view']"
-            class="btn btn-info btn-icon mr-1" title="Ver">
-            <fa-icon icon="eye"></fa-icon>
+            class="btn btn-info btn-icon ms-1" title="Ver">
+            <i class="bi bi-eye"></i>
           </button>
 
           <button *hasPermission="['users.write']" type="button" [routerLink]="[user.id, 'edit']"
-            class="btn btn-primary btn-icon mr-1" title="Editar">
-            <fa-icon icon="pencil-alt"></fa-icon>
+            class="btn btn-primary btn-icon ms-1" title="Editar">
+            <i class="bi bi-pencil"></i>
           </button>
 
           <button *hasPermission="['users.delete']" [disabled]="sessionUser.id === user.id" type="button"
-            (click)="delete(user)" class="btn btn-danger btn-icon mr-1"
+            (click)="delete(user)" class="btn btn-danger btn-icon ms-1"
             [title]="sessionUser.id === user.id ? 'No puede eliminar su propio Usuario' : 'Eliminar'">
-            <fa-icon icon="times"></fa-icon>
+            <i class="bi bi-x"></i>
           </button>
         </td>
       </tr>

@@ -1,4 +1,4 @@
-<nav class="float-right mb-5">
+<nav class="float-end mb-5">
     <ul class="pagination">
         <small class="m-2">
             Pág. {{ totalPages === 0 ? 0 : page }} de {{ totalPages }}
@@ -6,13 +6,13 @@
         <li class="page-item">
             <button type="button" (click)="firstPage()" [disabled]="page === 1" class="btn btn-outline-dark btn-icon"
                 title="Primer página">
-                <fa-icon icon="angle-double-left"></fa-icon>
+                <i class="bi bi-skip-backward"></i>
             </button>
         </li>
         <li class="page-item">
             <button type="button" (click)="previousPage()" [disabled]="page === 1" class="btn btn-outline-dark btn-icon"
                 title="Página anterior">
-                <fa-icon icon="angle-left"></fa-icon>
+                <i class="bi bi-skip-start"></i>
             </button>
         </li>
         <li class="page-item" *ngIf="page - 1 > 0">
@@ -33,13 +33,13 @@
         <li class="page-item">
             <button type="button" (click)="nextPage()" [disabled]="page === totalPages || totalPages === 0"
                 class="btn btn-outline-dark btn-icon" title="Página siguiente">
-                <fa-icon icon="angle-right"></fa-icon>
+                <i class="bi bi-skip-end"></i>
             </button>
         </li>
         <li class="page-item">
             <button type="button" (click)="lastPage()" [disabled]="page === totalPages || totalPages === 0"
                 class="btn btn-outline-dark btn-icon" title="Última página">
-                <fa-icon icon="angle-double-right"></fa-icon>
+                <i class="bi bi-skip-forward"></i>
             </button>
         </li>
     </ul>

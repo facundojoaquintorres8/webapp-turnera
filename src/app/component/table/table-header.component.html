@@ -2,12 +2,10 @@
     <div class="d-flex justify-content-between" [class.pointer]="header.sort"
         (click)="header.sort ? onSortChange(header.inputName) : null">
         {{ header.label}}
-        <small class="ml-1" *ngIf="header.sort">
-            <fa-icon icon="sort-up" *ngIf="sort[0] === 'DESC' && sort[1] === header.inputName">
-            </fa-icon>
-            <fa-icon icon="sort-down" *ngIf="sort[0] === 'ASC' && sort[1] === header.inputName">
-            </fa-icon>
-            <fa-icon icon="sort" *ngIf="sort[1] !== header.inputName"></fa-icon>
+        <small class="ms-1" *ngIf="header.sort">
+            <i class="bi bi-sort-alpha-down" *ngIf="sort[0] === 'DESC' && sort[1] === header.inputName"></i>
+            <i class="bi bi-sort-alpha-u-alt" *ngIf="sort[0] === 'ASC' && sort[1] === header.inputName"></i>
+            <i class="bi bi-sort-down" *ngIf="sort[1] !== header.inputName"></i>
         </small>
     </div>
     <div class="input-group input-group-sm" [ngSwitch]="header.inputType">
@@ -16,10 +14,10 @@
             name="{{header.inputName}}" id="{{header.inputName}}" formControlName="{{header.inputName}}">
         <div *ngSwitchCase="inputType.TEXT" class="input-group-append">
             <button class="btn btn-outline-success d-sm-none" type="submit">
-                <fa-icon icon="filter"></fa-icon>
+                <i class="bi bi-filter"></i>
             </button>
             <button class="btn btn-outline-secondary" type="button" (click)="clearInput(header.inputName)">
-                <fa-icon icon="times"></fa-icon>
+                <i class="bi bi-x"></i>
             </button>
         </div>
 
@@ -41,7 +39,7 @@
                 #inputDate="ngbDatepicker" [firstDayOfWeek]="7" (ngModelChange)="onChange()"> 
             <div class="input-group-append">
                 <button class="btn btn-primary" (click)="inputDate.toggle()" type="button" title="Ver Calendario">
-                    <fa-icon icon="calendar"></fa-icon>
+                    <i class="bi bi-calendar3"></i>
                 </button>
             </div>
         </div> -->

@@ -6,7 +6,7 @@
 
     <input type="checkbox" id="navbar-toggle-cbox">
     <label for="navbar-toggle-cbox" class="navbar-toggle text-white">
-        <fa-icon icon="bars"></fa-icon>
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
     </label>
 
     <div class="navbar-collapse collapse mobileNavbar">
@@ -35,9 +35,9 @@
             <li class="nav-item dropdown">
                 <div class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button"
                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <fa-icon icon="cog"></fa-icon>
+                    <i class="bi bi-gear"></i>
                 </div>
-                <div class="dropdown-menu dropdown-menu-right mt-0" aria-labelledby="navbarDropdown">
+                <div class="dropdown-menu dropdown-menu-left mt-0" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="/schedule">Calendario</a>
                     <a *hasPermission="['customers.read']" class="dropdown-item" href="/customers">Clientes</a>
                     <a *hasPermission="['profiles.read']" class="dropdown-item" href="/profiles">Perfiles</a>
@@ -51,11 +51,11 @@
             <li class="nav-item dropdown">
                 <div class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button"
                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <fa-icon icon="user"></fa-icon>
-                    {{ user?.firstName }}
+                    <i class="bi bi-person"></i>
+                    {{ user.firstName }}
                 </div>
-                <div class="dropdown-menu dropdown-menu-right mt-0" aria-labelledby="navbarDropdown">
-                    <small class="dropdown-item text-muted disabled">({{ user?.username }})</small>
+                <div class="dropdown-menu dropdown-menu-left mt-0" aria-labelledby="navbarDropdown">
+                    <small class="dropdown-item text-muted disabled">({{ user.username }})</small>
                     <a *hasPermission="['organizations.read']" class="dropdown-item" href="/organizations">Mi
                         Organización</a>
                     <a class="dropdown-item" href="/users/password-change">Cambiar Contraseña</a>
