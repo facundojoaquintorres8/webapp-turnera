@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container-fluid">
     <form name="myForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="myForm">
         <h2 *ngIf="!myForm.get('id')!.value">Crear Recurso</h2>
         <h2 *ngIf="myForm.get('id')!.value">Editar Recurso</h2>
