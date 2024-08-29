@@ -53,7 +53,7 @@ export class ActivateComponent implements OnInit {
         this.toastService.changeMessage(
           {
             showSuccessToast: true,
-            successMessage: 'Su Cuenta ha sido activada con éxito. Ya puede ingresar al sistema.'
+            successMessage: 'Su cuenta ha sido activada con éxito. Ya puede ingresar al sistema.'
           }
         );
         this.router.navigate(['/']);

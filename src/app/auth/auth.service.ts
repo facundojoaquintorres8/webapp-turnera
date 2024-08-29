@@ -19,7 +19,8 @@ export class AuthService {
   }
 
   public logout(): void {
-    localStorage.clear();
+    localStorage.removeItem('user');
+    localStorage.removeItem('jwt');
   }
 
   public onLoginSuccess(login: ISessionUser): void {

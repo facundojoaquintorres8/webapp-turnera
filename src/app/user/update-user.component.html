@@ -60,16 +60,11 @@
         </div>
 
         <h3>Perfiles</h3>
-        <div class="row">
-            <div class="col-lg-1 pointer" *ngFor="let profile of profiles"
-                (click)="selectProfile(profile)">
-                <span class="lead">
-                    <span class="badge rounded-pill" [class.bg-primary]="profile.selected"
-                        [class.bg-light]="!profile.selected" [class.text-dark]="!profile.selected"
-                        [class.border]="!profile.selected" [class.border-dark]="!profile.selected">{{ profile.description }}</span>
-                </span>
-            </div>
-        </div>
+        <span class="lead pointer pe-2" *ngFor="let profile of profiles" (click)="selectProfile(profile)">
+            <span class="badge rounded-pill" [class.bg-primary]="profile.selected" [class.bg-light]="!profile.selected"
+                [class.text-dark]="!profile.selected" [class.border]="!profile.selected"
+                [class.border-dark]="!profile.selected">{{ profile.description }}</span>
+        </span>
 
         <div class="button-form mt-4">
             <button type="button" class="btn btn-secondary" (click)="previousState()" title="Cancelar">
