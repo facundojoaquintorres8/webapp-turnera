@@ -12,7 +12,7 @@
                     <a *hasPermission="['holidays.read']" class="list-group-item" href="/holidays"><i class="bi bi-calendar-x"></i> <span class="ps-1">Feriados</span></a>
                     <a *hasPermission="['users.read']" class="list-group-item" href="/users"><i class="bi bi-person-workspace"></i> <span class="ps-1">Usuarios</span></a>
                     <a *hasPermission="['profiles.read']" class="list-group-item" href="/profiles"><i class="bi bi-person-gear"></i> <span class="ps-1">Perfiles</span></a>
-                    <a href="#" class="list-group-item border-end-0 d-inline-block text-truncate" data-bs-parent="#sidebar"><i class="bi bi-bootstrap"></i> <span>Original Borrar</span></a>
+                    <a href="#" class="list-group-item border-end-0 d-inline-block" data-bs-parent="#sidebar"><i class="bi bi-bootstrap"></i> <span>Original Borrar</span></a>
                 </div>
             </div>
         </div>
@@ -35,56 +35,63 @@
 <!-- <div id="sidebar-nav" class="list-group border-0 rounded-0 text-sm-start min-vh-100"> -->
 
 
-<!-- <div class="wrapper"> -->
-    <aside id="sidebar" [class.expand]="expandedSidebar">
-        <div class="d-flex">
-            <button class="toggle-btn" type="button" (click)="expandSidebar()">
-                <i class="bi bi-list"></i>
-            </button>
-            <div class="sidebar-logo">
-                <a href="/schedule">Turnera</a>
-            </div>
+<aside id="sidebar" [class.expand]="expandedSidebar" class="bg-dark">
+    <div class="d-flex justify-content-between shadow">
+        <button class="toggle-btn" type="button" (click)="expandSidebar()">
+            <i class="bi bi-list"></i>
+        </button>
+        <div class="sidebar-logo pe-3">
+            <a href="/schedule">Turnera</a>
         </div>
-        <ul class="sidebar-nav">
-            <li class="sidebar-item">
-                <a *hasPermission="['home.index']" class="sidebar-link text-truncate" href="/schedule"><i class="bi bi-calendar3"></i> <span>Calendario</span></a>
-            </li>
-            <li class="sidebar-item">
-                <a *hasPermission="['customers.read']" class="sidebar-link text-truncate" href="/customers"><i class="bi bi-people"></i> <span>Clientes</span></a>
-            </li>
-            <li class="sidebar-item">
-                <a *hasPermission="['resources.read']" class="sidebar-link text-truncate" href="/resources"><i class="bi bi-tools"></i> <span>Recursos</span></a>
-            </li>
-            <li class="sidebar-item">
-                <a *hasPermission="['resourcesTypes.read']" class="sidebar-link text-truncate" href="/resources-types"><i class="bi bi-tools"></i> <span>Tipos de Recursos</span></a>
-            </li>
-            <li class="sidebar-item">
-                <a *hasPermission="['holidays.read']" class="sidebar-link text-truncate" href="/holidays"><i class="bi bi-calendar-x"></i> <span>Feriados</span></a>
-            </li>
-            <li class="sidebar-item">
-                <a *hasPermission="['users.read']" class="sidebar-link text-truncate" href="/users"><i class="bi bi-person-workspace"></i> <span>Usuarios</span></a>
-            </li>
-            <li class="sidebar-item">
-                <a *hasPermission="['profiles.read']" class="sidebar-link text-truncate" href="/profiles"><i class="bi bi-person-gear"></i> <span>Perfiles</span></a>
-            </li>
-            <li class="sidebar-item">
-                <a *hasPermission="['organizations.read']" class="sidebar-link text-truncate" href="/organizations"><i class="bi bi-building-gear"></i> <span>Mi Organización</span></a>
-            </li>
-        </ul>
-        <div class="sidebar-footer">
-            <a href="/users/password-change" class="sidebar-link text-truncate">
-                <i class="bi bi-key"></i>
-                <span>Cambiar contraseña</span>
-            </a>
-            <a href="#" class="sidebar-link text-truncate">
-                <i class="bi bi-box-arrow-right"></i>
-                <span>Cerrar sesión</span>
-            </a>
-        </div>
-    </aside>
-    <div class="main p-3" [class.main2]="!expandedSidebar">
-        <app-toast></app-toast>
-        <router-outlet></router-outlet>
     </div>
-<!-- </div> -->
+
+    <ul class="sidebar-nav">
+        <li class="sidebar-item">
+            <a *hasPermission="['home.index']" class="sidebar-link" [class.text-truncate]="expandedSidebar"
+                href="/schedule"><i class="bi bi-calendar3"></i> <span>Calendario</span></a>
+        </li>
+        <li class="sidebar-item">
+            <a *hasPermission="['customers.read']" class="sidebar-link" [class.text-truncate]="expandedSidebar"
+                href="/customers"><i class="bi bi-people"></i> <span>Clientes</span></a>
+        </li>
+        <li class="sidebar-item">
+            <a *hasPermission="['resources.read']" class="sidebar-link" [class.text-truncate]="expandedSidebar"
+                href="/resources"><i class="bi bi-tools"></i> <span>Recursos</span></a>
+        </li>
+        <li class="sidebar-item">
+            <a *hasPermission="['resourcesTypes.read']" class="sidebar-link" [class.text-truncate]="expandedSidebar"
+                href="/resources-types"><i class="bi bi-tools"></i> <span>Tipos de Recursos</span></a>
+        </li>
+        <li class="sidebar-item">
+            <a *hasPermission="['holidays.read']" class="sidebar-link" [class.text-truncate]="expandedSidebar"
+                href="/holidays"><i class="bi bi-calendar-x"></i> <span>Feriados</span></a>
+        </li>
+        <li class="sidebar-item">
+            <a *hasPermission="['users.read']" class="sidebar-link" [class.text-truncate]="expandedSidebar"
+                href="/users"><i class="bi bi-person-workspace"></i> <span>Usuarios</span></a>
+        </li>
+        <li class="sidebar-item">
+            <a *hasPermission="['profiles.read']" class="sidebar-link" [class.text-truncate]="expandedSidebar"
+                href="/profiles"><i class="bi bi-person-gear"></i> <span>Perfiles</span></a>
+        </li>
+        <li class="sidebar-item">
+            <a *hasPermission="['organizations.read']" class="sidebar-link" [class.text-truncate]="expandedSidebar"
+                href="/organizations"><i class="bi bi-building-gear"></i> <span>Mi Organización</span></a>
+        </li>
+    </ul>
+    <div class="sidebar-footer">
+        <a href="/users/password-change" class="sidebar-link" [class.text-truncate]="expandedSidebar">
+            <i class="bi bi-key"></i>
+            <span>Cambiar contraseña</span>
+        </a>
+        <a href="#" class="sidebar-link" [class.text-truncate]="expandedSidebar">
+            <i class="bi bi-box-arrow-right"></i>
+            <span>Cerrar sesión</span>
+        </a>
+    </div>
+</aside>
+<div class="main p-3" [class.main2]="!expandedSidebar">
+    <app-toast></app-toast>
+    <router-outlet></router-outlet>
+</div>
 <!-- <app-footer></app-footer> -->

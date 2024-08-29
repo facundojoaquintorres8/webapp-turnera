@@ -4,8 +4,8 @@
   <form name="myFormFilter" role="form" novalidate (ngSubmit)="getAgendas()" [formGroup]="myFormFilter" class="mb-2">
     <div class="row">
       <div class="col-lg-4">
-        <div class="form-group">
-          <label class="form-control-label" for="resourceTypeId">Tipo de Recurso</label>
+        <div class="mb-3">
+          <label for="resourceTypeId">Tipo de Recurso</label>
           <select class="form-control" name="resourceTypeId" id="resourceTypeId" formControlName="resourceTypeId"
             (change)="onResourceTypeChange()">
             <option [ngValue]="null"></option>
@@ -15,8 +15,8 @@
         </div>
       </div>
       <div class="col-lg-4">
-        <div class="form-group">
-          <label class="form-control-label" for="resourceId">Recurso</label>
+        <div class="mb-3">
+          <label for="resourceId">Recurso</label>
           <select class="form-control" name="resourceId" id="resourceId" formControlName="resourceId"
             (change)="onResourceChange()">
             <option [ngValue]="null"></option>
@@ -27,8 +27,8 @@
         </div>
       </div>
       <div class="col-lg-4">
-        <div class="form-group">
-          <label class="form-control-label" for="customerId">Cliente</label>
+        <div class="mb-3">
+          <label for="customerId">Cliente</label>
           <select class="form-control" name="customerId" id="customerId" formControlName="customerId">
             <option [ngValue]="null"></option>
             <option [value]="customer.id" *ngFor="let customer of customers">{{ customer.businessName }}
@@ -39,8 +39,8 @@
     </div>
     <div class="row">
       <div class="col-lg-2">
-        <div class="form-group">
-          <label class="form-control-label required">Desde</label>
+        <div class="mb-3">
+          <label class="required">Desde</label>
           <div class="input-group">
             <input class="form-control" placeholder="yyyy-mm-dd" name="from" formControlName="from" ngbDatepicker
               #from="ngbDatepicker" [firstDayOfWeek]="7" [maxDate]="maxDate()">
@@ -59,8 +59,8 @@
         </div>
       </div>
       <div class="col-lg-2">
-        <div class="form-group">
-          <label class="form-control-label required">Hasta</label>
+        <div class="mb-3">
+          <label class="required">Hasta</label>
           <div class="input-group">
             <input class="form-control" placeholder="yyyy-mm-dd" name="to" formControlName="to" ngbDatepicker
               #to="ngbDatepicker" [firstDayOfWeek]="7" [minDate]="minDate()">
@@ -79,8 +79,8 @@
         </div>
       </div>
       <div class="col-lg-8">
-        <div class="form-group">
-          <label class="form-control-label">&nbsp;</label>
+        <div class="mb-3">
+          <label>&nbsp;</label>
           <div class="text-end">
             <button type="button" (click)="clear()" class="btn btn-secondary ms-2" [disabled]="isSearching"
               title="Limpiar">

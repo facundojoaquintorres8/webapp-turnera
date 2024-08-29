@@ -5,8 +5,8 @@
 
         <div class="row">
             <div class="col-lg-4">
-                <div class="form-group">
-                    <label class="form-control-label required" for="firstName">Nombre</label>
+                <div class="mb-3">
+                    <label class="required" for="firstName">Nombre</label>
                     <input type="text" class="form-control" name="firstName" id="firstName"
                         formControlName="firstName" />
                     <div
@@ -18,8 +18,8 @@
                 </div>
             </div>
             <div class="col-lg-4">
-                <div class="form-group">
-                    <label class="form-control-label required" for="lastName">Apellido</label>
+                <div class="mb-3">
+                    <label class="required" for="lastName">Apellido</label>
                     <input type="text" class="form-control" name="lastName" id="lastName" formControlName="lastName" />
                     <div
                         *ngIf="myForm.get('lastName')!.invalid && (myForm.get('lastName')!.dirty || myForm.get('lastName')!.touched)">
@@ -30,8 +30,8 @@
                 </div>
             </div>
             <div class="col-lg-4">
-                <div class="form-group">
-                    <label class="form-control-label required" for="email">Correo Electrónico</label>
+                <div class="mb-3">
+                    <label class="required" for="email">Correo Electrónico</label>
                     <input type="email" class="form-control" name="email" id="email" formControlName="email" />
 
                     <div

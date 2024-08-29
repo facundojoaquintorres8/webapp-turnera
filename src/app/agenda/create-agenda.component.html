@@ -4,8 +4,8 @@
 
         <div class="row">
             <div class="col-lg-4">
-                <div class="form-group">
-                    <label class="form-control-label required" for="resource">Recurso</label>
+                <div class="mb-3">
+                    <label class="required" for="resource">Recurso</label>
                     <select class="form-control" name="resource" id="resource" formControlName="resource">
                         <option [ngValue]="resource" *ngFor="let resource of resources">{{ resource.description }}
                         </option>
@@ -20,8 +20,8 @@
             </div>
 
             <div class="col-lg-2">
-                <div class="form-group">
-                    <label class="form-control-label required">Fecha inicio</label>
+                <div class="mb-3">
+                    <label class="required">Fecha inicio</label>
                     <div class="input-group">
                         <input class="form-control" placeholder="yyyy-mm-dd" name="startDate"
                             formControlName="startDate" ngbDatepicker #startDate="ngbDatepicker" [firstDayOfWeek]="7"
@@ -43,8 +43,8 @@
                 </div>
             </div>
             <div class="col-lg-2">
-                <div class="form-group">
-                    <label class="form-control-label required">Hora inicio</label>
+                <div class="mb-3">
+                    <label class="required">Hora inicio</label>
                     <ngb-timepicker name="startHour" id="startHour" formControlName="startHour" [spinners]="false">
                     </ngb-timepicker>
                     <div
@@ -56,8 +56,8 @@
                 </div>
             </div>
             <div class="col-lg-2">
-                <div class="form-group">
-                    <label class="form-control-label required">Hora fin</label>
+                <div class="mb-3">
+                    <label class="required">Hora fin</label>
                     <ngb-timepicker name="endHour" id="endHour" formControlName="endHour" [spinners]="false">
                     </ngb-timepicker>
                     <div
@@ -71,7 +71,7 @@
         </div>
         <div class="row">
             <div class="col-lg-2">
-                <div class="form-group">
+                <div class="mb-3">
                     <label for="segmented" class="mt-30 d-flex">
                         <input type="checkbox" class="checkbox ms-1" id="segmented" name="segmented"
                             formControlName="segmented" (ngModelChange)="onSegmentedChange()">
@@ -81,8 +81,8 @@
             </div>
 
             <div class="col-lg-2">
-                <div class="form-group" *ngIf="myForm.get('segmented')!.value">
-                    <label class="form-control-label required" for="duration">Duración (min.)</label>
+                <div class="mb-3" *ngIf="myForm.get('segmented')!.value">
+                    <label class="required" for="duration">Duración (min.)</label>
                     <input type="number" class="form-control text-end" name="duration" id="duration"
                         formControlName="duration" pattern="[0-9]*" />
                     <div
@@ -98,7 +98,7 @@
             </div>
 
             <div class="col-lg-2">
-                <div class="form-group">
+                <div class="mb-3">
                     <label for="omitHolidays" class="mt-30 d-flex">
                         <input type="checkbox" class="checkbox ms-1" id="omitHolidays" name="omitHolidays"
                             formControlName="omitHolidays">
@@ -110,7 +110,7 @@
             
         <div class="row">
             <div class="col-lg-2">
-                <div class="form-group">
+                <div class="mb-3">
                     <label for="repeat" class="mt-30 d-flex">
                         <input type="checkbox" class="checkbox ms-1" id="repeat" name="repeat" formControlName="repeat"
                             (ngModelChange)="onRepeatChange()">
@@ -120,8 +120,8 @@
             </div>
 
             <div class="col-lg-3">
-                <div class="form-group" *ngIf="myForm.get('repeat')!.value">
-                    <label class="form-control-label required" for="repeatType">Cada</label>
+                <div class="mb-3" *ngIf="myForm.get('repeat')!.value">
+                    <label class="required" for="repeatType">Cada</label>
                     <select class="form-control" name="repeatType" id="repeatType" formControlName="repeatType"
                         (change)="onRepeatTypeChange()">
                         <option [value]="repeatType.key"
@@ -133,8 +133,8 @@
             </div>
 
             <div class="col-lg-2">
-                <div class="form-group" *ngIf="myForm.get('repeat')!.value">
-                    <label class="form-control-label required">Hasta</label>
+                <div class="mb-3" *ngIf="myForm.get('repeat')!.value">
+                    <label class="required">Hasta</label>
                     <div class="input-group">
                         <input class="form-control" placeholder="yyyy-mm-dd" name="finalize" formControlName="finalize"
                             ngbDatepicker #finalize="ngbDatepicker" [firstDayOfWeek]="7" [minDate]="minDateToFinalize()">
@@ -158,8 +158,8 @@
 
         <div class="row mb--3" *ngIf="myForm.get('repeat')!.value && showDaysOfWeek">
             <div class="col-12">
-                <div class="form-group">
-                    <label class="form-control-label required">¿Qué días se repite?</label>
+                <div class="mb-3">
+                    <label class="required">¿Qué días se repite?</label>
                 </div>
             </div>
         </div>
@@ -167,7 +167,7 @@
         <div class="grid-container" *ngIf="myForm.get('repeat')!.value && showDaysOfWeek">
 
             <div class="sunday">
-                <div class="form-group">
+                <div class="mb-3">
                     <label for="sunday" class="mt-30 d-flex pointer">
                         <input type="checkbox" class="checkbox ms-1" id="sunday" name="sunday" formControlName="sunday">
                         Domingo
@@ -175,7 +175,7 @@
                 </div>
             </div>
             <div class="monday">
-                <div class="form-group">
+                <div class="mb-3">
                     <label for="monday" class="mt-30 d-flex pointer">
                         <input type="checkbox" class="checkbox ms-1" id="monday" name="monday" formControlName="monday">
                         Lunes
@@ -183,7 +183,7 @@
                 </div>
             </div>
             <div class="tuesday">
-                <div class="form-group">
+                <div class="mb-3">
                     <label for="tuesday" class="mt-30 d-flex pointer">
                         <input type="checkbox" class="checkbox ms-1" id="tuesday" name="tuesday"
                             formControlName="tuesday">
@@ -192,7 +192,7 @@
                 </div>
             </div>
             <div class="wednesday">
-                <div class="form-group">
+                <div class="mb-3">
                     <label for="wednesday" class="mt-30 d-flex pointer">
                         <input type="checkbox" class="checkbox ms-1" id="wednesday" name="wednesday"
                             formControlName="wednesday">
@@ -201,7 +201,7 @@
                 </div>
             </div>
             <div class="thursday">
-                <div class="form-group">
+                <div class="mb-3">
                     <label for="thursday" class="mt-30 d-flex pointer">
                         <input type="checkbox" class="checkbox ms-1" id="thursday" name="thursday"
                             formControlName="thursday">
@@ -210,7 +210,7 @@
                 </div>
             </div>
             <div class="friday">
-                <div class="form-group">
+                <div class="mb-3">
                     <label for="friday" class="mt-30 d-flex pointer">
                         <input type="checkbox" class="checkbox ms-1" id="friday" name="friday" formControlName="friday">
                         Viernes
@@ -218,7 +218,7 @@
                 </div>
             </div>
             <div class="saturday">
-                <div class="form-group">
+                <div class="mb-3">
                     <label for="saturday" class="mt-30 d-flex pointer">
                         <input type="checkbox" class="checkbox ms-1" id="saturday" name="saturday"
                             formControlName="saturday">

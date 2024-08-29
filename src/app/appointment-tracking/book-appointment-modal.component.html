@@ -7,8 +7,8 @@
     <div class="modal-body">
         <div class="row" *ngIf="showSelectCustomers">
             <div class="col-lg-12">
-                <div class="form-group">
-                    <label class="form-control-label required" for="customer">
+                <div class="mb-3">
+                    <label class="required" for="customer">
                         <button *hasPermission="['customers.write']" type="button" (click)="newCustomer()" class="btn btn-primary btn-icon" title="Agregar nuevo">
                             <i class="bi bi-plus-lg"></i>
                         </button> Cliente
@@ -29,8 +29,8 @@
         </div>
         <div class="row" *ngIf="!showSelectCustomers">
             <div class="col-lg-12">
-                <div class="form-group">
-                    <label class="form-control-label required" for="businessName">Razón Social</label>
+                <div class="mb-3">
+                    <label class="required" for="businessName">Razón Social</label>
                     <input type="text" class="form-control" name="businessName" id="businessName"
                         formControlName="businessName" />
                     <div
@@ -42,8 +42,8 @@
                 </div>
             </div>
             <div class="col-lg-12">
-                <div class="form-group">
-                    <label class="form-control-label required" for="email">Correo Electrónico</label>
+                <div class="mb-3">
+                    <label class="required" for="email">Correo Electrónico</label>
                     <input type="email" class="form-control" name="email" id="email" formControlName="email" />
                     <div
                         *ngIf="myForm.get('email')!.invalid && (myForm.get('email')!.dirty || myForm.get('email')!.touched)">
@@ -60,8 +60,8 @@
                 </div>
             </div>
             <div class="col-lg-12">
-                <div class="form-group">
-                    <label class="form-control-label required" for="phone1">Teléfono 1</label>
+                <div class="mb-3">
+                    <label class="required" for="phone1">Teléfono 1</label>
                     <input type="text" class="form-control" name="phone1" id="phone1" formControlName="phone1" />
                     <div
                         *ngIf="myForm.get('phone1')!.invalid && (myForm.get('phone1')!.dirty || myForm.get('phone1')!.touched)">
