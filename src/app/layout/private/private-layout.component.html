@@ -1,42 +1,5 @@
-<!-- <app-navbar></app-navbar> -->
-<!-- 
-<div class="container-fluid">
-    <div class="row flex-nowrap">
-        <div class="col-auto px-0">
-            <div id="sidebar" class="collapse collapse-horizontal show border-end">
-                <div id="sidebar-nav" class="list-group rounded-0">
-                    <a *hasPermission="['home.index']" class="list-group-item" href="/schedule"><i class="bi bi-calendar3"></i> <span class="ps-1">Calendario</span></a>
-                    <a *hasPermission="['customers.read']" class="list-group-item" href="/customers"><i class="bi bi-people"></i> <span class="ps-1">Clientes</span></a>
-                    <a *hasPermission="['resources.read']" class="list-group-item" href="/resources"><i class="bi bi-tools"></i> <span class="ps-1">Recursos</span></a>
-                    <a *hasPermission="['resourcesTypes.read']" class="list-group-item" href="/resources-types"><i class="bi bi-tools"></i> <span class="ps-1">Tipos de Recursos</span></a>
-                    <a *hasPermission="['holidays.read']" class="list-group-item" href="/holidays"><i class="bi bi-calendar-x"></i> <span class="ps-1">Feriados</span></a>
-                    <a *hasPermission="['users.read']" class="list-group-item" href="/users"><i class="bi bi-person-workspace"></i> <span class="ps-1">Usuarios</span></a>
-                    <a *hasPermission="['profiles.read']" class="list-group-item" href="/profiles"><i class="bi bi-person-gear"></i> <span class="ps-1">Perfiles</span></a>
-                    <a href="#" class="list-group-item border-end-0 d-inline-block" data-bs-parent="#sidebar"><i class="bi bi-bootstrap"></i> <span>Original Borrar</span></a>
-                </div>
-            </div>
-        </div>
-        <main class="col ps-md-2 pt-2">
-            <a href="#" data-bs-target="#sidebar" data-bs-toggle="collapse"><i class="bi bi-list p-1 display-6"></i></a>
-            <app-toast></app-toast>
-            <router-outlet></router-outlet>
-        </main>
-    </div>
-</div> -->
-<!-- <div class="container-fluid">
-    <app-toast></app-toast>
-    <router-outlet></router-outlet>
-</div> -->
-
-<!-- <app-footer></app-footer> -->
-
-
-
-<!-- <div id="sidebar-nav" class="list-group border-0 rounded-0 text-sm-start min-vh-100"> -->
-
-
 <aside id="sidebar" [class.expand]="expandedSidebar" class="bg-dark">
-    <div class="d-flex justify-content-between shadow">
+    <div class="d-sm-flex justify-content-between shadow">
         <button class="toggle-btn" type="button" (click)="expandSidebar()">
             <i class="bi bi-list"></i>
         </button>
@@ -48,7 +11,7 @@
     <ul class="sidebar-nav">
         <li class="sidebar-item">
             <a *hasPermission="['home.index']" class="sidebar-link" [class.text-truncate]="expandedSidebar"
-                href="/schedule"><i class="bi bi-calendar3"></i> <span>Calendario</span></a>
+                href="/schedule"><i class="bi bi-calendar3"></i><span>Calendario</span></a>
         </li>
         <li class="sidebar-item">
             <a *hasPermission="['customers.read']" class="sidebar-link" [class.text-truncate]="expandedSidebar"
@@ -66,7 +29,7 @@
             <a *hasPermission="['holidays.read']" class="sidebar-link" [class.text-truncate]="expandedSidebar"
                 href="/holidays"><i class="bi bi-calendar-x"></i> <span>Feriados</span></a>
         </li>
-        <li class="sidebar-item border-top">
+        <li class="sidebar-item border-desktop">
             <a *hasPermission="['users.read']" class="sidebar-link" [class.text-truncate]="expandedSidebar"
                 href="/users"><i class="bi bi-person-workspace"></i> <span>Usuarios</span></a>
         </li>
@@ -79,7 +42,7 @@
                 href="/organizations"><i class="bi bi-building-gear"></i> <span>Mi Organización</span></a>
         </li>
 
-        <li class="sidebar-item border-top">
+        <li class="sidebar-item border-desktop">
             <a href="/users/password-change" class="sidebar-link" [class.text-truncate]="expandedSidebar">
                 <i class="bi bi-key"></i>
                 <span>Cambiar contraseña</span>
@@ -98,50 +61,5 @@
     <router-outlet></router-outlet>
 </div>
 
-<aside id="sidebar-mobile" class="bg-dark">
-
-    <ul class="sidebar-nav">
-        <li class="sidebar-item">
-            <a *hasPermission="['home.index']" class="sidebar-link" href="/schedule"><i class="bi bi-calendar3"></i><small
-                    class="d-block text-center">Calendario</small></a>
-        </li>
-        <li class="sidebar-item">
-            <a *hasPermission="['customers.read']" class="sidebar-link" href="/customers"><i class="bi bi-people"></i><small
-                    class="d-block text-center">Clientes</small></a>
-        </li>
-        <li class="sidebar-item">
-            <a *hasPermission="['resources.read']" class="sidebar-link" href="/resources"><i class="bi bi-tools"></i><small
-                    class="d-block text-center">Recursos</small></a>
-        </li>
-        <li class="sidebar-item">
-            <a *hasPermission="['resourcesTypes.read']" class="sidebar-link" href="/resources-types"><i
-                    class="bi bi-tools"></i><small class="d-block text-center">Tipos Recursos</small></a>
-        </li>
-        <li class="sidebar-item">
-            <a *hasPermission="['holidays.read']" class="sidebar-link" href="/holidays"><i class="bi bi-calendar-x"></i><small
-                    class="d-block text-center">Feriados</small></a>
-        </li>
-        <li class="sidebar-item">
-            <a *hasPermission="['users.read']" class="sidebar-link" href="/users"><i class="bi bi-person-workspace"></i><small
-                    class="d-block text-center">Usuarios</small></a>
-        </li>
-        <li class="sidebar-item">
-            <a *hasPermission="['profiles.read']" class="sidebar-link" href="/profiles"><i class="bi bi-person-gear"></i><small
-                    class="d-block text-center">Perfiles</small></a>
-        </li>
-        <li class="sidebar-item">
-            <a *hasPermission="['organizations.read']" class="sidebar-link" href="/organizations"><i
-                    class="bi bi-building-gear"></i><small class="d-block text-center">Mi Organización</small></a>
-        </li>
-        <li class="sidebar-item">
-            <a class="sidebar-link" href="/users/password-change"><i class="bi bi-key"></i><small
-                    class="d-block text-center">Cambiar contraseña</small></a>
-        </li>
-        <li class="sidebar-item">
-            <a href="#" class="sidebar-link"><i class="bi bi-box-arrow-right"></i><small class="d-block text-center">Cerrar
-                    sesión</small></a>
-        </li>
-    </ul>
-</aside>
 
 <!-- <app-footer></app-footer> -->
