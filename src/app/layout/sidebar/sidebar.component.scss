@@ -1,0 +1,145 @@
+a {
+  text-decoration: none;
+}
+
+li {
+  list-style: none;
+}
+
+#sidebar {
+  width: 5vw;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  height: 100%;
+  overflow: auto;
+  overflow-x: hidden;
+}
+
+#sidebar.expand {
+  width: 20%;
+}
+
+.toggle-btn {
+  background-color: transparent;
+  cursor: pointer;
+  border: 0;
+  padding: 1rem 1.5rem;
+}
+
+.toggle-btn i {
+  font-size: 1.5rem;
+  color: #FFF;
+}
+
+.sidebar-logo {
+  margin: auto 0;
+}
+
+.sidebar-logo a {
+  font-size: 1.15rem;
+  font-weight: 600;
+}
+.sidebar-logo a:hover {
+  color: white;
+}
+
+.sidebar-nav {
+  padding: 1rem 0;
+  flex: 1 1 auto;
+}
+
+a.sidebar-link {
+  padding: .625rem 1.625rem;
+  color: #FFF;
+  display: block;
+  font-size: 0.9rem;
+  white-space: nowrap;
+  border-left: 3px solid transparent;
+}
+
+.sidebar-link i {
+  font-size: 1.1rem;
+  margin-right: .75rem;
+}
+
+a.sidebar-link:hover {
+  background-color: rgba(255, 255, 255, .075);
+  border-left: 3px solid #3b7ddd;
+}
+
+.sidebar-item {
+  position: relative;
+}
+
+.border-desktop {
+  border-top: 1px solid white;
+}
+
+@media screen and (min-width: 769px) {
+
+  #sidebar:not(.expand) a.sidebar-link span,
+  #sidebar:not(.expand) .sidebar-logo {
+      display: none !important;
+  }
+
+  #sidebar:not(.expand) .sidebar-link {
+      text-align: center;
+      padding: .625rem 0;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .main {
+      margin-left: 0;
+      width: 100%;
+      margin-bottom: 25%;
+  }
+  #sidebar {
+      display: block;
+      width: 100% !important;
+      position: fixed;
+      z-index: 1000;
+      bottom: 0;
+      overflow: auto;
+      height: fit-content;
+  }
+
+  #sidebar div {
+      display: none !important;
+  }
+  
+  a.sidebar-link {
+      padding: .625rem .625rem;
+      border-bottom: 3px solid transparent;
+
+      span {
+          display: block !important;
+          font-size: .875em;
+      }
+  }
+  
+  a.sidebar-link:hover {
+      border-left: none;
+      border-bottom: 3px solid #3b7ddd;
+  }
+  
+  .sidebar-link i {
+      margin-right: 0;
+      display: flex;
+      justify-content: center;
+  }
+  
+  ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: space-around;
+  }
+  .border-desktop {
+      border-top: none;
+      border-left: 1px solid white;
+  }
+}

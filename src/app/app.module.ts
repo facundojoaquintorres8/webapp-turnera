@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NavbarComponent } from './layout/navbar/navbar.component';
+import { SidebarComponent } from './layout/sidebar/sidebar.component';
 import { FooterComponent } from './layout/footer/footer.component';
 import { PrivateLayoutComponent } from './layout/private/private-layout.component';
 import { PublicLayoutComponent } from './layout/public/public-layout.component';
@@ -25,7 +25,7 @@ registerLocaleData(localeEsAr, 'es');
 @NgModule({ declarations: [
         AppComponent,
         ...APP_CONTAINERS,
-        NavbarComponent,
+        SidebarComponent,
         FooterComponent,
         ToastComponent,
     ],
