@@ -34,6 +34,13 @@
             <option [value]="item.id" *ngFor="let item of header.itemList">{{ item.value }}</option>
         </select>
 
+        <ng-select *ngSwitchCase="inputType.AUTOCOMPLETE" [items]="itemsAutocomplete" bindLabel="value" bindValue="id"
+            notFoundText="Sin items" clearAllText="Limpiar" (change)="onChange()"
+            (search)="onSearch($event)"
+            id="{{header.inputName}}" formControlName="{{header.inputName}}">
+        </ng-select>
+
+        <!-- TODO: arreglar -->
         <!-- <div class="input-group" *ngSwitchCase="inputType.DATE">
             <input class="form-control" placeholder="yyyy-mm-dd" name="{{header.inputName}}" formControlName="{{header.inputName}}" ngbDatepicker
                 #inputDate="ngbDatepicker" [firstDayOfWeek]="7" (ngModelChange)="onChange()"> 

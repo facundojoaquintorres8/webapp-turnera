@@ -1,9 +1,10 @@
 import { HttpResponse } from '@angular/common/http';
-import { Component, Input, OnInit, TemplateRef } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, TemplateRef } from '@angular/core';
 import { UntypedFormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { IHeader, InputTypeEnum } from './table.models';
 import { IResponse } from 'src/app/models/response.models';
+import { IListItem } from 'src/app/models/list.models';
 
 @Component({
     selector: 'app-table',
@@ -12,6 +13,7 @@ import { IResponse } from 'src/app/models/response.models';
 })
 export class TableComponent implements OnInit {
 
+    @Output() search: EventEmitter<any> = new EventEmitter();
     @Input() queryItems!: (req?: any) => Observable<HttpResponse<IResponse>>;
     @Input() headers: IHeader[] = [];
     @Input() myForm!: UntypedFormGroup;
@@ -19,6 +21,7 @@ export class TableComponent implements OnInit {
     @Input() hasButtons: boolean = false;
     @Input() page: number = 1;
     @Input() bodyTemplate!: TemplateRef<any>;
+    @Input() itemsAutocomplete!: IListItem[];
 
     totalPages: number = 0;
     items: any[] = [];
@@ -55,5 +58,9 @@ export class TableComponent implements OnInit {
                 this.totalPages
             }
         );
+    }
+
+    onSearch(event: any): void {
+        this.search.emit(event);
     }
 }

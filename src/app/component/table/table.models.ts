@@ -14,5 +14,6 @@ export enum InputTypeEnum {
   NUMBER,
   BOOLEAN,
   DATE,
-  LIST
+  LIST,
+  AUTOCOMPLETE
 }

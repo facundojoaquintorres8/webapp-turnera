@@ -25,14 +25,15 @@
             </div>
             <div class="col-lg-4">
                 <div class="mb-3">
-                    <label class="required" for="resourceTypeId">Tipo de Recurso</label>
-                    <select class="form-control" name="resourceTypeId" id="resourceTypeId" formControlName="resourceTypeId">
-                        <option [value]="resourceType.id" *ngFor="let resourceType of resourcesTypes">{{
-                            resourceType.description }}</option>
+                    <label class="required" for="resourcesTypes">Tipos de Recursos</label>
+                    <select multiple name="resourcesTypes" id="resourcesTypes" formControlName="resourcesTypes" [compareWith]="compareFun">
+                        <option *ngFor="let resourceType of resourcesTypes" [ngValue]="resourceType">
+                            {{ resourceType.description }}
+                        </option>
                     </select>
                     <div
-                        *ngIf="myForm.get('resourceTypeId')!.invalid && (myForm.get('resourceTypeId')!.dirty || myForm.get('resourceTypeId')!.touched)">
-                        <small class="form-text text-danger" *ngIf="myForm.get('resourceTypeId')?.errors?.required">
+                        *ngIf="myForm.get('resourcesTypes')!.invalid && (myForm.get('resourcesTypes')!.dirty || myForm.get('resourcesTypes')!.touched)">
+                        <small class="form-text text-danger" *ngIf="myForm.get('resourcesTypes')?.errors?.required">
                             El campo es requerido.
                         </small>
                     </div>

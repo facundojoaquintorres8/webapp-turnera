@@ -22,7 +22,7 @@ export class UpdateResourceComponent implements OnInit {
     id: [0],
     description: ['', [Validators.required]],
     code: [''],
-    resourceTypeId: [0, [Validators.required]],
+    resourcesTypes: this.fb.control<IResourceType[]>([], Validators.required),
     active: [false],
   });
 
@@ -49,13 +49,17 @@ export class UpdateResourceComponent implements OnInit {
       )
   }
 
+  compareFun(a: IResourceType, b: IResourceType) {
+    return a && b ? a.id === b.id : a === b;
+  }
+
   updateForm(resource: IResource): void {
     this.myForm.patchValue({
       id: resource.id,
       description: resource.description,
       code: resource.code,
-      resourceTypeId: resource.resourceType.id,
-      active: resource.active,
+      resourcesTypes: resource.resourcesTypes,
+      active: resource.active
     });
   }
 
@@ -79,7 +83,7 @@ export class UpdateResourceComponent implements OnInit {
       active: this.myForm.get(['active'])!.value,
       description: this.myForm.get(['description'])!.value,
       code: this.myForm.get(['code'])!.value,
-      resourceType: this.resourcesTypes.find(x => x.id == this.myForm.get(['resourceTypeId'])!.value)!,
+      resourcesTypes: this.myForm.get(['resourcesTypes'])!.value,
     };
   }
 

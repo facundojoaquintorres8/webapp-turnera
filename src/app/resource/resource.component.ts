@@ -6,6 +6,12 @@ import { IHeader, InputTypeEnum } from '../component/table/table.models';
 import { IResource } from '../models/resource.models';
 import { DeleteResourceModalComponent } from './delete-resource-modal.component';
 import { ResourceService } from './resource.service';
+import { ResourceTypeService } from '../resource-type/resource-type.service';
+import { HttpResponse } from '@angular/common/http';
+import { IResponse } from '../models/response.models';
+import { IResourceType } from '../models/resourceType.models';
+import { IListItem } from '../models/list.models';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-resource',
@@ -20,11 +26,14 @@ export class ResourceComponent implements OnInit {
   myForm = this.fb.group({
     description: [null],
     code: [null],
-    resourceTypeDescription: [null],
+    resourceTypeId: [null],
     active: [null],
   });
+  resourcesTypes!: IListItem[];
+
   constructor(
     private resourceService: ResourceService,
+    private resourceTypeService: ResourceTypeService,
     private modalService: NgbModal,
     private fb: FormBuilder,
   ) { }
@@ -33,12 +42,27 @@ export class ResourceComponent implements OnInit {
     this.headers = [
       { label: 'Descripción', inputType: InputTypeEnum.TEXT, inputName: 'description', sort: true },
       { label: 'Código', inputType: InputTypeEnum.TEXT, inputName: 'code', sort: true },
-      { label: 'Tipo de Recurso', inputType: InputTypeEnum.TEXT, inputName: 'resourceTypeDescription', sort: true },
+      { label: 'Tipo de Recurso', inputType: InputTypeEnum.AUTOCOMPLETE, inputName: 'resourceTypeId', sort: false },
       { label: 'Activo', inputType: InputTypeEnum.BOOLEAN, inputName: 'active', sort: false }
     ];
   }
 
   query = (req?: any) => this.resourceService.findAllByFilter(req);
+
+  getResourcesTypes(search: { term: string; items: any[] }) {
+    if (search.term && search.term.length > 2) {
+      this.resourceTypeService.findAllByFilter({ active: true, description: search.term })
+        .pipe(
+          map((res: HttpResponse<IResponse>) => res.body?.data.content
+            .map((rt: IResourceType) => ({ id: rt.id, value: rt.description })))
+        )
+        .subscribe(
+          (res: any) => {
+            this.resourcesTypes = res || [];
+          }
+        )
+    }
+  }
 
   delete(resource: IResource): void {
     this.ngbModalRef = this.modalService.open(DeleteResourceModalComponent, { size: 'lg', backdrop: 'static' });

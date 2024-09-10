@@ -7,7 +7,13 @@
     <dt>Código</dt>
     <dd>{{ resource.code ? resource.code : '-' }}</dd>
     <dt>Tipo de Recuros</dt>
-    <dd>{{ resource.resourceType.description }}</dd>
+    <dd>
+      <ng-content *ngFor="let resourceType of resource.resourcesTypes">
+        <div>
+          {{ resourceType.description }}
+        </div>
+      </ng-content>
+    </dd>
     <dt>Activo</dt>
     <dd>{{ resource.active ? 'Si' : 'No' }}</dd>
   </dl>

@@ -5,6 +5,5 @@ export interface IResource {
   active: boolean;
   description: string;
   code?: string;
-  resourceType: IResourceType;
-  resourceTypeDescription?: string;
+  resourcesTypes: IResourceType[];
 }

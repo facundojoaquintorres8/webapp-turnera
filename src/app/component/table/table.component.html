@@ -13,7 +13,8 @@
 <ng-template #defaultHeader>
     <tr>
         <th scope="col" *ngFor="let header of headers">
-            <app-table-header [header]="header" [sort]="sort" [myForm]="myForm" (executeQuery)="executeQuery($event)">
+            <app-table-header [header]="header" [sort]="sort" [myForm]="myForm" (executeQuery)="executeQuery($event)" 
+            [itemsAutocomplete]="itemsAutocomplete" (search)="onSearch($event)">
             </app-table-header>
         </th>
         <th scope="col" *ngIf="hasButtons"></th>

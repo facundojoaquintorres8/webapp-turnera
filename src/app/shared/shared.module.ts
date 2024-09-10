@@ -7,10 +7,11 @@ import { TableComponent } from '../component/table/table.component';
 import { PaginateComponent } from '../component/table/paginated.component';
 import { TableHeaderComponent } from '../component/table/table-header.component';
 import { ObservationModalComponent } from '../component/observation-modal/observation-modal.component';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @NgModule({
     declarations: [TableComponent, TableHeaderComponent, PaginateComponent, ObservationModalComponent],
-    imports: [CommonModule, PermissionModule, ReactiveFormsModule, NgbModule],
+    imports: [CommonModule, PermissionModule, ReactiveFormsModule, NgbModule, NgSelectModule],
     exports: [
         FormsModule,
         CommonModule,

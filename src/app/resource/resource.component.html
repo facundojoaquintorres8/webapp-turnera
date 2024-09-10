@@ -7,13 +7,19 @@
   </h2>
 
   <app-table [headers]="headers" [bodyTemplate]="customBody" [myForm]="myForm" [sort]="sort" [hasButtons]="true" [queryItems]="query"
-    #tableComponent>
+    [itemsAutocomplete]="resourcesTypes" (search)="getResourcesTypes($event)"  #tableComponent>
 
     <ng-template #customBody let-items>
       <tr *ngFor="let resource of items">
         <td>{{ resource.description }}</td>
         <td>{{ resource.code ? resource.code : '-' }}</td>
-        <td>{{ resource.resourceType.description }}</td>
+        <td>
+          <ng-content *ngFor="let resourceType of resource.resourcesTypes">
+            <div>
+              {{ resourceType.description }}
+            </div>
+          </ng-content>
+        </td>
         <td>
           <i *ngIf="resource.active" class="bi bi-check-square text-success"></i>
           <i *ngIf="!resource.active" class="bi bi-square text-danger outline"></i>
