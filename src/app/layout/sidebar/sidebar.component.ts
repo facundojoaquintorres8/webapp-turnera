@@ -15,6 +15,7 @@ export class SidebarComponent implements OnInit {
 
   ngOnInit(): void {
     this.expandedSidebar = localStorage.getItem('expandedSidebar') ? JSON.parse(localStorage.getItem('expandedSidebar')!) : true;
+    this.expandSidebarEvent.emit(this.expandedSidebar);
   }
 
   expandSidebar(): void {
