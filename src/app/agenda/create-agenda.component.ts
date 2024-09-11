@@ -11,6 +11,7 @@ import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import moment from 'moment';
 import * as momentTimeZone from 'moment-timezone';
 import { IResponse } from '../models/response.models';
+import { IResourceType } from '../models/resourceType.models';
 
 @Component({
   selector: 'app-create-agenda',
@@ -21,6 +22,7 @@ export class CreateAgendaComponent implements OnInit {
   isSaving = false;
 
   resources!: IResource[];
+  resourcesTypes!: IResourceType[] | null;
   repeatTypes: any = RepeatTypeEnum;
   showDaysOfWeek!: boolean;
   dayOfTheMonthText!: string;
@@ -33,6 +35,7 @@ export class CreateAgendaComponent implements OnInit {
   myForm = this.fb.group({
     id: [],
     resource: [null, [Validators.required]],
+    resourceType: this.fb.control<any>({ value: {}, disabled: true }, Validators.required),
     startDate: [this.today, [Validators.required]],
     startHour: [{ hour: 8, minute: 0, second: 0 }, [Validators.required]],
     endHour: [{ hour: 18, minute: 0, second: 0 }, [Validators.required]],
@@ -60,7 +63,7 @@ export class CreateAgendaComponent implements OnInit {
 
   ngOnInit(): void {
     this.resourceService.findAllByFilter({ active: true }).subscribe(
-      (res: HttpResponse<IResponse>) => this.resources = res.body?.data.content!
+      (res: HttpResponse<IResponse>) => this.resources = res.body?.data.content
     )
 
     this.myForm.get('zoneId')?.setValue(momentTimeZone.tz.guess());
@@ -70,11 +73,17 @@ export class CreateAgendaComponent implements OnInit {
     window.history.back();
   }
 
-  hasAnyDaySelected(): boolean {
-    return (this.showDaysOfWeek && (this.myForm.get(['sunday'])!.value || this.myForm.get(['monday'])!.value ||
-      this.myForm.get(['tuesday'])!.value || this.myForm.get(['wednesday'])!.value ||
-      this.myForm.get(['thursday'])!.value || this.myForm.get(['friday'])!.value ||
-      this.myForm.get(['saturday'])!.value)) || !this.showDaysOfWeek;
+  onResourceChange(): void {
+    const selectedResource: IResource = this.myForm.get(['resource'])!.value;
+    if(selectedResource) {
+      this.myForm.get('resourceType')!.enable();
+      this.resourcesTypes = selectedResource.resourcesTypes;
+      if (this.resourcesTypes.length === 1) {
+        this.myForm.get('resourceType')?.setValue(this.resourcesTypes[0]);
+      } else {
+        this.myForm.get('resourceType')?.setValue(null);
+      }
+    }
   }
 
   onStartDateChange(): void {
@@ -87,12 +96,12 @@ export class CreateAgendaComponent implements OnInit {
   }
 
   onSegmentedChange(): void {
-    this.myForm.controls['duration'].reset();
     if (this.myForm.get('segmented')!.value) {
       this.myForm.controls['duration'].setValidators([Validators.required, Validators.min(5)]);
     } else {
       this.myForm.controls['duration'].clearValidators();
     }
+    this.myForm.controls['duration'].reset();
   }
 
   onRepeatChange(): void {
@@ -114,8 +123,13 @@ export class CreateAgendaComponent implements OnInit {
     this.setDayOfTheMonth();
   }
 
-  originalOrder = (): number => {
-    return 0;
+  originalOrder = (): number => 0;
+
+  hasAnyDaySelected(): boolean {
+    return (this.showDaysOfWeek && (this.myForm.get(['sunday'])!.value || this.myForm.get(['monday'])!.value ||
+      this.myForm.get(['tuesday'])!.value || this.myForm.get(['wednesday'])!.value ||
+      this.myForm.get(['thursday'])!.value || this.myForm.get(['friday'])!.value ||
+      this.myForm.get(['saturday'])!.value)) || !this.showDaysOfWeek;
   }
 
   save(): void {
@@ -140,6 +154,7 @@ export class CreateAgendaComponent implements OnInit {
     return {
       id: this.myForm.get(['id'])!.value,
       resource: this.myForm.get(['resource'])!.value,
+      resourceType: this.myForm.get(['resourceType'])!.value,
       startDate: formatDateFromNgbDateStruct(this.myForm.get(['startDate'])!.value)!,
       startHour: formatTimeFromNgbTimeStruct(this.myForm.get(['startHour'])!.value)!,
       endHour: formatTimeFromNgbTimeStruct(this.myForm.get(['endHour'])!.value)!,
@@ -147,7 +162,7 @@ export class CreateAgendaComponent implements OnInit {
       segmented: this.myForm.get(['segmented'])!.value,
       duration: this.myForm.get(['duration'])!.value,
       repeat: this.myForm.get(['repeat'])!.value,
-      repeatType: this.myForm.get(['repeatType'])!.value,
+      repeatType: this.myForm.get(['repeatType'])!.value === '' ? null : this.myForm.get(['repeatType'])!.value,
       finalize: formatDateFromNgbDateStruct(this.myForm.get(['finalize'])!.value)!,
       sunday: this.myForm.get(['sunday'])!.value,
       monday: this.myForm.get(['monday'])!.value,

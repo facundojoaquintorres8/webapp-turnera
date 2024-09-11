@@ -3,10 +3,10 @@
         <h2>Crear Disponibilidades</h2>
 
         <div class="row">
-            <div class="col-lg-4">
+            <div class="col-lg-6">
                 <div class="mb-3">
                     <label class="required" for="resource">Recurso</label>
-                    <select class="form-control" name="resource" id="resource" formControlName="resource">
+                    <select class="form-control" name="resource" id="resource" formControlName="resource" (ngModelChange)="onResourceChange()">
                         <option [ngValue]="resource" *ngFor="let resource of resources">{{ resource.description }}
                         </option>
                     </select>
@@ -19,6 +19,24 @@
                 </div>
             </div>
 
+            <div class="col-lg-6">
+                <div class="mb-3">
+                    <label class="required" for="resourceType">Tipo de recurso</label>
+                    <select class="form-control" name="resourceType" id="resourceType" formControlName="resourceType">
+                        <option [ngValue]="resourceType" *ngFor="let resourceType of resourcesTypes">{{ resourceType.description }}
+                        </option>
+                    </select>
+                    <div
+                        *ngIf="myForm.get('resourceType')!.invalid && (myForm.get('resourceType')!.dirty || myForm.get('resourceType')!.touched)">
+                        <small class="form-text text-danger" *ngIf="myForm.get('resourceType')?.errors?.required">
+                            El campo es requerido.
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
             <div class="col-lg-2">
                 <div class="mb-3">
                     <label class="required">Fecha inicio</label>
@@ -68,8 +86,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="row">
             <div class="col-lg-2">
                 <div class="mb-3">
                     <label for="segmented" class="mt-30 d-flex">
@@ -96,7 +112,9 @@
                     </div>
                 </div>
             </div>
-
+        </div>
+            
+        <div class="row">
             <div class="col-lg-2">
                 <div class="mb-3">
                     <label for="omitHolidays" class="mt-30 d-flex">
@@ -106,9 +124,7 @@
                     </label>
                 </div>
             </div>
-        </div>
             
-        <div class="row">
             <div class="col-lg-2">
                 <div class="mb-3">
                     <label for="repeat" class="mt-30 d-flex">

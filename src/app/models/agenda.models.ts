@@ -1,5 +1,6 @@
 import { IAppointment } from "./appointment.model";
 import { IResource } from "./resource.models";
+import { IResourceType } from "./resourceType.models";
 
 export interface IAgenda {
   id: number;
@@ -12,6 +13,7 @@ export interface IAgenda {
 export interface ISaveAgenda {
   id: number;
   resource: IResource;
+  resourceType: IResourceType;
   startDate: string;
   startHour: string;
   endHour: string;
