@@ -1,5 +1,6 @@
-import { IAgenda } from "./agenda.models";
-import { IQuickCustomer } from "./customer.models";
+import { IAgenda } from './agenda.models';
+import { IQuickCustomer } from './customer.models';
+import { IListItem } from './list.models';
 
 export interface IAppointment {
     id: number;
@@ -24,10 +25,18 @@ export interface IAppointmentStatus {
 }
 
 export enum AppointmentStatusEnum {
-    FREE,
-    BOOKED,
-    ABSENT,
-    CANCELLED,
-    IN_ATTENTION,
-    FINALIZED
+    // FREE,
+    // BOOKED,
+    // ABSENT,
+    // CANCELLED,
+    // IN_ATTENTION,
+    // FINALIZED
+    FREE = 'Libre',
+    BOOKED = 'Reservado',
+    ABSENT = 'Ausente',
+    CANCELLED = 'Cancelado',
+    IN_ATTENTION = 'En Atención',
+    FINALIZED = 'Finalizado',
 }
+
+export const AppointmentStatusToListItem: IListItem[] = Object.entries(AppointmentStatusEnum).map(([id, value]) => ({ id, value }));

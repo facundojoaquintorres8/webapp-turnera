@@ -1,7 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { UntypedFormGroup } from '@angular/forms';
 import { IHeader, InputTypeEnum } from './table.models';
-import { IListItem } from 'src/app/models/list.models';
 
 @Component({
     selector: 'app-table-header',
@@ -14,7 +13,6 @@ export class TableHeaderComponent {
     @Input() myForm!: UntypedFormGroup;
     @Input() header!: IHeader;
     @Input() sort!: string[];
-    @Input() itemsAutocomplete!: IListItem[];
 
     inputType: any = InputTypeEnum;
 
@@ -42,9 +40,5 @@ export class TableHeaderComponent {
 
     onFilterChange(): void {
         this.executeQuery.emit({ page: 1, sort: this.sort });
-    }
-
-    onSearch(event: any): void {
-        this.search.emit(event);
     }
 }

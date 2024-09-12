@@ -8,7 +8,7 @@
             <i class="bi bi-sort-down" *ngIf="sort[1] !== header.inputName"></i>
         </small>
     </div>
-    <div class="input-group input-group-sm" [ngSwitch]="header.inputType">
+    <!-- <div class="input-group input-group-sm" [ngSwitch]="header.inputType">
 
         <input *ngSwitchCase="inputType.TEXT" type="text" class="form-control" placeholder="Filtrar"
             name="{{header.inputName}}" id="{{header.inputName}}" formControlName="{{header.inputName}}">
@@ -38,9 +38,8 @@
             notFoundText="Sin items" clearAllText="Limpiar" (change)="onChange()"
             (search)="onSearch($event)"
             id="{{header.inputName}}" formControlName="{{header.inputName}}">
-        </ng-select>
+        </ng-select> -->
 
-        <!-- TODO: arreglar -->
         <!-- <div class="input-group" *ngSwitchCase="inputType.DATE">
             <input class="form-control" placeholder="yyyy-mm-dd" name="{{header.inputName}}" formControlName="{{header.inputName}}" ngbDatepicker
                 #inputDate="ngbDatepicker" [firstDayOfWeek]="7" (ngModelChange)="onChange()"> 
@@ -50,5 +49,5 @@
                 </button>
             </div>
         </div> -->
-    </div>
+    <!-- </div> -->
 </form>

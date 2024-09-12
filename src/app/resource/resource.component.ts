@@ -49,7 +49,7 @@ export class ResourceComponent implements OnInit {
 
   query = (req?: any) => this.resourceService.findAllByFilter(req);
 
-  getResourcesTypes(search: { term: string; items: any[] }) {
+  getResourcesTypes(search: { term: string }) {
     if (search.term && search.term.length > 2) {
       this.resourceTypeService.findAllByFilter({ active: true, description: search.term })
         .pipe(

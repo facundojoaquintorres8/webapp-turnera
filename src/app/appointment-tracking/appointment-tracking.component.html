@@ -1,105 +1,10 @@
 <div class="container-fluid">
   <h2>Seguimiento de Turnos</h2>
 
-  <form name="myFormFilter" role="form" novalidate (ngSubmit)="getAgendas()" [formGroup]="myFormFilter" class="mb-2">
-    <div class="row">
-      <div class="col-lg-4">
-        <div class="mb-3">
-          <label for="resourceTypeId">Tipo de Recurso</label>
-          <select class="form-control" name="resourceTypeId" id="resourceTypeId" formControlName="resourceTypeId"
-            (change)="onResourceTypeChange()">
-            <option [ngValue]="null"></option>
-            <option [value]="resourceType.id" *ngFor="let resourceType of resourcesTypes">{{ resourceType.description }}
-            </option>
-          </select>
-        </div>
-      </div>
-      <div class="col-lg-4">
-        <div class="mb-3">
-          <label for="resourceId">Recurso</label>
-          <select class="form-control" name="resourceId" id="resourceId" formControlName="resourceId"
-            (change)="onResourceChange()">
-            <option [ngValue]="null"></option>
-            <option [value]="resource.id" *ngFor="let resource of resources">{{ resource.description }} - {{
-              resource.code }}
-            </option>
-          </select>
-        </div>
-      </div>
-      <div class="col-lg-4">
-        <div class="mb-3">
-          <label for="customerId">Cliente</label>
-          <select class="form-control" name="customerId" id="customerId" formControlName="customerId">
-            <option [ngValue]="null"></option>
-            <option [value]="customer.id" *ngFor="let customer of customers">{{ customer.businessName }}
-            </option>
-          </select>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-lg-2">
-        <div class="mb-3">
-          <label class="required">Desde</label>
-          <div class="input-group">
-            <input class="form-control" placeholder="yyyy-mm-dd" name="from" formControlName="from" ngbDatepicker
-              #from="ngbDatepicker" [firstDayOfWeek]="7" [maxDate]="maxDate()">
-            <div class="input-group-append">
-              <button class="btn btn-primary" (click)="from.toggle()" type="button" title="Ver Calendario">
-                <i class="bi bi-calendar3"></i>
-              </button>
-            </div>
-          </div>
-          <div
-            *ngIf="myFormFilter.get('from')!.invalid && (myFormFilter.get('from')!.dirty || myFormFilter.get('from')!.touched)">
-            <small class="form-text text-danger" *ngIf="myFormFilter.get('from')?.errors?.required">
-              El campo es requerido.
-            </small>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-2">
-        <div class="mb-3">
-          <label class="required">Hasta</label>
-          <div class="input-group">
-            <input class="form-control" placeholder="yyyy-mm-dd" name="to" formControlName="to" ngbDatepicker
-              #to="ngbDatepicker" [firstDayOfWeek]="7" [minDate]="minDate()">
-            <div class="input-group-append">
-              <button class="btn btn-primary" (click)="to.toggle()" type="button" title="Ver Calendario">
-                <i class="bi bi-calendar3"></i>
-              </button>
-            </div>
-          </div>
-          <div
-            *ngIf="myFormFilter.get('to')!.invalid && (myFormFilter.get('to')!.dirty || myFormFilter.get('to')!.touched)">
-            <small class="form-text text-danger" *ngIf="myFormFilter.get('to')?.errors?.required">
-              El campo es requerido.
-            </small>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-8">
-        <div class="mb-3">
-          <label>&nbsp;</label>
-          <div class="text-end">
-            <button type="button" (click)="clear()" class="btn btn-secondary ms-2" [disabled]="isSearching"
-              title="Limpiar">
-              <i class="bi bi-skip-backward-circle"></i>&nbsp;Limpiar
-            </button>
-            <button type="submit" class="btn btn-outline-dark" [disabled]="myFormFilter.invalid || isSearching"
-              title="Filtrar">
-              <i class="bi bi-filter"></i>&nbsp;Filtrar
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
+  <app-filter [filterInputs]="filterInputs" [myFormFilter]="myFormFilter" (submit)="getAgendas()" (clear)="clear()"></app-filter>
 
-  </form>
-
-
-  <app-table [headers]="headers" [bodyTemplate]="customBody" [myForm]="myForm" [sort]="sort" [hasButtons]="true"
-    [queryItems]="query" #tableComponent>
+  <app-table [headers]="headers" [bodyTemplate]="customBody" [myForm]="myFormFilter" [sort]="sort" [hasButtons]="true"
+    [filterInputs]="filterInputs" [queryItems]="query" #tableComponent>
 
     <ng-template #customBody let-items>
       <tr *ngFor="let agenda of items">
@@ -108,13 +13,12 @@
         <td>{{ agenda.endDate | date: 'dd/MM/yyyy HH:mm' }}</td>
         <td>{{ agenda.lastAppointment ? agenda.lastAppointment.customerBusinessName : '-'}}</td>
         <td>
-          <!-- TODO: arreglar lista porque no le gusta al angular nuevo -->
-          <!-- <span class="{{ appointmentStatusColor(agenda.lastAppointment) }} appointmentStatus">
-            {{ agenda.lastAppointment ? appointmentStatusObject[agenda.lastAppointment.lastAppointmentStatus.status] :
-            appointmentStatusObject.FREE }}
-          </span> -->
+            <span class="appointmentStatus badge {{ appointmentStatusColor(agenda.lastAppointment) }}">
+              {{ agenda.lastAppointment ? appointmentStatusEnum[agenda.lastAppointment.lastAppointmentStatus.status] :
+              appointmentStatusEnum.FREE }}
+            </span>
           <ng-container *ngIf="agenda.lastAppointment && agenda.lastAppointment.lastAppointmentStatus.observations">
-            <i class="bi bi-chat-left-text text-info ms-1 pointer"
+            <i class="bi bi-chat-text text-primary ms-1 pointer"
               (click)="seeObservations(agenda.lastAppointment.lastAppointmentStatus.observations)"
               [title]="'Observaciones: ' + agenda.lastAppointment.lastAppointmentStatus.observations"></i>
           </ng-container>

@@ -8,9 +8,10 @@ import { PaginateComponent } from '../component/table/paginated.component';
 import { TableHeaderComponent } from '../component/table/table-header.component';
 import { ObservationModalComponent } from '../component/observation-modal/observation-modal.component';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { FilterComponent } from '../component/filter/filter.component';
 
 @NgModule({
-    declarations: [TableComponent, TableHeaderComponent, PaginateComponent, ObservationModalComponent],
+    declarations: [TableComponent, TableHeaderComponent, PaginateComponent, ObservationModalComponent, FilterComponent],
     imports: [CommonModule, PermissionModule, ReactiveFormsModule, NgbModule, NgSelectModule],
     exports: [
         FormsModule,
@@ -22,6 +23,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
         TableHeaderComponent,
         PaginateComponent,
         ObservationModalComponent,
+        FilterComponent,
     ]
 })
 export class SharedModule { }

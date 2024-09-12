@@ -6,8 +6,7 @@
     </button> Recursos
   </h2>
 
-  <app-table [headers]="headers" [bodyTemplate]="customBody" [myForm]="myForm" [sort]="sort" [hasButtons]="true" [queryItems]="query"
-    [itemsAutocomplete]="resourcesTypes" (search)="getResourcesTypes($event)"  #tableComponent>
+  <app-table [headers]="headers" [bodyTemplate]="customBody" [myForm]="myForm" [sort]="sort" [hasButtons]="true" [queryItems]="query" #tableComponent>
 
     <ng-template #customBody let-items>
       <tr *ngFor="let resource of items">

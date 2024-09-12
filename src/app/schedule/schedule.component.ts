@@ -98,19 +98,19 @@ export class ScheduleComponent implements OnInit {
     //     this.loading = false;
     //   }
     // );
-    this.agendaService.getAgendasForAMonth({ page: 0, ...this.createFromForm() }).subscribe(
-      (res: HttpResponse<IResponse>) => { // TODO: mappear agendas
-        this.events = res.body?.data.map((x: IAgenda) => ({
-          id: x.id,
-          start: new Date(x.startDate),
-          end: new Date(x.endDate),
-          title: this.getEventTitle(x),
-          agenda: x,
-          lastAppointmentStatus: x.lastAppointment ? x.lastAppointment.lastAppointmentStatus.status : null
-        }));
-        this.loading = false;
-      }
-    );
+    // this.agendaService.getAgendasForAMonth({ page: 0, ...this.createFromForm() }).subscribe(
+    //   (res: HttpResponse<IResponse>) => { // TODO: mappear agendas
+    //     this.events = res.body?.data.map((x: IAgenda) => ({
+    //       id: x.id,
+    //       start: new Date(x.startDate),
+    //       end: new Date(x.endDate),
+    //       title: this.getEventTitle(x),
+    //       agenda: x,
+    //       lastAppointmentStatus: x.lastAppointment ? x.lastAppointment.lastAppointmentStatus.status : null
+    //     }));
+    //     this.loading = false;
+    //   }
+    // );
   }
 
   private createFromForm(): any {

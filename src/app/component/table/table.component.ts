@@ -1,10 +1,10 @@
 import { HttpResponse } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output, TemplateRef } from '@angular/core';
-import { UntypedFormGroup } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { IHeader, InputTypeEnum } from './table.models';
 import { IResponse } from 'src/app/models/response.models';
-import { IListItem } from 'src/app/models/list.models';
+import { IInput } from '../filter/filter.models';
 
 @Component({
     selector: 'app-table',
@@ -13,15 +13,14 @@ import { IListItem } from 'src/app/models/list.models';
 })
 export class TableComponent implements OnInit {
 
-    @Output() search: EventEmitter<any> = new EventEmitter();
     @Input() queryItems!: (req?: any) => Observable<HttpResponse<IResponse>>;
     @Input() headers: IHeader[] = [];
-    @Input() myForm!: UntypedFormGroup;
+    @Input() filterInputs: IInput[] = [];
+    @Input() myForm!: FormGroup;
     @Input() sort!: string[];
     @Input() hasButtons: boolean = false;
     @Input() page: number = 1;
     @Input() bodyTemplate!: TemplateRef<any>;
-    @Input() itemsAutocomplete!: IListItem[];
 
     totalPages: number = 0;
     items: any[] = [];
@@ -39,9 +38,9 @@ export class TableComponent implements OnInit {
             this.sort = $event.sort;            
         }
         let filters: { [index: string]: [string] } = {};
-        this.headers.forEach(header => {
-            if (header.inputName && this.myForm.get(header.inputName)!.value) {
-                filters[header.inputName] = [this.myForm.get(header.inputName)!.value];
+        this.filterInputs.forEach(fi => {
+            if (fi.name && this.myForm.get(fi.name)!.value) {
+                filters[fi.name] = [this.myForm.get(fi.name)!.value];
             }
         });
 
@@ -60,7 +59,4 @@ export class TableComponent implements OnInit {
         );
     }
 
-    onSearch(event: any): void {
-        this.search.emit(event);
-    }
 }
