@@ -16,6 +16,8 @@ export class FilterComponent {
 
     inputType: any = InputTypeEnum;
 
+    isCollapsed = false;
+
     constructor() { }
 
     onClear(): void {

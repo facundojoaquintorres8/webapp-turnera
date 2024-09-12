@@ -1,9 +1,18 @@
-<form name="myFormFilter" role="form" novalidate (ngSubmit)="onSubmit()" [formGroup]="myFormFilter" class="mb-2">
+<div class="d-flex justify-content-end">
+    <i class="bi bi-funnel text-primary pointer h4 me-2" (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed"
+    placement="left" ngbTooltip="Mostrar/Ocultar filtros"></i>
+</div>
+
+<form name="myFormFilter" role="form" novalidate (ngSubmit)="onSubmit()" [formGroup]="myFormFilter" class="mb-2"
+    #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
     <div class="row">
 
         <div class="col-lg-{{input.width}}" *ngFor="let input of filterInputs" [ngSwitch]="input.type">
             <div class="mb-3" >
-                <label [class.required]="input.required">{{ input.label }}</label>
+                <label [class.required]="input.required">
+                    {{ input.label }} 
+                    <i *ngIf="input.tooltip" class="bi bi-info-circle" placement="top" ngbTooltip="{{input.tooltip}}"></i>
+                </label>
 
                 <ng-select *ngSwitchCase="inputType.AUTOCOMPLETE" [items]="input.itemList" bindLabel="value" bindValue="id"
                     notFoundText="Sin items" clearAllText="Limpiar" (change)="onSubmit()" (search)="onSearch(input, $event)"

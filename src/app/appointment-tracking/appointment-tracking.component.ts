@@ -80,7 +80,7 @@ export class AppointmentTrackingComponent implements OnInit {
       { label: 'Tipo Recurso', type: InputTypeEnum.AUTOCOMPLETE, name: 'resourceTypeId', width: 4, onSearch: (search) => this.getResourcesTypes(search) },
       { label: 'Desde', type: InputTypeEnum.DATE, name: 'from', width: 2, required: true, maxDate: this.myFormFilter.get(['to'])!.value },
       { label: 'Hasta', type: InputTypeEnum.DATE, name: 'to', width: 2, required: true, minDate: this.myFormFilter.get(['from'])!.value },
-      { label: 'Cliente', type: InputTypeEnum.AUTOCOMPLETE, name: 'customerId', width: 6, onSearch: (search) => this.getCustomers(search) },
+      { label: 'Cliente', type: InputTypeEnum.AUTOCOMPLETE, name: 'customerId', width: 6, onSearch: (search) => this.getCustomers(search), tooltip: 'Buscar por Razón Social, CUIT, email o teléfono.' },
       { label: 'Último Estado', type: InputTypeEnum.LIST, name: 'status', width: 2, itemList: this.appointmentStatusList }
     ];
 
