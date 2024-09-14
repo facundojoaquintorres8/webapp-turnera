@@ -1,5 +1,5 @@
 <div class="d-flex justify-content-end">
-    <i class="bi bi-funnel text-primary pointer h4 me-2" (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed"
+    <i class="bi bi-funnel-fill text-primary pointer h4 me-2" (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed"
     placement="left" ngbTooltip="Mostrar/Ocultar filtros"></i>
 </div>
 
@@ -9,9 +9,9 @@
 
         <div class="col-lg-{{input.width}}" *ngFor="let input of filterInputs" [ngSwitch]="input.type">
             <div class="mb-3" >
-                <label [class.required]="input.required">
+                <label [class.required]="input.required" for="{{input.name}}">
                     {{ input.label }} 
-                    <i *ngIf="input.tooltip" class="bi bi-info-circle" placement="top" ngbTooltip="{{input.tooltip}}"></i>
+                    <i *ngIf="input.tooltip" class="bi bi-info-circle-fill text-primary" placement="top" ngbTooltip="{{input.tooltip}}"></i>
                 </label>
 
                 <ng-select *ngSwitchCase="inputType.AUTOCOMPLETE" [items]="input.itemList" bindLabel="value" bindValue="id"

@@ -151,14 +151,16 @@ export class AppointmentTrackingComponent implements OnInit {
   }
   
   clear(): void {
-    // TODO: revisar que llama 5 veces, no debería llamar ninguna
-    this.myFormFilter.reset(); //2
-    this.myFormFilter.get('from')?.setValue(formatNgbDateStructFromDate(this.today)); //1
-    this.myFormFilter.get('to')?.setValue(formatNgbDateStructFromDate(this.lastDayMonth)); //1
-    
+    this.myFormFilter.get('resourceId')?.setValue(null);
+    this.myFormFilter.get('resourceTypeId')?.setValue(null);
+    this.myFormFilter.get('customerId')?.setValue(null);
+    this.myFormFilter.get('status')?.setValue(null);
+    this.myFormFilter.get('from')?.setValue(formatNgbDateStructFromDate(this.today), { emitEvent: false, emitViewToModelChange: false  });
+    this.myFormFilter.get('to')?.setValue(formatNgbDateStructFromDate(this.lastDayMonth), { emitEvent: false, emitViewToModelChange: false });
+
     this.updateLimitsToDates();
 
-    this.tableComponent.executeQuery({ page: 1 }); //1
+    this.tableComponent.executeQuery({ page: 1 });
   }
 
   private updateLimitsToDates(): void {
