@@ -40,7 +40,7 @@ export class BookAppointmentComponent implements OnInit {
       (res: HttpResponse<IResponse>) => {
         this.customers = res.body?.data.content.map(
           (c: ICustomer) => {
-            c.fullName = c.businessName + ' ' + c.cuit
+            c.fullName = `${c.businessName} ${c.cuit ? c.cuit: ''}`
             return c;
           }
         ) || [];

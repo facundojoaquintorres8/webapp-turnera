@@ -20,8 +20,7 @@ export class DetailResourceComponent implements OnInit {
   ngOnInit(): void {
     const id = this.activatedRoute.snapshot.paramMap.get("id");
     if (id) {
-      this.resource.id = parseInt(id);
-      this.resourceService.find(this.resource.id).subscribe(
+      this.resourceService.find(parseInt(id)).subscribe(
         (res: HttpResponse<IResponse>) =>  this.resource = res.body?.data
       );
     }
