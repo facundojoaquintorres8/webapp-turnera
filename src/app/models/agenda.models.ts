@@ -1,4 +1,5 @@
 import { IAppointment } from "./appointment.model";
+import { IListItem } from "./list.models";
 import { IResource } from "./resource.models";
 import { IResourceType } from "./resourceType.models";
 
@@ -38,3 +39,5 @@ export enum RepeatTypeEnum {
   WEEKLY = 'Semana',
   MONTHLY = 'Mes'
 }
+
+export const RepeatTypeToListItem: IListItem[] = Object.entries(RepeatTypeEnum).map(([id, value]) => ({ id, value }));

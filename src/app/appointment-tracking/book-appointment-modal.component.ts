@@ -18,7 +18,7 @@ export class BookAppointmentComponent implements OnInit {
   isSaving = false;
   agenda!: IAgenda;
 
-  customers!: ICustomer[];
+  customers: ICustomer[] = [];
   showSelectCustomers: boolean = true;
 
   myForm = this.fb.group({
@@ -38,7 +38,12 @@ export class BookAppointmentComponent implements OnInit {
   ngOnInit(): void {
     this.customerService.findAllByFilter({ active: true }).subscribe(
       (res: HttpResponse<IResponse>) => {
-        this.customers = res.body?.data.content || [];
+        this.customers = res.body?.data.content.map(
+          (c: ICustomer) => {
+            c.fullName = c.businessName + ' ' + c.cuit
+            return c;
+          }
+        ) || [];
       }
     )
   }

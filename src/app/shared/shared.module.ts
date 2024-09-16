@@ -18,6 +18,7 @@ import { FilterComponent } from '../component/filter/filter.component';
         NgbModule,
         ReactiveFormsModule,
         PermissionModule,
+        NgSelectModule,
         TableComponent,
         PaginateComponent,
         ObservationModalComponent,

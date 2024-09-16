@@ -26,11 +26,9 @@
             <div class="col-lg-4">
                 <div class="mb-3">
                     <label class="required" for="resourcesTypes">Tipos de Recursos</label>
-                    <select multiple name="resourcesTypes" id="resourcesTypes" formControlName="resourcesTypes" [compareWith]="compareFun">
-                        <option *ngFor="let resourceType of resourcesTypes" [ngValue]="resourceType">
-                            {{ resourceType.description }}
-                        </option>
-                    </select>
+                    <ng-select [multiple]="true" [items]="resourcesTypes" [compareWith]="compareFun" bindLabel="description"
+                        notFoundText="Sin items" clearAllText="Limpiar" id="resourcesTypes" formControlName="resourcesTypes">
+                    </ng-select>
                     <div
                         *ngIf="myForm.get('resourcesTypes')!.invalid && (myForm.get('resourcesTypes')!.dirty || myForm.get('resourcesTypes')!.touched)">
                         <small class="form-text text-danger" *ngIf="myForm.get('resourcesTypes')?.errors?.required">

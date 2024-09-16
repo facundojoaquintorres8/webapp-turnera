@@ -16,7 +16,7 @@ import { IResponse } from '../models/response.models';
 export class UpdateResourceComponent implements OnInit {
   isSaving = false;
 
-  resourcesTypes!: IResourceType[];
+  resourcesTypes: IResourceType[] = [];
 
   myForm = this.fb.group({
     id: [0],

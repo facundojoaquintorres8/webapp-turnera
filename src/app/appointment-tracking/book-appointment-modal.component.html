@@ -8,16 +8,14 @@
         <div class="row" *ngIf="showSelectCustomers">
             <div class="col-lg-12">
                 <div class="mb-3">
-                    <label class="required" for="customer">
+                    <label class="required mb-1" for="customer">
                         <button *hasPermission="['customers.write']" type="button" (click)="newCustomer()" class="btn btn-primary btn-icon" title="Agregar nuevo">
                             <i class="bi bi-plus-lg"></i>
                         </button> Cliente
                     </label>
-                    <select class="form-control" name="customer" id="customer" formControlName="customer">
-                        <option [ngValue]="customer" *ngFor="let customer of customers">
-                            {{ customer.businessName }} {{ customer.cuit }}
-                        </option>
-                    </select>
+                    <ng-select [items]="customers" bindLabel="fullName" notFoundText="Sin items" clearAllText="Limpiar" id="customer"
+                        formControlName="customer">
+                    </ng-select>
                     <div
                         *ngIf="myForm.get('customer')!.invalid && (myForm.get('customer')!.dirty || myForm.get('customer')!.touched)">
                         <small class="form-text text-danger" *ngIf="myForm.get('customer')?.errors?.required">

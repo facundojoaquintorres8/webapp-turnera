@@ -25,12 +25,6 @@ export interface IAppointmentStatus {
 }
 
 export enum AppointmentStatusEnum {
-    // FREE,
-    // BOOKED,
-    // ABSENT,
-    // CANCELLED,
-    // IN_ATTENTION,
-    // FINALIZED
     FREE = 'Libre',
     BOOKED = 'Reservado',
     ABSENT = 'Ausente',

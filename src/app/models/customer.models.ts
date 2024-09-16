@@ -9,6 +9,7 @@ export interface ICustomer {
   phone1: string;
   phone2?: string;
   address?: string;
+  fullName?: string; // businessName + cuit
 }
 
 export interface IQuickCustomer {

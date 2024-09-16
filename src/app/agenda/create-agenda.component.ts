@@ -3,7 +3,7 @@ import { HttpResponse } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { AgendaService } from './agenda.service';
-import { ISaveAgenda, RepeatTypeEnum } from '../models/agenda.models';
+import { ISaveAgenda, RepeatTypeEnum, RepeatTypeToListItem } from '../models/agenda.models';
 import { IResource } from '../models/resource.models';
 import { ResourceService } from '../resource/resource.service';
 import { formatDateFromNgbDateStruct, formatTimeFromNgbTimeStruct } from '../shared/date-format';
@@ -12,6 +12,7 @@ import moment from 'moment';
 import * as momentTimeZone from 'moment-timezone';
 import { IResponse } from '../models/response.models';
 import { IResourceType } from '../models/resourceType.models';
+import { IListItem } from '../models/list.models';
 
 @Component({
   selector: 'app-create-agenda',
@@ -23,7 +24,7 @@ export class CreateAgendaComponent implements OnInit {
 
   resources!: IResource[];
   resourcesTypes!: IResourceType[] | null;
-  repeatTypes: any = RepeatTypeEnum;
+  repeatTypesList: IListItem[] = RepeatTypeToListItem;
   showDaysOfWeek!: boolean;
   dayOfTheMonthText!: string;
 
@@ -83,6 +84,9 @@ export class CreateAgendaComponent implements OnInit {
       } else {
         this.myForm.get('resourceType')?.setValue(null);
       }
+    } else {
+      this.myForm.get('resourceType')?.setValue(null);
+      this.myForm.get('resourceType')!.disable();
     }
   }
 
