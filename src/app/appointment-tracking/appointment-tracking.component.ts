@@ -8,7 +8,7 @@ import { DesactivateAgendaModalComponent } from '../agenda/desactivate-agenda-mo
 import { AuthService } from '../auth/auth.service';
 import { ObservationModalComponent } from '../component/observation-modal/observation-modal.component';
 import { TableComponent } from '../component/table/table.component';
-import { IHeader, InputTypeEnum } from '../component/table/table.models';
+import { IHeader } from '../component/table/table.models';
 import { CustomerService } from '../customer/customer.service';
 import { IAgenda } from '../models/agenda.models';
 import { AppointmentStatusEnum, AppointmentStatusToListItem, IAppointment } from '../models/appointment.model';
@@ -26,7 +26,7 @@ import { BookAppointmentComponent } from './book-appointment-modal.component';
 import { CancelAppointmentModalComponent } from './cancel-appointment-modal.component';
 import { FinalizeAppointmentModalComponent } from './finalize-appointment-modal.component';
 import { IResponse } from '../models/response.models';
-import { IInput } from '../component/filter/filter.models';
+import { IInput, InputTypeEnum } from '../component/filter/filter.models';
 import { map } from 'rxjs/operators';
 
 @Component({
@@ -49,13 +49,12 @@ export class AppointmentTrackingComponent implements OnInit {
   today: Date = this.agendaService.viewDate;
   lastDayMonth: Date = new Date(this.today.getFullYear(), this.today.getMonth() + 1, 0);
 
-
   headers!: IHeader[];
   sort: string[] = ['ASC', 'startDate'];
 
   filterInputs!: IInput[];
 
-  myFormFilter = this.fb.group({
+  myForm = this.fb.group({
     resourceId: [null],
     resourceTypeId: [null],
     customerId: [null],
@@ -78,18 +77,18 @@ export class AppointmentTrackingComponent implements OnInit {
     this.filterInputs = [
       { label: 'Recurso', type: InputTypeEnum.AUTOCOMPLETE, name: 'resourceId', width: 4, onSearch: (search) => this.getResources(search) },
       { label: 'Tipo Recurso', type: InputTypeEnum.AUTOCOMPLETE, name: 'resourceTypeId', width: 4, onSearch: (search) => this.getResourcesTypes(search) },
-      { label: 'Desde', type: InputTypeEnum.DATE, name: 'from', width: 2, required: true, maxDate: this.myFormFilter.get(['to'])!.value },
-      { label: 'Hasta', type: InputTypeEnum.DATE, name: 'to', width: 2, required: true, minDate: this.myFormFilter.get(['from'])!.value },
+      { label: 'Desde', type: InputTypeEnum.DATE, name: 'from', width: 2, required: true, maxDate: this.myForm.get(['to'])!.value },
+      { label: 'Hasta', type: InputTypeEnum.DATE, name: 'to', width: 2, required: true, minDate: this.myForm.get(['from'])!.value },
       { label: 'Cliente', type: InputTypeEnum.AUTOCOMPLETE, name: 'customerId', width: 6, onSearch: (search) => this.getCustomers(search), tooltip: 'Buscar por Razón Social, CUIT, email o teléfono.' },
       { label: 'Último Estado', type: InputTypeEnum.LIST, name: 'status', width: 2, itemList: this.appointmentStatusList }
     ];
 
     this.headers = [
-      { label: 'Recurso', inputType: InputTypeEnum.TEXT, inputName: 'resourceDescription', sort: true },
-      { label: 'Inicio', inputType: InputTypeEnum.DATE, inputName: 'startDate', sort: true },
-      { label: 'Fin', inputType: InputTypeEnum.DATE, inputName: 'endDate', sort: true },
-      { label: 'Cliente', inputType: InputTypeEnum.TEXT, inputName: 'customerBusinessName', sort: false },
-      { label: 'Último Estado', inputType: InputTypeEnum.LIST, inputName: 'status', sort: false, itemList: this.appointmentStatusList }
+      { label: 'Recurso', colName: 'resourceDescription', canSort: true },
+      { label: 'Inicio',colName: 'startDate', canSort: true },
+      { label: 'Fin', colName: 'endDate', canSort: true },
+      { label: 'Cliente', colName: 'customerBusinessName', canSort: false },
+      { label: 'Último Estado', colName: 'status', canSort: false }
     ];
 
     this.permissions = this.authService.getPermissions();
@@ -151,32 +150,16 @@ export class AppointmentTrackingComponent implements OnInit {
   }
   
   clear(): void {
-    this.myFormFilter.get('resourceId')?.setValue(null);
-    this.myFormFilter.get('resourceTypeId')?.setValue(null);
-    this.myFormFilter.get('customerId')?.setValue(null);
-    this.myFormFilter.get('status')?.setValue(null);
-    this.myFormFilter.get('from')?.setValue(formatNgbDateStructFromDate(this.today), { emitEvent: false, emitViewToModelChange: false  });
-    this.myFormFilter.get('to')?.setValue(formatNgbDateStructFromDate(this.lastDayMonth), { emitEvent: false, emitViewToModelChange: false });
+    this.myForm.get('resourceId')?.setValue(null);
+    this.myForm.get('resourceTypeId')?.setValue(null);
+    this.myForm.get('customerId')?.setValue(null);
+    this.myForm.get('status')?.setValue(null);
+    this.myForm.get('from')?.setValue(formatNgbDateStructFromDate(this.today), { emitEvent: false, emitViewToModelChange: false  });
+    this.myForm.get('to')?.setValue(formatNgbDateStructFromDate(this.lastDayMonth), { emitEvent: false, emitViewToModelChange: false });
 
     this.updateLimitsToDates();
 
     this.tableComponent.executeQuery({ page: 1 });
-  }
-
-  private updateLimitsToDates(): void {
-    this.filterInputs.find(f => f.name === 'from')!.maxDate = this.myFormFilter.get(['to'])!.value;
-    this.filterInputs.find(f => f.name === 'to')!.minDate = this.myFormFilter.get(['from'])!.value;
-  }
-
-  private createFromForm(): any {
-    return {
-      resourceTypeId: this.myFormFilter.get(['resourceTypeId'])!.value,
-      resourceId: this.myFormFilter.get(['resourceId'])!.value,
-      customerId: this.myFormFilter.get(['customerId'])!.value,
-      from: formatDateFromNgbDateStruct(this.myFormFilter.get(['from'])!.value),
-      to: formatDateFromNgbDateStruct(this.myFormFilter.get(['to'])!.value),
-      active: true,
-    };
   }
 
   appointmentStatusColor(lastAppointment: IAppointment): string {
@@ -346,5 +329,21 @@ export class AppointmentTrackingComponent implements OnInit {
         this.ngbModalRef = undefined;
       }
     );
+  }
+  
+  private updateLimitsToDates(): void {
+    this.filterInputs.find(f => f.name === 'from')!.maxDate = this.myForm.get(['to'])!.value;
+    this.filterInputs.find(f => f.name === 'to')!.minDate = this.myForm.get(['from'])!.value;
+  }
+
+  private createFromForm(): any {
+    return {
+      resourceTypeId: this.myForm.get(['resourceTypeId'])!.value,
+      resourceId: this.myForm.get(['resourceId'])!.value,
+      customerId: this.myForm.get(['customerId'])!.value,
+      from: formatDateFromNgbDateStruct(this.myForm.get(['from'])!.value),
+      to: formatDateFromNgbDateStruct(this.myForm.get(['to'])!.value),
+      active: true,
+    };
   }
 }

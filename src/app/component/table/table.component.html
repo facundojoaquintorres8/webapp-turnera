@@ -13,8 +13,15 @@
 <ng-template #defaultHeader>
     <tr>
         <th scope="col" *ngFor="let header of headers">
-            <app-table-header [header]="header" [sort]="sort" [myForm]="myForm" (executeQuery)="executeQuery($event)">
-            </app-table-header>
+            <div class="d-flex justify-content-between" [class.pointer]="header.canSort"
+                (click)="header.canSort ? onSortChange(header.colName) : null">
+                {{ header.label}}
+                <small class="ms-1" *ngIf="header.canSort">
+                    <i class="bi bi-sort-alpha-down" *ngIf="sort[0] === 'DESC' && sort[1] === header.colName"></i>
+                    <i class="bi bi-sort-alpha-up-alt" *ngIf="sort[0] === 'ASC' && sort[1] === header.colName"></i>
+                    <i class="bi bi-sort-down" *ngIf="sort[1] !== header.colName"></i>
+                </small>
+            </div>
         </th>
         <th scope="col" *ngIf="hasButtons"></th>
     </tr>

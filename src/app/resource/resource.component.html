@@ -6,7 +6,10 @@
     </button> Recursos
   </h2>
 
-  <app-table [headers]="headers" [bodyTemplate]="customBody" [myForm]="myForm" [sort]="sort" [hasButtons]="true" [queryItems]="query" #tableComponent>
+  <app-filter [filterInputs]="filterInputs" [myForm]="myForm" (submit)="getItems()" (clear)="clear()"></app-filter>
+
+  <app-table [headers]="headers" [bodyTemplate]="customBody" [myForm]="myForm" [sort]="sort" [hasButtons]="true"
+    [filterInputs]="filterInputs" [queryItems]="query" #tableComponent>
 
     <ng-template #customBody let-items>
       <tr *ngFor="let resource of items">

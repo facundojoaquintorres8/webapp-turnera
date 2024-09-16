@@ -3,7 +3,7 @@
     placement="left" ngbTooltip="Mostrar/Ocultar filtros"></i>
 </div>
 
-<form name="myFormFilter" role="form" novalidate (ngSubmit)="onSubmit()" [formGroup]="myFormFilter" class="mb-2"
+<form name="myForm" role="form" novalidate (ngSubmit)="onSubmit()" [formGroup]="myForm" class="mb-2"
     #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed">
     <div class="row">
 
@@ -13,6 +13,9 @@
                     {{ input.label }} 
                     <i *ngIf="input.tooltip" class="bi bi-info-circle-fill text-primary" placement="top" ngbTooltip="{{input.tooltip}}"></i>
                 </label>
+
+                <input *ngSwitchCase="inputType.TEXT" type="text" class="form-control" name="{{input.name}}" id="{{input.name}}"
+                    formControlName="{{input.name}}" (keyup)="onSubmit()" />
 
                 <ng-select *ngSwitchCase="inputType.AUTOCOMPLETE" [items]="input.itemList" bindLabel="value" bindValue="id"
                     notFoundText="Sin items" clearAllText="Limpiar" (change)="onSubmit()" (search)="onSearch(input, $event)"
@@ -35,8 +38,8 @@
                     </div>
                 </div>
 
-                <div *ngIf="myFormFilter.get(input.name)!.invalid && (myFormFilter.get(input.name)!.dirty || myFormFilter.get(input.name)!.touched)">
-                    <small class="form-text text-danger" *ngIf="myFormFilter.get(input.name)?.errors?.required">
+                <div *ngIf="myForm.get(input.name)!.invalid && (myForm.get(input.name)!.dirty || myForm.get(input.name)!.touched)">
+                    <small class="form-text text-danger" *ngIf="myForm.get(input.name)?.errors?.required">
                         El campo es requerido.
                     </small>
                 </div>

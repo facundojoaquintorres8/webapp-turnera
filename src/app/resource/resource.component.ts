@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { TableComponent } from '../component/table/table.component';
-import { IHeader, InputTypeEnum } from '../component/table/table.models';
+import { IHeader } from '../component/table/table.models';
 import { IResource } from '../models/resource.models';
 import { DeleteResourceModalComponent } from './delete-resource-modal.component';
 import { ResourceService } from './resource.service';
@@ -12,6 +12,8 @@ import { IResponse } from '../models/response.models';
 import { IResourceType } from '../models/resourceType.models';
 import { IListItem } from '../models/list.models';
 import { map } from 'rxjs/operators';
+import { IInput, InputTypeEnum } from '../component/filter/filter.models';
+import { getListToBoolean } from '../shared/generic-util';
 
 @Component({
   selector: 'app-resource',
@@ -23,12 +25,16 @@ export class ResourceComponent implements OnInit {
 
   headers!: IHeader[];
   sort: string[] = ['ASC', 'description'];
+
+  filterInputs!: IInput[];
+
   myForm = this.fb.group({
     description: [null],
     code: [null],
     resourceTypeId: [null],
     active: [null],
   });
+
   resourcesTypes!: IListItem[];
 
   constructor(
@@ -39,15 +45,31 @@ export class ResourceComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.filterInputs = [
+      { label: 'Descripción', type: InputTypeEnum.TEXT, name: 'description', width: 4 },
+      { label: 'Código', type: InputTypeEnum.TEXT, name: 'code', width: 4 },
+      { label: 'Tipo de Recurso', type: InputTypeEnum.AUTOCOMPLETE, name: 'resourceTypeId', width: 4, onSearch: (search) => this.getResourcesTypes(search) },
+      { label: 'Activos', type: InputTypeEnum.LIST, name: 'active', width: 2, itemList: getListToBoolean() },
+    ];
+
     this.headers = [
-      { label: 'Descripción', inputType: InputTypeEnum.TEXT, inputName: 'description', sort: true },
-      { label: 'Código', inputType: InputTypeEnum.TEXT, inputName: 'code', sort: true },
-      { label: 'Tipo de Recurso', inputType: InputTypeEnum.AUTOCOMPLETE, inputName: 'resourceTypeId', sort: false },
-      { label: 'Activo', inputType: InputTypeEnum.BOOLEAN, inputName: 'active', sort: false }
+      { label: 'Descripción', colName: 'description', canSort: true },
+      { label: 'Código', colName: 'code', canSort: true },
+      { label: 'Tipo de Recurso', colName: 'resourceTypeId', canSort: false },
+      { label: 'Activo', colName: 'active', canSort: true }
     ];
   }
 
   query = (req?: any) => this.resourceService.findAllByFilter(req);
+
+  getItems(): void {
+    this.tableComponent.executeQuery({ page: 1 });
+  }
+
+  clear(): void {
+    this.myForm.reset();
+    this.tableComponent.executeQuery({ page: 1 });
+  }
 
   getResourcesTypes(search: { term: string }) {
     if (search.term && search.term.length > 2) {
@@ -59,6 +81,7 @@ export class ResourceComponent implements OnInit {
         .subscribe(
           (res: any) => {
             this.resourcesTypes = res || [];
+            this.filterInputs.find(f => f.name === 'resourceTypeId')!.itemList = this.resourcesTypes;
           }
         )
     }

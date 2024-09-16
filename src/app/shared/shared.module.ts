@@ -5,13 +5,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PermissionModule } from '../security/permission.module';
 import { TableComponent } from '../component/table/table.component';
 import { PaginateComponent } from '../component/table/paginated.component';
-import { TableHeaderComponent } from '../component/table/table-header.component';
 import { ObservationModalComponent } from '../component/observation-modal/observation-modal.component';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { FilterComponent } from '../component/filter/filter.component';
 
 @NgModule({
-    declarations: [TableComponent, TableHeaderComponent, PaginateComponent, ObservationModalComponent, FilterComponent],
+    declarations: [TableComponent, PaginateComponent, ObservationModalComponent, FilterComponent],
     imports: [CommonModule, PermissionModule, ReactiveFormsModule, NgbModule, NgSelectModule],
     exports: [
         FormsModule,
@@ -20,7 +19,6 @@ import { FilterComponent } from '../component/filter/filter.component';
         ReactiveFormsModule,
         PermissionModule,
         TableComponent,
-        TableHeaderComponent,
         PaginateComponent,
         ObservationModalComponent,
         FilterComponent,

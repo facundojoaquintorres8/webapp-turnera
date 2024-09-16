@@ -18,24 +18,24 @@
                 href="/customers"><i class="bi bi-people"></i> <span>Clientes</span></a>
         </li>
         <li class="sidebar-item">
-            <a *hasPermission="['resources.read']" class="sidebar-link" [class.text-truncate]="expandedSidebar"
-                href="/resources"><i class="bi bi-tools"></i> <span>Recursos</span></a>
-        </li>
-        <li class="sidebar-item">
             <a *hasPermission="['resourcesTypes.read']" class="sidebar-link" [class.text-truncate]="expandedSidebar"
                 href="/resources-types"><i class="bi bi-tools"></i> <span>Tipos de Recursos</span></a>
+        </li>
+        <li class="sidebar-item">
+            <a *hasPermission="['resources.read']" class="sidebar-link" [class.text-truncate]="expandedSidebar"
+                href="/resources"><i class="bi bi-tools"></i> <span>Recursos</span></a>
         </li>
         <li class="sidebar-item">
             <a *hasPermission="['holidays.read']" class="sidebar-link" [class.text-truncate]="expandedSidebar"
                 href="/holidays"><i class="bi bi-calendar-x"></i> <span>Feriados</span></a>
         </li>
         <li class="sidebar-item border-desktop">
-            <a *hasPermission="['users.read']" class="sidebar-link" [class.text-truncate]="expandedSidebar"
-                href="/users"><i class="bi bi-person-workspace"></i> <span>Usuarios</span></a>
-        </li>
-        <li class="sidebar-item">
             <a *hasPermission="['profiles.read']" class="sidebar-link" [class.text-truncate]="expandedSidebar"
                 href="/profiles"><i class="bi bi-person-gear"></i> <span>Perfiles</span></a>
+        </li>
+        <li class="sidebar-item">
+            <a *hasPermission="['users.read']" class="sidebar-link" [class.text-truncate]="expandedSidebar"
+                href="/users"><i class="bi bi-person-workspace"></i> <span>Usuarios</span></a>
         </li>
         <li class="sidebar-item">
             <a *hasPermission="['organizations.read']" class="sidebar-link" [class.text-truncate]="expandedSidebar"

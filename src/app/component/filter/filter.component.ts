@@ -10,7 +10,7 @@ export class FilterComponent {
 
     @Output() submit: EventEmitter<void> = new EventEmitter();
     @Output() clear: EventEmitter<void> = new EventEmitter();
-    @Input() myFormFilter!: FormGroup;
+    @Input() myForm!: FormGroup;
     @Input() filterInputs!: IInput[];
     @Input() isSearching!: boolean;
 

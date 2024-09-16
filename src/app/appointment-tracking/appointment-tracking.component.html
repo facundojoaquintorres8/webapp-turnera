@@ -1,9 +1,9 @@
 <div class="container-fluid">
   <h2>Seguimiento de Turnos</h2>
 
-  <app-filter [filterInputs]="filterInputs" [myFormFilter]="myFormFilter" (submit)="getAgendas()" (clear)="clear()"></app-filter>
+  <app-filter [filterInputs]="filterInputs" [myForm]="myForm" (submit)="getAgendas()" (clear)="clear()"></app-filter>
 
-  <app-table [headers]="headers" [bodyTemplate]="customBody" [myForm]="myFormFilter" [sort]="sort" [hasButtons]="true"
+  <app-table [headers]="headers" [bodyTemplate]="customBody" [myForm]="myForm" [sort]="sort" [hasButtons]="true"
     [filterInputs]="filterInputs" [queryItems]="query" #tableComponent>
 
     <ng-template #customBody let-items>

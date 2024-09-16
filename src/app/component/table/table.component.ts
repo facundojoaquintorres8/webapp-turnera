@@ -1,8 +1,8 @@
 import { HttpResponse } from '@angular/common/http';
-import { Component, EventEmitter, Input, OnInit, Output, TemplateRef } from '@angular/core';
+import { Component, Input, OnInit, TemplateRef } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { IHeader, InputTypeEnum } from './table.models';
+import { IHeader } from './table.models';
 import { IResponse } from 'src/app/models/response.models';
 import { IInput } from '../filter/filter.models';
 
@@ -15,16 +15,15 @@ export class TableComponent implements OnInit {
 
     @Input() queryItems!: (req?: any) => Observable<HttpResponse<IResponse>>;
     @Input() headers: IHeader[] = [];
-    @Input() filterInputs: IInput[] = [];
     @Input() myForm!: FormGroup;
     @Input() sort!: string[];
     @Input() hasButtons: boolean = false;
     @Input() page: number = 1;
     @Input() bodyTemplate!: TemplateRef<any>;
+    @Input() filterInputs: IInput[] = [];
 
     totalPages: number = 0;
     items: any[] = [];
-    inputType: any = InputTypeEnum;
 
     constructor() {}
 
@@ -57,6 +56,17 @@ export class TableComponent implements OnInit {
                 this.totalPages
             }
         );
+    }
+
+    onSortChange(colName: string): void {
+        let order = 'ASC';
+        if (this.sort[1] === colName) {
+            if (this.sort[0] !== 'DESC') {
+                order = 'DESC';
+            }
+        }
+        this.sort = [order, colName];
+        this.executeQuery({ page: 1, sort: this.sort });
     }
 
 }

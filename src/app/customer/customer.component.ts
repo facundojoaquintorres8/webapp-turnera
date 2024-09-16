@@ -4,8 +4,10 @@ import { DeleteCustomerModalComponent } from './delete-customer-modal.component'
 import { CustomerService } from './customer.service';
 import { ICustomer } from '../models/customer.models';
 import { FormBuilder } from '@angular/forms';
-import { IHeader, InputTypeEnum } from '../component/table/table.models';
+import { IHeader } from '../component/table/table.models';
 import { TableComponent } from '../component/table/table.component';
+import { IInput, InputTypeEnum } from '../component/filter/filter.models';
+import { getListToBoolean } from '../shared/generic-util';
 
 @Component({
   selector: 'app-customer',
@@ -17,6 +19,9 @@ export class CustomerComponent implements OnInit {
 
   headers!: IHeader[];
   sort: string[] = ['ASC', 'businessName'];
+
+  filterInputs!: IInput[];
+
   myForm = this.fb.group({
     businessName: [null],
     brandName: [null],
@@ -32,16 +37,33 @@ export class CustomerComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.filterInputs = [
+      { label: 'Razón Social', type: InputTypeEnum.TEXT, name: 'businessName', width: 4 },
+      { label: 'Marca', type: InputTypeEnum.TEXT, name: 'brandName', width: 4 },
+      { label: 'Correo Electrónico', type: InputTypeEnum.TEXT, name: 'email', width: 4 },
+      { label: 'Teléfono 1', type: InputTypeEnum.TEXT, name: 'phone1', width: 4 },
+      { label: 'Activos', type: InputTypeEnum.LIST, name: 'active', width: 2, itemList: getListToBoolean() },
+    ];
+
     this.headers = [
-      { label: 'Razón Social', inputType: InputTypeEnum.TEXT, inputName: 'businessName', sort: true },
-      { label: 'Marca', inputType: InputTypeEnum.TEXT, inputName: 'brandName', sort: true },
-      { label: 'Correo Electrónico', inputType: InputTypeEnum.TEXT, inputName: 'email', sort: true },
-      { label: 'Teléfono 1', inputType: InputTypeEnum.TEXT, inputName: 'phone1', sort: true },
-      { label: 'Activo', inputType: InputTypeEnum.BOOLEAN, inputName: 'active', sort: false }
+      { label: 'Razón Social', colName: 'businessName', canSort: true },
+      { label: 'Marca', colName: 'brandName', canSort: true },
+      { label: 'Correo Electrónico', colName: 'email', canSort: true },
+      { label: 'Teléfono 1', colName: 'phone1', canSort: true },
+      { label: 'Activo', colName: 'active', canSort: true }
     ];
   }
 
   query = (req?: any) => this.customerService.findAllByFilter(req);
+
+  getItems(): void {
+    this.tableComponent.executeQuery({ page: 1 });
+  }
+
+  clear(): void {
+    this.myForm.reset();
+    this.tableComponent.executeQuery({ page: 1 });
+  }
 
   delete(customer: ICustomer): void {
     this.ngbModalRef = this.modalService.open(DeleteCustomerModalComponent, { size: 'lg', backdrop: 'static' });
