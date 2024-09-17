@@ -1,4 +1,4 @@
-<form *ngIf="agenda" name="desactivateForm" (ngSubmit)="confirmDesactivate(agenda.id!)">
+<form *ngIf="agenda" name="activateForm" (ngSubmit)="confirmActivate(agenda.id!)">
     <div class="modal-header">
         <h4 class="modal-title">Confirmar operación</h4>
         <button type="button" class="btn-close" (click)="cancel()" title="Cancelar"></button>
@@ -6,7 +6,7 @@
 
     <div class="modal-body">
         <p>
-            ¿Está seguro que desea desactivar la Disponibilidad <strong>{{ agenda.startDate | date: 'dd/MM/yyyy HH:mm' }} - {{ agenda.resource.description }}</strong>?
+            ¿Está seguro que desea activar la Disponibilidad <strong>{{ agenda.startDate | date: 'dd/MM/yyyy HH:mm' }} - {{ agenda.resource.description }}</strong>?
         </p>
     </div>
 
@@ -15,8 +15,8 @@
             <i class="bi bi-ban"></i>&nbsp;Cancelar
         </button>
 
-        <button type="submit" class="btn btn-danger" title="Desactivar">
-            <i class="bi bi-calendar-x"></i>&nbsp;Desactivar
+        <button type="submit" class="btn btn-primary" title="Activar">
+            <i class="bi bi-calendar-plus"></i>&nbsp;Activar
         </button>
     </div>
 </form>

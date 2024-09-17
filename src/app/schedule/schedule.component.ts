@@ -229,6 +229,8 @@ export class ScheduleComponent implements OnInit {
       && checkPermission(this.permissions, ['agendas.write']);
   }
 
+  // TOOD: si dejo calendario, agregar activar
+
   book(): void {
     this.ngbModalRef = this.modalService.open(BookAppointmentComponent, { size: 'lg', backdrop: 'static' });
     this.ngbModalRef.componentInstance.agenda = this.agendaSelected!;

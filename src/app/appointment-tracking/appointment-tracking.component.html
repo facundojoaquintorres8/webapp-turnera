@@ -59,6 +59,11 @@
             class="btn btn-danger btn-icon ms-1" title="Desactivar disponibilidad">
             <i class="bi bi-calendar-x"></i>
           </button>
+
+          <button type="button" *ngIf="canActivate(agenda)" (click)="activate(agenda)" class="btn btn-primary btn-icon ms-1"
+            title="Activar disponibilidad">
+            <i class="bi bi-calendar-plus"></i>
+          </button>
         </td>
       </tr>
     </ng-template>

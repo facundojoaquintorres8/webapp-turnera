@@ -40,4 +40,8 @@ export class AgendaService {
   desactivate(id: number): Observable<HttpResponse<IResponse>> {
     return this.http.put<IResponse>(`${this.resourceUrl}/${id}/desactivate`, {} ,{ observe: 'response' });
   }
+
+  activate(id: number): Observable<HttpResponse<IResponse>> {
+    return this.http.put<IResponse>(`${this.resourceUrl}/${id}/activate`, {} ,{ observe: 'response' });
+  }
 }

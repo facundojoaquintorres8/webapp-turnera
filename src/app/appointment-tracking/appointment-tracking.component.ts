@@ -28,6 +28,8 @@ import { FinalizeAppointmentModalComponent } from './finalize-appointment-modal.
 import { IResponse } from '../models/response.models';
 import { IInput, InputTypeEnum } from '../component/filter/filter.models';
 import { map } from 'rxjs/operators';
+import { ActivateAgendaModalComponent } from '../agenda/activate-agenda-modal.component';
+import { getListToBoolean } from '../shared/generic-util';
 
 @Component({
   selector: 'app-appointment-tracking',
@@ -61,6 +63,7 @@ export class AppointmentTrackingComponent implements OnInit {
     from: [formatNgbDateStructFromDate(this.today), [Validators.required]],
     to: [formatNgbDateStructFromDate(this.lastDayMonth), [Validators.required]],
     status: [null],
+    active: [null]
   });
 
   constructor(
@@ -80,7 +83,8 @@ export class AppointmentTrackingComponent implements OnInit {
       { label: 'Desde', type: InputTypeEnum.DATE, name: 'from', width: 2, required: true, maxDate: this.myForm.get(['to'])!.value },
       { label: 'Hasta', type: InputTypeEnum.DATE, name: 'to', width: 2, required: true, minDate: this.myForm.get(['from'])!.value },
       { label: 'Cliente', type: InputTypeEnum.AUTOCOMPLETE, name: 'customerId', width: 6, onSearch: (search) => this.getCustomers(search), tooltip: 'Buscar por Razón Social, CUIT, email o teléfono.' },
-      { label: 'Último Estado', type: InputTypeEnum.LIST, name: 'status', width: 2, itemList: this.appointmentStatusList }
+      { label: 'Último Estado', type: InputTypeEnum.LIST, name: 'status', width: 2, itemList: this.appointmentStatusList },
+      { label: 'Activas', type: InputTypeEnum.LIST, name: 'active', width: 2, itemList: getListToBoolean() },
     ];
 
     this.headers = [
@@ -154,6 +158,7 @@ export class AppointmentTrackingComponent implements OnInit {
     this.myForm.get('resourceTypeId')?.setValue(null);
     this.myForm.get('customerId')?.setValue(null);
     this.myForm.get('status')?.setValue(null);
+    this.myForm.get('active')?.setValue(null);
     this.myForm.get('from')?.setValue(formatNgbDateStructFromDate(this.today), { emitEvent: false, emitViewToModelChange: false  });
     this.myForm.get('to')?.setValue(formatNgbDateStructFromDate(this.lastDayMonth), { emitEvent: false, emitViewToModelChange: false });
 
@@ -188,27 +193,27 @@ export class AppointmentTrackingComponent implements OnInit {
 
   canBook(agenda: IAgenda): boolean {
     return (!agenda.lastAppointment || this.appointmentStatusEnum[agenda.lastAppointment.lastAppointmentStatus.status] === AppointmentStatusEnum.CANCELLED)
-        && checkPermission(this.permissions, ['appointments.book']);
+      && agenda.active && checkPermission(this.permissions, ['appointments.book']);
   }
 
   canAbsent(agenda: IAgenda): boolean {
     return agenda.lastAppointment && this.appointmentStatusEnum[agenda.lastAppointment.lastAppointmentStatus.status] === AppointmentStatusEnum.BOOKED
-      && checkPermission(this.permissions, ['appointments.absent']);
+      && agenda.active && checkPermission(this.permissions, ['appointments.absent']);
   }
 
   canCancel(agenda: IAgenda): boolean {
     return agenda.lastAppointment && this.appointmentStatusEnum[agenda.lastAppointment.lastAppointmentStatus.status] === AppointmentStatusEnum.BOOKED
-      && checkPermission(this.permissions, ['appointments.cancel']);
+      && agenda.active && checkPermission(this.permissions, ['appointments.cancel']);
   }
 
   canAttend(agenda: IAgenda): boolean {
     return agenda.lastAppointment && this.appointmentStatusEnum[agenda.lastAppointment.lastAppointmentStatus.status] === AppointmentStatusEnum.BOOKED
-      && checkPermission(this.permissions, ['appointments.attend']);
+      && agenda.active && checkPermission(this.permissions, ['appointments.attend']);
   }
 
   canFinalize(agenda: IAgenda): boolean {
     return agenda.lastAppointment && this.appointmentStatusEnum[agenda.lastAppointment.lastAppointmentStatus.status] === AppointmentStatusEnum.IN_ATTENTION
-      && checkPermission(this.permissions, ['appointments.finalize']);
+      && agenda.active && checkPermission(this.permissions, ['appointments.finalize']);
   }
 
   canDelete(agenda: IAgenda): boolean {
@@ -216,8 +221,12 @@ export class AppointmentTrackingComponent implements OnInit {
   }
 
   canDesactivate(agenda: IAgenda): boolean {
-    return !agenda.lastAppointment || this.appointmentStatusEnum[agenda.lastAppointment.lastAppointmentStatus.status] === AppointmentStatusEnum.CANCELLED
-      && checkPermission(this.permissions, ['agendas.write']);
+    return (!agenda.lastAppointment || this.appointmentStatusEnum[agenda.lastAppointment.lastAppointmentStatus.status] === AppointmentStatusEnum.CANCELLED)
+      && agenda.active && checkPermission(this.permissions, ['agendas.write']);
+  }
+
+  canActivate(agenda: IAgenda): boolean {
+    return !agenda.active && checkPermission(this.permissions, ['agendas.write']);
   }
 
   book(agenda: IAgenda): void {
@@ -318,6 +327,20 @@ export class AppointmentTrackingComponent implements OnInit {
     );
   }
 
+  activate(agenda: IAgenda): void {
+    this.ngbModalRef = this.modalService.open(ActivateAgendaModalComponent, { size: 'lg', backdrop: 'static' });
+    this.ngbModalRef.componentInstance.agenda = agenda;
+    this.ngbModalRef.result.then(
+      () => {
+        this.tableComponent.executeQuery({ page: 1 });
+        this.ngbModalRef = undefined;
+      },
+      () => {
+        this.ngbModalRef = undefined;
+      }
+    );
+  }
+
   seeObservations(observations: string): void {
     this.ngbModalRef = this.modalService.open(ObservationModalComponent, { size: 'lg', backdrop: 'static' });
     this.ngbModalRef.componentInstance.observations = observations;
@@ -343,7 +366,7 @@ export class AppointmentTrackingComponent implements OnInit {
       customerId: this.myForm.get(['customerId'])!.value,
       from: formatDateFromNgbDateStruct(this.myForm.get(['from'])!.value),
       to: formatDateFromNgbDateStruct(this.myForm.get(['to'])!.value),
-      active: true,
+      active: this.myForm.get(['active'])!.value,
     };
   }
 }
