@@ -5,12 +5,14 @@ import { ILogin, ISessionUser } from '../models/login.models';
 import { IUser } from '../models/user.models';
 import { IResponse } from '../models/response.models';
 import { environment } from 'src/environments/environment';
+import { EncryptStorage } from 'encrypt-storage';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   public resourceUrl = environment.SERVER_API_URL + 'api/authenticate';
+  private encryptStorage: EncryptStorage = new EncryptStorage(environment.ENCRYPT_STORAGE_KEY);
 
   constructor(private http: HttpClient) {}
 
@@ -19,8 +21,8 @@ export class AuthService {
   }
 
   public logout(): void {
-    localStorage.removeItem('user');
-    localStorage.removeItem('jwt');
+    this.encryptStorage.removeItem('user');
+    this.encryptStorage.removeItem('jwt');
   }
 
   public onLoginSuccess(login: ISessionUser): void {
@@ -33,19 +35,19 @@ export class AuthService {
   }
 
   private setSessionUser(user: IUser): void {
-    localStorage.setItem('user', JSON.stringify(user));
+    this.encryptStorage.setItem('user', JSON.stringify(user));
   }
 
   public getSessionUser(): IUser | null {
-    return JSON.parse(localStorage.getItem('user')!);
+    return this.encryptStorage.getItem('user')!;
   }
 
   private setToken(jwt: string): void {
-    localStorage.setItem('jwt', jwt);
+    this.encryptStorage.setItem('jwt', jwt);
   }
 
   public getToken(): string | null {
-    return localStorage.getItem('jwt');
+    return this.encryptStorage.getItem('jwt')!;
   }
 
   public getPermissions(): string[] {
