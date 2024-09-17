@@ -29,7 +29,7 @@
 
                 <div class="input-group" *ngSwitchCase="inputType.DATE">
                     <input class="form-control" placeholder="yyyy-mm-dd" name="{{input.name}}" formControlName="{{input.name}}"
-                        ngbDatepicker #inputDate="ngbDatepicker" [firstDayOfWeek]="7" (ngModelChange)="onSubmit()"
+                        ngbDatepicker #inputDate="ngbDatepicker" (ngModelChange)="onSubmit()"
                         [minDate]="input.minDate!" [maxDate]="input.maxDate!">
                     <div class="input-group-append">
                         <button class="btn btn-primary" (click)="inputDate.toggle()" type="button" title="Ver Calendario">

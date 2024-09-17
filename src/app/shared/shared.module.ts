@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbInputDatepickerConfig, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PermissionModule } from '../security/permission.module';
 import { TableComponent } from '../component/table/table.component';
@@ -8,6 +8,7 @@ import { PaginateComponent } from '../component/table/paginated.component';
 import { ObservationModalComponent } from '../component/observation-modal/observation-modal.component';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { FilterComponent } from '../component/filter/filter.component';
+import { CustomDatePickerConfig } from './generic-util';
 
 @NgModule({
     declarations: [TableComponent, PaginateComponent, ObservationModalComponent, FilterComponent],
@@ -23,6 +24,9 @@ import { FilterComponent } from '../component/filter/filter.component';
         PaginateComponent,
         ObservationModalComponent,
         FilterComponent,
+    ],
+    providers: [
+        { provide: NgbInputDatepickerConfig, useClass: CustomDatePickerConfig },
     ]
 })
 export class SharedModule { }

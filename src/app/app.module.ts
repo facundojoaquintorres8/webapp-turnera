@@ -16,13 +16,14 @@ import { PermissionModule } from './security/permission.module';
 import { AuthGuard } from './security/auth-guard';
 
 const APP_CONTAINERS = [
-  PrivateLayoutComponent,
-  PublicLayoutComponent
+    PrivateLayoutComponent,
+    PublicLayoutComponent
 ];
 
 registerLocaleData(localeEsAr, 'es');
 
-@NgModule({ declarations: [
+@NgModule({
+    declarations: [
         AppComponent,
         ...APP_CONTAINERS,
         SidebarComponent,
@@ -30,9 +31,11 @@ registerLocaleData(localeEsAr, 'es');
         ToastComponent,
     ],
     exports: [ToastComponent],
-    bootstrap: [AppComponent], imports: [BrowserModule,
+    bootstrap: [AppComponent], 
+    imports: [BrowserModule,
         AppRoutingModule,
-        PermissionModule], providers: [
+        PermissionModule], 
+    providers: [
         {
             provide: HTTP_INTERCEPTORS,
             useClass: TokenInterceptor,
@@ -41,5 +44,6 @@ registerLocaleData(localeEsAr, 'es');
         { provide: LOCALE_ID, useValue: 'es' },
         AuthGuard,
         provideHttpClient(withInterceptorsFromDi())
-    ] })
-export class AppModule {}
+    ]
+})
+export class AppModule { }
