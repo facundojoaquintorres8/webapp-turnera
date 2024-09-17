@@ -19,7 +19,7 @@ import { IResourceType } from '../models/resourceType.models';
 import { ResourceTypeService } from '../resource-type/resource-type.service';
 import { ResourceService } from '../resource/resource.service';
 import { checkPermission } from '../security/check-permissions';
-import { formatDateFromNgbDateStruct, formatNgbDateStructFromDate } from '../shared/date-format';
+import { formatDateFromNgbDateStruct, formatNgbDateStructFromDate } from '../shared/date-util';
 import { AbsentAppointmentModalComponent } from './absent-appointment-modal.component';
 import { AttendAppointmentModalComponent } from './attend-appointment-modal.component';
 import { BookAppointmentComponent } from './book-appointment-modal.component';

@@ -148,7 +148,7 @@
                     <label class="required">Hasta</label>
                     <div class="input-group">
                         <input class="form-control" placeholder="yyyy-mm-dd" name="finalize" formControlName="finalize"
-                            ngbDatepicker #finalize="ngbDatepicker" [minDate]="minDateToFinalize()">
+                            ngbDatepicker #finalize="ngbDatepicker" [minDate]="minDateToFinalize()" [maxDate]="maxDateToFinalize()">
                         <div class="input-group-append">
                             <button class="btn btn-primary" (click)="finalize.toggle()" type="button" title="Abrir Calendario">
                                 <i class="bi bi-calendar3"></i>

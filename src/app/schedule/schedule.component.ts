@@ -17,7 +17,7 @@ import { AuthService } from '../auth/auth.service';
 import { IAgenda } from '../models/agenda.models';
 import { AppointmentStatusEnum } from '../models/appointment.model';
 import { checkPermission } from '../security/check-permissions';
-import { formatDateFromDate } from '../shared/date-format';
+import { formatDateFromDate } from '../shared/date-util';
 import { IResponse } from '../models/response.models';
 import { CalendarViewEnum, ICalendarEvent } from '../models/schedule.models';
 

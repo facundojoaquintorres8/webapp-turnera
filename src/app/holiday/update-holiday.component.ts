@@ -5,7 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { HolidayService } from './holiday.service';
 import { IHoliday, ISaveHoliday } from '../models/holiday.models';
-import { formatDateFromNgbDateStruct, formatNgbDateStructFromDate } from '../shared/date-format';
+import { formatDateFromNgbDateStruct, formatNgbDateStructFromDate } from '../shared/date-util';
 import moment from 'moment';
 import { IResponse } from '../models/response.models';
 

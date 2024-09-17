@@ -6,7 +6,7 @@ import { AgendaService } from './agenda.service';
 import { ISaveAgenda, RepeatTypeEnum, RepeatTypeToListItem } from '../models/agenda.models';
 import { IResource } from '../models/resource.models';
 import { ResourceService } from '../resource/resource.service';
-import { formatDateFromNgbDateStruct, formatTimeFromNgbTimeStruct } from '../shared/date-format';
+import { addTimeToNgbDateStruct, formatDateFromNgbDateStruct, formatTimeFromNgbTimeStruct } from '../shared/date-util';
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import moment from 'moment';
 import * as momentTimeZone from 'moment-timezone';
@@ -32,6 +32,7 @@ export class CreateAgendaComponent implements OnInit {
   private today: NgbDateStruct = { year: this.now.getFullYear(), month: this.now.getMonth() + 1, day: this.now.getDate() }
 
   public minDateToFinalize = (): NgbDateStruct => { return this.myForm.get(['startDate'])!.value };
+  public maxDateToFinalize = (): NgbDateStruct => { return addTimeToNgbDateStruct(this.myForm.get(['startDate'])!.value, 6, 'M') };
 
   myForm = this.fb.group({
     id: [],
@@ -91,11 +92,7 @@ export class CreateAgendaComponent implements OnInit {
   }
 
   onStartDateChange(): void {
-    if (this.myForm.get(['startDate'])!.value && this.myForm.get(['finalize'])!.value
-      && (moment(this.myForm.get(['startDate'])!.value).diff(moment(this.myForm.get(['finalize'])!.value)) > 0
-        || Number.isNaN(moment(this.myForm.get(['startDate'])!.value).diff(moment(this.myForm.get(['finalize'])!.value))))) {
-      this.myForm.get('finalize')?.setValue(null);
-    }
+    this.myForm.get('finalize')?.setValue(null);
     this.setDayOfTheMonth();
   }
 

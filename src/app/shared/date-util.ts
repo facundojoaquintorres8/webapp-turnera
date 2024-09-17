@@ -1,4 +1,5 @@
 import { NgbDateStruct, NgbTimeStruct } from "@ng-bootstrap/ng-bootstrap";
+import moment, { DurationInputArg2 } from "moment";
 
 export function formatDateFromNgbDateStruct(date: NgbDateStruct): string | null {
     if (!date) {
@@ -33,4 +34,9 @@ export function formatNgbDateStructFromDate(date: Date): NgbDateStruct | null {
         return null;
     }
     return { year: date.getFullYear(), month: date.getMonth() + 1, day: date.getDate() };
+}
+
+export function addTimeToNgbDateStruct(date: NgbDateStruct, value: number, type: DurationInputArg2): NgbDateStruct {
+    const result = moment(formatDateFromNgbDateStruct(date)).add(value, type);
+    return { day: result.date(), month: result.month() + 1, year: result.year() };
 }

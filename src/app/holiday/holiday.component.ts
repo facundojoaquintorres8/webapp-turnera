@@ -8,7 +8,7 @@ import { DeleteHolidayModalComponent } from './delete-holiday-modal.component';
 import { HolidayService } from './holiday.service';
 import { IInput, InputTypeEnum } from '../component/filter/filter.models';
 import { getListToBoolean } from '../shared/generic-util';
-import { formatDateFromNgbDateStruct } from '../shared/date-format';
+import { formatDateFromNgbDateStruct } from '../shared/date-util';
 
 @Component({
   selector: 'app-holiday',
