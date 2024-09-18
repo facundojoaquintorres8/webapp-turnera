@@ -3,7 +3,7 @@ import { HttpResponse } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { AgendaService } from './agenda.service';
-import { ISaveAgenda, RepeatTypeEnum, RepeatTypeToListItem } from '../models/agenda.models';
+import { ICreateAgenda, RepeatTypeEnum, RepeatTypeToListItem } from '../models/agenda.models';
 import { IResource } from '../models/resource.models';
 import { ResourceService } from '../resource/resource.service';
 import { addTimeToNgbDateStruct, formatDateFromNgbDateStruct, formatTimeFromNgbTimeStruct } from '../shared/date-util';
@@ -151,7 +151,7 @@ export class CreateAgendaComponent implements OnInit {
     }
   }
 
-  private createFromForm(): ISaveAgenda {
+  private createFromForm(): ICreateAgenda {
     return {
       id: this.myForm.get(['id'])!.value,
       resource: this.myForm.get(['resource'])!.value,

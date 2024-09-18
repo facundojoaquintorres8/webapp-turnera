@@ -64,6 +64,11 @@
             title="Activar disponibilidad">
             <i class="bi bi-calendar-plus"></i>
           </button>
+
+          <button *hasPermission="['agendas.write']" type="button" [routerLink]="['../agendas', agenda.id, 'edit']"
+            class="btn btn-info btn-icon ms-1" title="Editar disponibilidad">
+            <i class="bi bi-pencil"></i>
+          </button>
         </td>
       </tr>
     </ng-template>

@@ -6,13 +6,14 @@ import { IResourceType } from "./resourceType.models";
 export interface IAgenda {
   id: number;
   resource: IResource;
+  resourceType: IResourceType;
   startDate: Date;
   endDate: Date;
   lastAppointment: IAppointment;
   active: boolean;
 }
 
-export interface ISaveAgenda {
+export interface ICreateAgenda {
   id: number;
   resource: IResource;
   resourceType: IResourceType;
@@ -33,6 +34,18 @@ export interface ISaveAgenda {
   friday: boolean;
   saturday: boolean;
   omitHolidays: boolean;
+}
+
+export interface IUpdateAgenda {
+  id: number;
+  resource: IResource;
+  resourceType: IResourceType;
+  startDate: string;
+  startHour: string;
+  endHour: string;
+  endDate: string;
+  zoneId: string;
+  active: boolean;
 }
 
 export enum RepeatTypeEnum {

@@ -47,7 +47,7 @@ export class ResourceComponent implements OnInit {
   ngOnInit(): void {
     this.filterInputs = [
       { label: 'Descripción', type: InputTypeEnum.TEXT, name: 'description', width: 4 },
-      { label: 'Código', type: InputTypeEnum.TEXT, name: 'code', width: 4 },
+      { label: 'Código', type: InputTypeEnum.TEXT, name: 'code', width: 2 },
       { label: 'Tipo de Recurso', type: InputTypeEnum.AUTOCOMPLETE, name: 'resourceTypeId', width: 4, onSearch: (search) => this.getResourcesTypes(search) },
       { label: 'Activos', type: InputTypeEnum.LIST, name: 'active', width: 2, itemList: getListToBoolean() },
     ];
