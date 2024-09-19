@@ -13,10 +13,7 @@
         <td>{{ agenda.endDate | date: 'dd/MM/yyyy HH:mm' }}</td>
         <td>{{ agenda.lastAppointment ? agenda.lastAppointment.customerBusinessName : '-'}}</td>
         <td>
-            <span class="appointmentStatus badge {{ appointmentStatusColor(agenda.lastAppointment) }}">
-              {{ agenda.lastAppointment ? appointmentStatusEnum[agenda.lastAppointment.lastAppointmentStatus.status] :
-              appointmentStatusEnum.FREE }}
-            </span>
+          <app-appointment-status [appointment]="agenda.lastAppointment"></app-appointment-status>
           <ng-container *ngIf="agenda.lastAppointment && agenda.lastAppointment.lastAppointmentStatus.observations">
             <i class="bi bi-chat-text text-primary ms-1 pointer"
               (click)="seeObservations(agenda.lastAppointment.lastAppointmentStatus.observations)"

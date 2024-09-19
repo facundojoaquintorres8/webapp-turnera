@@ -1,0 +1,4 @@
+<span class="appointmentStatus badge {{ appointmentStatusColor(appointment) }}">
+    {{ appointment ? appointmentStatusEnum[appointment.lastAppointmentStatus.status] :
+    appointmentStatusEnum.FREE }}
+</span>

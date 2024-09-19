@@ -33,8 +33,7 @@ import { getListToBoolean } from '../shared/generic-util';
 
 @Component({
   selector: 'app-appointment-tracking',
-  templateUrl: './appointment-tracking.component.html',
-  styleUrls: ['./appointment-tracking.component.scss']
+  templateUrl: './appointment-tracking.component.html'
 })
 export class AppointmentTrackingComponent implements OnInit {
   @ViewChild('tableComponent') tableComponent!: TableComponent;
@@ -165,30 +164,6 @@ export class AppointmentTrackingComponent implements OnInit {
     this.updateLimitsToDates();
 
     this.tableComponent.executeQuery({ page: 1 });
-  }
-
-  appointmentStatusColor(lastAppointment: IAppointment): string {
-    let result = 'bg-white border border-primary'; // Free
-    if (lastAppointment) {
-      switch (this.appointmentStatusEnum[lastAppointment.lastAppointmentStatus.status]) {
-        case AppointmentStatusEnum.BOOKED:
-          result = 'bg-warning';
-          break;
-        case AppointmentStatusEnum.ABSENT:
-          result = 'bg-dark';
-          break;
-        case AppointmentStatusEnum.CANCELLED:
-          result = 'bg-danger';
-          break;
-        case AppointmentStatusEnum.IN_ATTENTION:
-          result = 'bg-info';
-          break;
-        case AppointmentStatusEnum.FINALIZED:
-          result = 'bg-success';
-          break;
-      }
-    }
-    return result;
   }
 
   canBook(agenda: IAgenda): boolean {

@@ -3,7 +3,7 @@
 
 body {
   font-family: Helvetica, sans-serif;
-  background-color: #fafbfe;
+  background-color: #e9ecef;
 }
 
 @media screen and (min-width: 991px) {
@@ -83,3 +83,9 @@ button {
 select, ng-select {
   width: 100%;
 }
+
+.nav-link:not(.active) { //  text-light
+  --bs-text-opacity: 1;
+    color: rgba(var(--bs-light-rgb), var(--bs-text-opacity)) !important;
+}
+

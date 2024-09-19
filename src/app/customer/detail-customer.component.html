@@ -1,32 +1,70 @@
 <div class="container-fluid">
-  <h2>Detalle</h2>
+  <div class="card">
+    <div class="card-header bg-dark text-white">
+      <h1 class="card-title">Cliente: <span *ngIf="customer">{{ customer.businessName }}</span></h1>
+      <ul class="nav nav-tabs card-header-tabs" data-bs-tabs="tabs">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="true" data-bs-toggle="tab" href="#detail">
+            <i class="bi bi-eye"></i>&nbsp;Detalle
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-bs-toggle="tab" href="#appointments" (click)="getHistory()">
+            <i class="bi bi-list-task"></i>&nbsp;Historial de turnos
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="card-body tab-content">
+      <div class="tab-pane active" id="detail">
 
-  <dl *ngIf="customer">
-    <dt>Razón Social</dt>
-    <dd>{{ customer.businessName }}</dd>
-    <dt>Marca</dt>
-    <dd>{{ customer.brandName ? customer.brandName : '-' }}</dd>
-    <dt>CUIT</dt>
-    <dd>{{ customer.cuit }}</dd>
-    <dt>Correo Electrónico</dt>
-    <dd>{{ customer.email }}</dd>
-    <dt>Teléfono 1</dt>
-    <dd>{{ customer.phone1 }}</dd>
-    <dt>Teléfono 2</dt>
-    <dd>{{ customer.phone2 ? customer.phone2 : '-' }}</dd>
-    <dt>Dirección</dt>
-    <dd>{{ customer.address ? customer.address : '-' }}</dd>
-    <dt>Activo</dt>
-    <dd>{{ customer.active ? 'Si' : 'No' }}</dd>
-  </dl>
+        <ul class="list-group list-group-flush" *ngIf="customer">
+          <li class="list-group-item d-flex justify-content-between"><h5>Razón Social</h5><h6>{{ customer.businessName }}</h6></li>
+          <li class="list-group-item d-flex justify-content-between"><h5>Marca</h5><h6>{{ customer.brandName ? customer.brandName : '-' }}</h6></li>
+          <li class="list-group-item d-flex justify-content-between"><h5>CUIT</h5><h6>{{ customer.cuit }}</h6></li>
+          <li class="list-group-item d-flex justify-content-between"><h5>Correo Electrónico</h5><h6>{{ customer.email }}</h6></li>
+          <li class="list-group-item d-flex justify-content-between"><h5>Teléfono 1</h5><h6>{{ customer.phone1 }}</h6></li>
+          <li class="list-group-item d-flex justify-content-between"><h5>Teléfono 2</h5><h6>{{ customer.phone2 ? customer.phone2 : '-' }}</h6></li>
+          <li class="list-group-item d-flex justify-content-between"><h5>Dirección</h5><h6>{{ customer.address ? customer.address : '-' }}</h6></li>
+          <li class="list-group-item d-flex justify-content-between">
+            <h5>Activo</h5>
+            <i *ngIf="customer.active" class="bi bi-check-square text-success"></i>
+            <i *ngIf="!customer.active" class="bi bi-square text-danger outline"></i>
+          </li>
+        </ul>
+        <div class="button-form m-0" *ngIf="customer">
+          <button type="button" class="btn btn-secondary" (click)="previousState()" title="Volver">
+            <i class="bi bi-arrow-left-short"></i>&nbsp;Volver
+          </button>
+  
+          <button *hasPermission="['customers.write']" type="button" [routerLink]="['../../', customer.id, 'edit']"
+            class="btn btn-primary" title="Editar">
+            <i class="bi bi-pencil"></i>&nbsp;Editar
+          </button>
+        </div>
 
-  <div class="button-form">
-    <button type="button" class="btn btn-secondary" (click)="previousState()" title="Volver">
-      <i class="bi bi-arrow-left-short"></i>&nbsp;Volver
-    </button>
+      </div>
+      <div class="tab-pane" id="appointments">
+        <div class="row">
+          <app-table *ngIf="customer" [headers]="headers" [bodyTemplate]="customBody" [sort]="sort" [queryItems]="query" #tableComponent>
+            <ng-template #customBody let-items>
+              <tr *ngFor="let appointment of items">
+                <td>{{ appointment.agenda.startDate | date: 'dd/MM/yyyy HH:mm' }}</td>
+                <td>{{ appointment.agenda.endDate | date: 'dd/MM/yyyy HH:mm' }}</td>
+                <td>{{ appointment.agenda.resource.description }}</td>
+                <td>{{ appointment.agenda.resourceType.description }}</td>
+                <td><app-appointment-status [appointment]="appointment"></app-appointment-status></td>
+              </tr>
+            </ng-template>
+          </app-table>
+        </div>
 
-    <button *hasPermission="['customers.write']" type="button" [routerLink]="['../../', customer.id, 'edit']" class="btn btn-primary" title="Editar">
-      <i class="bi bi-pencil"></i>&nbsp;Editar
-    </button>
+        <div class="button-form">
+          <button type="button" class="btn btn-secondary" (click)="previousState()" title="Volver">
+            <i class="bi bi-arrow-left-short"></i>&nbsp;Volver
+          </button>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

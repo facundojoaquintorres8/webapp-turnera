@@ -9,9 +9,10 @@ import { ObservationModalComponent } from '../component/observation-modal/observ
 import { NgSelectModule } from '@ng-select/ng-select';
 import { FilterComponent } from '../component/filter/filter.component';
 import { CustomDatePickerConfig } from './generic-util';
+import { AppointmentStatusComponent } from '../component/appointment-status/appointment-status.component';
 
 @NgModule({
-    declarations: [TableComponent, PaginateComponent, ObservationModalComponent, FilterComponent],
+    declarations: [TableComponent, PaginateComponent, ObservationModalComponent, FilterComponent, AppointmentStatusComponent],
     imports: [CommonModule, PermissionModule, ReactiveFormsModule, NgbModule, NgSelectModule],
     exports: [
         FormsModule,
@@ -24,6 +25,7 @@ import { CustomDatePickerConfig } from './generic-util';
         PaginateComponent,
         ObservationModalComponent,
         FilterComponent,
+        AppointmentStatusComponent
     ],
     providers: [
         { provide: NgbInputDatepickerConfig, useClass: CustomDatePickerConfig },
