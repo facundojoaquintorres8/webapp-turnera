@@ -1,6 +1,6 @@
 <app-sidebar (expandSidebarEvent)="expandSidebar($event)"></app-sidebar>
 
-<div class="main p-2 p-sm-3" [class.main2]="!expandedSidebar">
+<div class="main p-0 p-sm-3" [class.main2]="!expandedSidebar">
     <app-toast></app-toast>
     <router-outlet></router-outlet>
 </div>

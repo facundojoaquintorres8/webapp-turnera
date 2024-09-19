@@ -1,34 +1,58 @@
-<div class="container-fluid">
-  <h2>Detalle</h2>
-
-  <dl *ngIf="user">
-    <dt>Nombre</dt>
-    <dd>{{ user.firstName }}</dd>
-    <dt>Apellido</dt>
-    <dd>{{ user.lastName }}</dd>
-    <dt>Correo Electrónico</dt>
-    <dd>{{ user.username }}</dd>
-    <dt>Activo</dt>
-    <dd>{{ user.active ? 'Si' : 'No' }}</dd>
-  </dl>
-
-  <h3>Perfiles</h3>
-  <div class="row" *ngIf="user">
-    <div class="col-lg-1" *ngFor="let profile of user.profiles">
-      <span class="lead">
-        <span class="badge rounded-pill bg-primary">{{ profile.description }}</span>
-      </span>
+<div class="m-sm-1">
+  <div class="card">
+    <div class="card-header bg-dark text-white">
+      <h1 class="card-title">Usuario: <span *ngIf="user">{{ user.username }}</span></h1>
+      <ul class="nav nav-tabs card-header-tabs" data-bs-tabs="tabs">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="true" data-bs-toggle="tab" href="#detail">
+            <i class="bi bi-eye"></i>&nbsp;Detalle
+          </a>
+        </li>
+      </ul>
     </div>
-  </div>
+    <div class="card-body tab-content">
+      <div class="tab-pane active" id="detail">
+        <ul class="list-group list-group-flush" *ngIf="user">
+          <li class="list-group-item d-flex justify-content-between">
+            <h5>Correo Electrónico</h5>
+            <h6>{{ user.username }}</h6>
+          </li>
+          <li class="list-group-item d-flex justify-content-between">
+            <h5>Apellido</h5>
+            <h6>{{ user.lastName }}</h6>
+          </li>
+          <li class="list-group-item d-flex justify-content-between">
+            <h5>Nombre</h5>
+            <h6>{{ user.firstName }}</h6>
+          </li>
+          <li class="list-group-item d-flex justify-content-between">
+            <h5>Perfiles</h5>
+            <h6 class="text-end">
+              <ng-content *ngFor="let profile of user.profiles">
+                <div>
+                  <span class="badge rounded-pill bg-primary">{{ profile.description }}</span>
+                </div>
+              </ng-content>
+            </h6>
+          </li>
+          <li class="list-group-item d-flex justify-content-between">
+            <h5>Activo</h5>
+            <i *ngIf="user.active" class="bi bi-check-square text-success"></i>
+            <i *ngIf="!user.active" class="bi bi-square text-danger outline"></i>
+          </li>
+        </ul>
+        <div class="button-form m-0" *ngIf="user">
+          <button type="button" class="btn btn-secondary" (click)="previousState()" title="Volver">
+            <i class="bi bi-arrow-left-short"></i>&nbsp;Volver
+          </button>
+  
+          <button *hasPermission="['users.write']" type="button" [routerLink]="['../../', user.id, 'edit']"
+            class="btn btn-primary" title="Editar">
+            <i class="bi bi-pencil"></i>&nbsp;Editar
+          </button>
+        </div>
 
-  <div class="button-form">
-    <button type="button" class="btn btn-secondary" (click)="previousState()" title="Volver">
-      <i class="bi bi-arrow-left-short"></i>&nbsp;Volver
-    </button>
-
-    <button *hasPermission="['users.write']" type="button" [routerLink]="['../../', user.id, 'edit']"
-      class="btn btn-primary" title="Editar">
-      <i class="bi bi-pencil"></i>&nbsp;Editar
-    </button>
+      </div>
+    </div>
   </div>
 </div>

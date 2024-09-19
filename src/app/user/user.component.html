@@ -14,13 +14,13 @@
     <ng-template #customBody let-items>
       <tr *ngFor="let user of items">
         <td>
-          {{ user.firstName }}
+          {{ user.username }}
         </td>
         <td>
           {{ user.lastName }}
         </td>
         <td>
-          {{ user.username }}
+          {{ user.firstName }}
         </td>
         <td>
           <i *ngIf="user.active" class="bi bi-check-square text-success"></i>

@@ -1,24 +1,49 @@
-<div class="container-fluid">
-  <h2>Detalle</h2>
+<div class="m-sm-1">
+  <div class="card">
+    <div class="card-header bg-dark text-white">
+      <h1 class="card-title">Feriado: <span *ngIf="holiday">{{ holiday.date | date: 'dd/MM/yyyy' }}</span></h1>
+      <ul class="nav nav-tabs card-header-tabs" data-bs-tabs="tabs">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="true" data-bs-toggle="tab" href="#detail">
+            <i class="bi bi-eye"></i>&nbsp;Detalle
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="card-body tab-content">
+      <div class="tab-pane active" id="detail">
+        <ul class="list-group list-group-flush" *ngIf="holiday">
+          <li class="list-group-item d-flex justify-content-between">
+            <h5>Fecha</h5>
+            <h6>{{ holiday.date | date: 'dd/MM/yyyy' }}</h6>
+          </li>
+          <li class="list-group-item d-flex justify-content-between">
+            <h5>Descripción</h5>
+            <h6>{{ holiday.description }}</h6>
+          </li>
+          <li class="list-group-item d-flex justify-content-between">
+            <h5>Usar en Agenda</h5>
+            <i *ngIf="holiday.useInAgenda" class="bi bi-check-square text-success"></i>
+            <i *ngIf="!holiday.useInAgenda" class="bi bi-square text-danger outline"></i>
+          </li>
+          <li class="list-group-item d-flex justify-content-between">
+            <h5>Activo</h5>
+            <i *ngIf="holiday.active" class="bi bi-check-square text-success"></i>
+            <i *ngIf="!holiday.active" class="bi bi-square text-danger outline"></i>
+          </li>
+        </ul>
+        <div class="button-form m-0" *ngIf="holiday">
+          <button type="button" class="btn btn-secondary" (click)="previousState()" title="Volver">
+            <i class="bi bi-arrow-left-short"></i>&nbsp;Volver
+          </button>
+  
+          <button *hasPermission="['holidays.write']" type="button" [routerLink]="['../../', holiday.id, 'edit']"
+            class="btn btn-primary" title="Editar">
+            <i class="bi bi-pencil"></i>&nbsp;Editar
+          </button>
+        </div>
 
-  <dl *ngIf="holiday">
-    <dt>Fecha</dt>
-    <dd>{{ holiday.date | date: 'dd/MM/yyyy' }}</dd>
-    <dt>Descripción</dt>
-    <dd>{{ holiday.description }}</dd>
-    <dt>Usar en Agenda</dt>
-    <dd>{{ holiday.useInAgenda ? 'Si' : 'No' }}</dd>
-    <dt>Activo</dt>
-    <dd>{{ holiday.active ? 'Si' : 'No' }}</dd>
-  </dl>
-
-  <div class="button-form">
-    <button type="button" class="btn btn-secondary" (click)="previousState()" title="Volver">
-      <i class="bi bi-arrow-left-short"></i>&nbsp;Volver
-  </button>
-
-    <button *hasPermission="['holidays.write']" type="button" [routerLink]="['../../', holiday.id, 'edit']" class="btn btn-primary" title="Editar">
-      <i class="bi bi-pencil"></i>&nbsp;Editar
-    </button>
+      </div>
+    </div>
   </div>
 </div>

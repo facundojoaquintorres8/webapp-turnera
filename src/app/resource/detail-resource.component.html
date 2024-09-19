@@ -1,30 +1,54 @@
-<div class="container-fluid">
-  <h2>Detalle</h2>
-
-  <dl *ngIf="resource">
-    <dt>Descripción</dt>
-    <dd>{{ resource.description }}</dd>
-    <dt>Código</dt>
-    <dd>{{ resource.code ? resource.code : '-' }}</dd>
-    <dt>Tipo de Recuros</dt>
-    <dd>
-      <ng-content *ngFor="let resourceType of resource.resourcesTypes">
-        <div>
-          {{ resourceType.description }}
+<div class="m-sm-1">
+  <div class="card">
+    <div class="card-header bg-dark text-white">
+      <h1 class="card-title">Recurso: <span *ngIf="resource">{{ resource.description }}</span></h1>
+      <ul class="nav nav-tabs card-header-tabs" data-bs-tabs="tabs">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="true" data-bs-toggle="tab" href="#detail">
+            <i class="bi bi-eye"></i>&nbsp;Detalle
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="card-body tab-content">
+      <div class="tab-pane active" id="detail">
+        <ul class="list-group list-group-flush" *ngIf="resource">
+          <li class="list-group-item d-flex justify-content-between">
+            <h5>Descripción</h5>
+            <h6>{{ resource.description }}</h6>
+          </li>
+          <li class="list-group-item d-flex justify-content-between">
+            <h5>Código</h5>
+            <h6>{{ resource.code ? resource.code : '-' }}</h6>
+          </li>
+          <li class="list-group-item d-flex justify-content-between">
+            <h5>Tipo de Recuros</h5>
+            <h6 class="text-end">
+              <ng-content *ngFor="let resourceType of resource.resourcesTypes">
+                <div>
+                  {{ resourceType.description }}
+                </div>
+              </ng-content>
+            </h6>
+          </li>
+          <li class="list-group-item d-flex justify-content-between">
+            <h5>Activo</h5>
+            <i *ngIf="resource.active" class="bi bi-check-square text-success"></i>
+            <i *ngIf="!resource.active" class="bi bi-square text-danger outline"></i>
+          </li>
+        </ul>
+        <div class="button-form m-0" *ngIf="resource">
+          <button type="button" class="btn btn-secondary" (click)="previousState()" title="Volver">
+            <i class="bi bi-arrow-left-short"></i>&nbsp;Volver
+          </button>
+  
+          <button *hasPermission="['resources.write']" type="button" [routerLink]="['../../', resource.id, 'edit']"
+            class="btn btn-primary" title="Editar">
+            <i class="bi bi-pencil"></i>&nbsp;Editar
+          </button>
         </div>
-      </ng-content>
-    </dd>
-    <dt>Activo</dt>
-    <dd>{{ resource.active ? 'Si' : 'No' }}</dd>
-  </dl>
 
-  <div class="button-form">
-    <button type="button" class="btn btn-secondary" (click)="previousState()" title="Volver">
-      <i class="bi bi-arrow-left-short"></i>&nbsp;Volver
-  </button>
-
-    <button *hasPermission="['resources.write']" type="button" [routerLink]="['../../', resource.id, 'edit']" class="btn btn-primary" title="Editar">
-      <i class="bi bi-pencil"></i>&nbsp;Editar
-    </button>
+      </div>
+    </div>
   </div>
 </div>
