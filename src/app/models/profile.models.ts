@@ -13,6 +13,18 @@ export interface IPermission {
   selected?: boolean;
 }
 
+
+export interface PermissionByEntity2 { // TODO: ver con editar si unifico
+  id: string;
+  name: string;
+  actions: IPermissionAccion[];
+}
+
+export interface IPermissionAccion {
+  name: string;
+  order: number;
+}
+
 export interface PermissionByEntity {
   name: string;
   actions: {

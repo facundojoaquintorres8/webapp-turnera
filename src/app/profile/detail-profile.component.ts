@@ -1,9 +1,10 @@
 import { HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { IPermission, IProfile, PermissionByEntity } from '../models/profile.models';
+import { IPermission, IProfile, PermissionByEntity2 } from '../models/profile.models';
 import { ProfileService } from './profile.service';
 import { IResponse } from '../models/response.models';
+import { getPermissionActionOrder, translateEntityFromPermission } from '../shared/generic-util';
 
 @Component({
   selector: 'app-detail-profile',
@@ -13,7 +14,7 @@ import { IResponse } from '../models/response.models';
 export class DetailProfileComponent implements OnInit {
   profile!: IProfile;
   allPermissions: IPermission[] = [];
-  permissionsByEntities: PermissionByEntity[] = [];
+  permissionsByEntities: PermissionByEntity2[] = [];
 
   constructor(
     private profileService: ProfileService,
@@ -23,49 +24,33 @@ export class DetailProfileComponent implements OnInit {
   ngOnInit(): void {
     const id = this.activatedRoute.snapshot.paramMap.get("id");
     if (id) {
-
-      this.profileService.findAllPermissions().subscribe(
-        (res1: HttpResponse<IResponse>) => {
-          this.allPermissions = res1.body?.data.filter((x: IPermission) => x.code !== 'home.index') || [];
-  
-          this.allPermissions.forEach(permission => {
-            const permissionSplit = permission.code.split('.');
-            const permissionExisting = this.permissionsByEntities.find(x => x.name === permissionSplit[0]);
-            if (permissionExisting) {
-              permissionExisting.actions.push({ permission, action: permissionSplit[1] });
-            } else {
-              this.permissionsByEntities.push({
-                name: permissionSplit[0], actions: [{ permission, action: permissionSplit[1] }], selected: false
-              });
-            }
-          });
-  
-          this.profileService.find(parseInt(id)).subscribe(
-            (res2: HttpResponse<IResponse>) => {
-              this.profile = res2.body?.data;
-              this.updateForm(res2.body?.data, this.permissionsByEntities);
-            }
-          );
+      this.profileService.find(parseInt(id)).subscribe(
+        (res: HttpResponse<IResponse>) => {
+          this.profile = res.body?.data;
+          this.updateForm(this.profile);
         }
-      )
+      );
     }
   }
 
-  private updateForm(profile: IProfile, permissionsByEntities: PermissionByEntity[]): void {
-    permissionsByEntities.forEach(pbye => {
-      pbye.actions.forEach(action => {
-        if (profile.permissions.find(x => x.id === action.permission.id)) {
-          this.select(action.permission, pbye);
-        }
-      });
-    });
-  }
+  private updateForm(profile: IProfile): void {
+    this.allPermissions = profile.permissions.filter((x: IPermission) => x.code !== 'home.index') || [];
 
-  private select(permission: IPermission, permissionByEntity: PermissionByEntity): void {
-    permission.selected = !permission.selected;
-    permissionByEntity.selected = permissionByEntity.actions.every((x: any) => {
-      return x.permission.selected;
+    this.allPermissions.forEach(p => {
+      const permissionSplit = p.code.split('.');
+      const entity = permissionSplit[0];
+      const action = permissionSplit[1];
+      const actionObject = { name: permissionSplit[1], order: getPermissionActionOrder(action) };
+      const permissionExisting = this.permissionsByEntities.find(x => x.id === entity);
+      if (permissionExisting) {
+        permissionExisting.actions.push(actionObject);
+      } else {
+        this.permissionsByEntities.push({
+          id: entity, name: translateEntityFromPermission(entity), actions: [actionObject]
+        });
+      }
     });
+
   }
 
   previousState(): void {

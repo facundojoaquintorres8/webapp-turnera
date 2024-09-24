@@ -1,91 +1,75 @@
-<div class="container-fluid">
-  <h2>Detalle</h2>
-
-  <dl *ngIf="profile">
-    <dt>Descripción</dt>
-    <dd>{{ profile.description }}</dd>
-    <dt>Activo</dt>
-    <dd>{{ profile.active ? 'Si' : 'No' }}</dd>
-  </dl>
-
-  <h3>Permisos</h3>
-  <div class="container-fluid">
-    <div class="row h5 text-center d-none d-sm-flex mb-0">
-      <div class="col-lg-3 border">
-        Entidad
-      </div>
-      <div class="col-lg-3 border">
-        Acción
-      </div>
-      <div class="col-lg-3 border">
-        Entidad
-      </div>
-      <div class="col-lg-3 border">
-        Acción
-      </div>
+<div class="m-sm-1">
+  <div class="card">
+    <div class="card-header bg-dark text-white">
+      <h1 class="card-title">Perfil: <span *ngIf="profile">{{ profile.description }}</span></h1>
+      <ul class="nav nav-tabs card-header-tabs" data-bs-tabs="tabs">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="true" data-bs-toggle="tab" href="#detail">
+            <i class="bi bi-eye"></i>&nbsp;Detalle
+          </a>
+        </li>
+      </ul>
     </div>
-    <div class="row">
-      <ng-container *ngFor="let permissionByEntity of permissionsByEntities">
-        <div class="col-lg-3 d-flex border">
-          <span class="lead" [ngSwitch]="permissionByEntity.name">
-            <span *ngSwitchCase="'users'" class="badge rounded-pill bg-light text-dark border border-dark">Usuarios</span>
-            <span *ngSwitchCase="'profiles'" class="badge rounded-pill bg-light text-dark border border-dark">Perfiles</span>
-            <span *ngSwitchCase="'organizations'" class="badge rounded-pill bg-light text-dark border border-dark">Mi
-              Organización</span>
-            <span *ngSwitchCase="'customers'" class="badge rounded-pill bg-light text-dark border border-dark">Clientes</span>
-            <span *ngSwitchCase="'resourcesTypes'" class="badge rounded-pill bg-light text-dark border border-dark">Tipos de
-              Recursos</span>
-            <span *ngSwitchCase="'resources'" class="badge rounded-pill bg-light text-dark border border-dark">Recursos</span>
-            <span *ngSwitchCase="'agendas'"
-              class="badge rounded-pill bg-light text-dark border border-dark">Disponibilidades</span>
-            <span *ngSwitchCase="'appointments'" class="badge rounded-pill bg-light text-dark border border-dark">Turnos</span>
-            <span *ngSwitchCase="'holidays'" class="badge rounded-pill bg-light text-dark border border-dark">Feriados</span>
-          </span>
-        </div>
-        <div class="col-lg-3 border">
-          <div class="row" *ngFor="let action of permissionByEntity.actions">
-            <div class="col-lg-12 d-flex">
-              <span class="lead" [ngSwitch]="action.action">
-                <span *ngSwitchCase="'read'" class="badge rounded-pill" [class.bg-info]="action.permission.selected"
-                  [class.bg-ligth]="!action.permission.selected"
-                  [class.text-line-through]="!action.permission.selected">Ver</span>
-                <span *ngSwitchCase="'write'" class="badge rounded-pill"
-                  [class.bg-primary]="action.permission.selected" [class.bg-ligth]="!action.permission.selected"
-                  [class.text-line-through]="!action.permission.selected">Actualizar</span>
-                <span *ngSwitchCase="'delete'" class="badge rounded-pill"
-                  [class.bg-danger]="action.permission.selected" [class.bg-ligth]="!action.permission.selected"
-                  [class.text-line-through]="!action.permission.selected">Eliminar</span>
-                <span *ngSwitchCase="'book'" class="badge rounded-pill"
-                  [class.bg-warning]="action.permission.selected" [class.bg-ligth]="!action.permission.selected"
-                  [class.text-line-through]="!action.permission.selected">Reservar</span>
-                <span *ngSwitchCase="'absent'" class="badge rounded-pill" [class.bg-dark]="action.permission.selected"
-                  [class.bg-ligth]="!action.permission.selected"
-                  [class.text-line-through]="!action.permission.selected">Ausentar</span>
-                <span *ngSwitchCase="'cancel'" class="badge rounded-pill"
-                  [class.bg-danger]="action.permission.selected" [class.bg-ligth]="!action.permission.selected"
-                  [class.text-line-through]="!action.permission.selected">Cancelar</span>
-                <span *ngSwitchCase="'attend'" class="badge rounded-pill" [class.bg-info]="action.permission.selected"
-                  [class.bg-ligth]="!action.permission.selected"
-                  [class.text-line-through]="!action.permission.selected">Atender</span>
-                <span *ngSwitchCase="'finalize'" class="badge rounded-pill"
-                  [class.bg-success]="action.permission.selected" [class.bg-ligth]="!action.permission.selected"
-                  [class.text-line-through]="!action.permission.selected">Finalizar</span>
-              </span>
-            </div>
+    <div class="card-body tab-content">
+      <div class="tab-pane active" id="detail">
+        <ul class="list-group list-group-flush" *ngIf="profile">
+          <li class="list-group-item d-flex justify-content-between">
+            <h5>Descripción</h5>
+            <h6>{{ profile.description }}</h6>
+          </li>
+          <li class="list-group-item d-flex justify-content-between">
+            <h5>Activo</h5>
+            <i *ngIf="profile.active" class="bi bi-check-square text-success"></i>
+            <i *ngIf="!profile.active" class="bi bi-square text-danger outline"></i>
+          </li>
+          <li class="list-group-item border-0">
+            <h5>Permisos</h5>
+          </li>
+          <li class="list-group-item">
+            <div class="table-responsive">
+            <table class="table table-light table-striped">
+              <thead>
+                <tr>
+                  <th scope="col">Entidad</th>
+                  <th scope="col">Acciones</th>
+                </tr>
+              </thead>
+              <tbody class="table-group-divider">
+                <tr *ngFor="let permissionByEntity of permissionsByEntities | orderBy: 'name'">
+                  <th scope="row">{{ permissionByEntity.name }}</th>
+                  <td>
+                    <span *ngFor="let action of permissionByEntity.actions | orderBy: 'order'">
+                      <span class="lead p-1" [ngSwitch]="action.name">
+                        <span *ngSwitchCase="'read'" class="badge rounded-pill bg-info">Ver</span>
+                        <span *ngSwitchCase="'write'" class="badge rounded-pill bg-primary">Actualizar</span>
+                        <span *ngSwitchCase="'delete'" class="badge rounded-pill bg-danger">Eliminar</span>
+                        <span *ngSwitchCase="'book'" class="badge rounded-pill bg-warning">Reservar</span>
+                        <span *ngSwitchCase="'absent'" class="badge rounded-pill bg-dark">Ausentar</span>
+                        <span *ngSwitchCase="'cancel'" class="badge rounded-pill bg-danger">Cancelar</span>
+                        <span *ngSwitchCase="'attend'" class="badge rounded-pill bg-info">Atender</span>
+                        <span *ngSwitchCase="'finalize'" class="badge rounded-pill bg-success">Finalizar</span>
+                      </span>
+                    </span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
+          </li>
+
+        </ul>
+        <div class="button-form m-0" *ngIf="profile">
+          <button type="button" class="btn btn-secondary" (click)="previousState()" title="Volver">
+            <i class="bi bi-arrow-left-short"></i>&nbsp;Volver
+          </button>
+  
+          <button *hasPermission="['profiles.write']" type="button" [routerLink]="['../../', profile.id, 'edit']"
+            class="btn btn-primary" title="Editar">
+            <i class="bi bi-pencil"></i>&nbsp;Editar
+          </button>
         </div>
-      </ng-container>
+
+      </div>
     </div>
-  </div>
-
-  <div class="button-form">
-    <button type="button" class="btn btn-secondary" (click)="previousState()" title="Volver">
-      <i class="bi bi-arrow-left-short"></i>&nbsp;Volver
-    </button>
-
-    <button *hasPermission="['profiles.write']" type="button" [routerLink]="['../../', profile.id, 'edit']"
-      class="btn btn-primary" title="Editar">
-      <i class="bi bi-pencil"></i>&nbsp;Editar
-    </button>
   </div>
 </div>

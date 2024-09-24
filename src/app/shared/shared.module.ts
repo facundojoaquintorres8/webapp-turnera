@@ -8,11 +8,11 @@ import { PaginateComponent } from '../component/table/paginated.component';
 import { ObservationModalComponent } from '../component/observation-modal/observation-modal.component';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { FilterComponent } from '../component/filter/filter.component';
-import { CustomDatePickerConfig } from './generic-util';
+import { CustomDatePickerConfig, OrderByPipe } from './generic-util';
 import { AppointmentStatusComponent } from '../component/appointment-status/appointment-status.component';
 
 @NgModule({
-    declarations: [TableComponent, PaginateComponent, ObservationModalComponent, FilterComponent, AppointmentStatusComponent],
+    declarations: [TableComponent, PaginateComponent, ObservationModalComponent, FilterComponent, AppointmentStatusComponent, OrderByPipe],
     imports: [CommonModule, PermissionModule, ReactiveFormsModule, NgbModule, NgSelectModule],
     exports: [
         FormsModule,
@@ -25,7 +25,8 @@ import { AppointmentStatusComponent } from '../component/appointment-status/appo
         PaginateComponent,
         ObservationModalComponent,
         FilterComponent,
-        AppointmentStatusComponent
+        AppointmentStatusComponent,
+        OrderByPipe
     ],
     providers: [
         { provide: NgbInputDatepickerConfig, useClass: CustomDatePickerConfig },
