@@ -2,56 +2,47 @@
   <div class="card">
     <div class="card-header bg-dark text-white">
       <h1 class="card-title">Mi Organización</h1>
-      <ul class="nav nav-tabs card-header-tabs" data-bs-tabs="tabs">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="true" data-bs-toggle="tab" href="#detail">
-            <i class="bi bi-eye"></i>&nbsp;Detalle
-          </a>
+    </div>
+    <div class="card-body">
+      <ul class="list-group list-group-flush" *ngIf="organization">
+        <li class="list-group-item d-flex justify-content-between">
+          <h5>Razón Social</h5>
+          <h6>{{ organization.businessName }}</h6>
+        </li>
+        <li class="list-group-item d-flex justify-content-between">
+          <h5>Marca</h5>
+          <h6>{{ organization.brandName ? organization.brandName : '-' }}</h6>
+        </li>
+        <li class="list-group-item d-flex justify-content-between">
+          <h5>CUIT</h5>
+          <h6>{{ organization.cuit ? organization.cuit : '-' }}</h6>
+        </li>
+        <li class="list-group-item d-flex justify-content-between">
+          <h5>Correo Electrónico Predeterminado</h5>
+          <h6>{{ organization.defaultEmail }}</h6>
+        </li>
+        <li class="list-group-item d-flex justify-content-between">
+          <h5>Teléfono 1</h5>
+          <h6>{{ organization.phone1 ? organization.phone1 : '-' }}</h6>
+        </li>
+        <li class="list-group-item d-flex justify-content-between">
+          <h5>Teléfono 2</h5>
+          <h6>{{ organization.phone2 ? organization.phone2 : '-' }}</h6>
+        </li>
+        <li class="list-group-item d-flex justify-content-between">
+          <h5>Dirección</h5>
+          <h6>{{ organization.address ? organization.address : '-' }}</h6>
         </li>
       </ul>
-    </div>
-    <div class="card-body tab-content">
-      <div class="tab-pane active" id="detail">
-        <ul class="list-group list-group-flush" *ngIf="organization">
-          <li class="list-group-item d-flex justify-content-between">
-            <h5>Razón Social</h5>
-            <h6>{{ organization.businessName }}</h6>
-          </li>
-          <li class="list-group-item d-flex justify-content-between">
-            <h5>Marca</h5>
-            <h6>{{ organization.brandName ? organization.brandName : '-' }}</h6>
-          </li>
-          <li class="list-group-item d-flex justify-content-between">
-            <h5>CUIT</h5>
-            <h6>{{ organization.cuit ? organization.cuit : '-' }}</h6>
-          </li>
-          <li class="list-group-item d-flex justify-content-between">
-            <h5>Correo Electrónico Predeterminado</h5>
-            <h6>{{ organization.defaultEmail }}</h6>
-          </li>
-          <li class="list-group-item d-flex justify-content-between">
-            <h5>Teléfono 1</h5>
-            <h6>{{ organization.phone1 ? organization.phone1 : '-' }}</h6>
-          </li>
-          <li class="list-group-item d-flex justify-content-between">
-            <h5>Teléfono 2</h5>
-            <h6>{{ organization.phone2 ? organization.phone2 : '-' }}</h6>
-          </li>
-          <li class="list-group-item d-flex justify-content-between">
-            <h5>Dirección</h5>
-            <h6>{{ organization.address ? organization.address : '-' }}</h6>
-          </li>
-        </ul>
-        <div class="button-form m-0" *ngIf="organization">
-          <button type="button" class="btn btn-secondary" (click)="previousState()" title="Volver">
-            <i class="bi bi-arrow-left-short"></i>&nbsp;Volver
-          </button>
-  
-          <button *hasPermission="['organizations.write']" type="button" [routerLink]="['edit']"
-            class="btn btn-primary" title="Editar">
-            <i class="bi bi-pencil"></i>&nbsp;Editar
-          </button>
-        </div>
+      <div class="button-form m-0" *ngIf="organization">
+        <button type="button" class="btn btn-secondary" (click)="previousState()" title="Volver">
+          <i class="bi bi-arrow-left-short"></i>&nbsp;Volver
+        </button>
+
+        <button *hasPermission="['organizations.write']" type="button" [routerLink]="['edit']" class="btn btn-primary"
+          title="Editar">
+          <i class="bi bi-pencil"></i>&nbsp;Editar
+        </button>
 
       </div>
     </div>

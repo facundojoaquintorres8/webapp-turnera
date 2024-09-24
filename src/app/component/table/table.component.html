@@ -1,13 +1,17 @@
-<table class="table table-responsive">
-    <thead>
-        <ng-container *ngTemplateOutlet="defaultHeader">
-        </ng-container>
-    </thead>
-    <tbody>
-        <ng-container *ngTemplateOutlet="items.length ? bodyTemplate : bodyNoItems; context: {$implicit:  items}">
-        </ng-container>
-    </tbody>
-</table>
+
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <ng-container *ngTemplateOutlet="defaultHeader">
+            </ng-container>
+        </thead>
+        <tbody>
+            <ng-container *ngTemplateOutlet="items.length ? bodyTemplate : bodyNoItems; context: {$implicit:  items}">
+            </ng-container>
+        </tbody>
+    </table>
+</div>
+
 <app-paginated [page]="page" [totalPages]="totalPages" (executeQuery)="executeQuery($event)"></app-paginated>
 
 <ng-template #defaultHeader>

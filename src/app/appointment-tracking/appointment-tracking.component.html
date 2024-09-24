@@ -1,74 +1,82 @@
-<div class="container-fluid">
-  <h2>Seguimiento de Turnos</h2>
+<div class="m-sm-1">
+  <div class="card">
+    <div class="card-header bg-dark text-white">
+      <h1 class="card-title">
+        Seguimiento de Turnos
+      </h1>
+    </div>
+    <div class="card-body">
+      <app-filter [filterInputs]="filterInputs" [myForm]="myForm" (submit)="getAgendas()"
+        (clear)="clear()"></app-filter>
 
-  <app-filter [filterInputs]="filterInputs" [myForm]="myForm" (submit)="getAgendas()" (clear)="clear()"></app-filter>
+      <app-table [headers]="headers" [bodyTemplate]="customBody" [myForm]="myForm" [sort]="sort" [hasButtons]="true"
+        [filterInputs]="filterInputs" [queryItems]="query" #tableComponent>
 
-  <app-table [headers]="headers" [bodyTemplate]="customBody" [myForm]="myForm" [sort]="sort" [hasButtons]="true"
-    [filterInputs]="filterInputs" [queryItems]="query" #tableComponent>
+        <ng-template #customBody let-items>
+          <tr *ngFor="let agenda of items">
+            <td>{{ agenda.resource.description }}</td>
+            <td>{{ agenda.startDate | date: 'dd/MM/yyyy HH:mm' }}</td>
+            <td>{{ agenda.endDate | date: 'dd/MM/yyyy HH:mm' }}</td>
+            <td>{{ agenda.lastAppointment ? agenda.lastAppointment.customerBusinessName : '-'}}</td>
+            <td>
+              <app-appointment-status [appointment]="agenda.lastAppointment"></app-appointment-status>
+              <ng-container *ngIf="agenda.lastAppointment && agenda.lastAppointment.lastAppointmentStatus.observations">
+                <i class="bi bi-chat-text text-primary ms-1 pointer"
+                  (click)="seeObservations(agenda.lastAppointment.lastAppointmentStatus.observations)"
+                  ngbTooltip="{{ 'Observaciones: ' + agenda.lastAppointment.lastAppointmentStatus.observations }}"></i>
+              </ng-container>
+            </td>
 
-    <ng-template #customBody let-items>
-      <tr *ngFor="let agenda of items">
-        <td>{{ agenda.resource.description }}</td>
-        <td>{{ agenda.startDate | date: 'dd/MM/yyyy HH:mm' }}</td>
-        <td>{{ agenda.endDate | date: 'dd/MM/yyyy HH:mm' }}</td>
-        <td>{{ agenda.lastAppointment ? agenda.lastAppointment.customerBusinessName : '-'}}</td>
-        <td>
-          <app-appointment-status [appointment]="agenda.lastAppointment"></app-appointment-status>
-          <ng-container *ngIf="agenda.lastAppointment && agenda.lastAppointment.lastAppointmentStatus.observations">
-            <i class="bi bi-chat-text text-primary ms-1 pointer"
-              (click)="seeObservations(agenda.lastAppointment.lastAppointmentStatus.observations)"
-              ngbTooltip="{{ 'Observaciones: ' + agenda.lastAppointment.lastAppointmentStatus.observations }}"></i>
-          </ng-container>
-        </td>
+            <td class="text-end">
+              <button type="button" *ngIf="canBook(agenda)" (click)="book(agenda)" class="btn btn-warning btn-icon ms-1"
+                title="Reservar turno">
+                <i class="bi bi-plus-lg"></i>
+              </button>
 
-        <td class="text-end">
-          <button type="button" *ngIf="canBook(agenda)" (click)="book(agenda)" class="btn btn-warning btn-icon ms-1"
-            title="Reservar turno">
-            <i class="bi bi-plus-lg"></i>
-          </button>
+              <button type="button" *ngIf="canAttend(agenda)" (click)="attend(agenda.lastAppointment)"
+                class="btn btn-info btn-icon ms-1" title="Atender">
+                <i class="bi bi-play"></i>
+              </button>
 
-          <button type="button" *ngIf="canAttend(agenda)" (click)="attend(agenda.lastAppointment)"
-            class="btn btn-info btn-icon ms-1" title="Atender">
-            <i class="bi bi-play"></i>
-          </button>
+              <button type="button" *ngIf="canAbsent(agenda)" (click)="absent(agenda.lastAppointment)"
+                class="btn btn-dark btn-icon ms-1" title="Ausentar">
+                <i class="bi bi-person-slash"></i>
+              </button>
 
-          <button type="button" *ngIf="canAbsent(agenda)" (click)="absent(agenda.lastAppointment)"
-            class="btn btn-dark btn-icon ms-1" title="Ausentar">
-            <i class="bi bi-person-slash"></i>
-          </button>
+              <button type="button" *ngIf="canCancel(agenda)" (click)="cancel(agenda.lastAppointment)"
+                class="btn btn-danger btn-icon ms-1" title="Cancelar">
+                <i class="bi bi-ban"></i>
+              </button>
 
-          <button type="button" *ngIf="canCancel(agenda)" (click)="cancel(agenda.lastAppointment)"
-            class="btn btn-danger btn-icon ms-1" title="Cancelar">
-            <i class="bi bi-ban"></i>
-          </button>
+              <button type="button" *ngIf="canFinalize(agenda)" (click)="finalize(agenda.lastAppointment)"
+                class="btn btn-success btn-icon ms-1" title="Finalizar">
+                <i class="bi bi-person-check-fill"></i>
+              </button>
 
-          <button type="button" *ngIf="canFinalize(agenda)" (click)="finalize(agenda.lastAppointment)"
-            class="btn btn-success btn-icon ms-1" title="Finalizar">
-            <i class="bi bi-person-check-fill"></i>
-          </button>
+              <button type="button" *ngIf="canDelete(agenda)" (click)="delete(agenda)"
+                class="btn btn-danger btn-icon ms-1" title="Eliminar disponibilidad">
+                <i class="bi bi-trash"></i>
+              </button>
 
-          <button type="button" *ngIf="canDelete(agenda)" (click)="delete(agenda)" class="btn btn-danger btn-icon ms-1"
-            title="Eliminar disponibilidad">
-            <i class="bi bi-trash"></i>
-          </button>
+              <button type="button" *ngIf="canDesactivate(agenda)" (click)="desactivate(agenda)"
+                class="btn btn-danger btn-icon ms-1" title="Desactivar disponibilidad">
+                <i class="bi bi-calendar-x"></i>
+              </button>
 
-          <button type="button" *ngIf="canDesactivate(agenda)" (click)="desactivate(agenda)"
-            class="btn btn-danger btn-icon ms-1" title="Desactivar disponibilidad">
-            <i class="bi bi-calendar-x"></i>
-          </button>
+              <button type="button" *ngIf="canActivate(agenda)" (click)="activate(agenda)"
+                class="btn btn-primary btn-icon ms-1" title="Activar disponibilidad">
+                <i class="bi bi-calendar-plus"></i>
+              </button>
 
-          <button type="button" *ngIf="canActivate(agenda)" (click)="activate(agenda)" class="btn btn-primary btn-icon ms-1"
-            title="Activar disponibilidad">
-            <i class="bi bi-calendar-plus"></i>
-          </button>
+              <button *hasPermission="['agendas.write']" type="button" [routerLink]="['../agendas', agenda.id, 'edit']"
+                class="btn btn-info btn-icon ms-1" title="Editar disponibilidad">
+                <i class="bi bi-pencil"></i>
+              </button>
+            </td>
+          </tr>
+        </ng-template>
 
-          <button *hasPermission="['agendas.write']" type="button" [routerLink]="['../agendas', agenda.id, 'edit']"
-            class="btn btn-info btn-icon ms-1" title="Editar disponibilidad">
-            <i class="bi bi-pencil"></i>
-          </button>
-        </td>
-      </tr>
-    </ng-template>
-
-  </app-table>
+      </app-table>
+    </div>
+  </div>
 </div>

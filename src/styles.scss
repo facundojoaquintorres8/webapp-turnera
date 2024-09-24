@@ -3,7 +3,6 @@
 
 body {
   font-family: Helvetica, sans-serif;
-  background-color: #e9ecef;
 }
 
 @media screen and (min-width: 991px) {
@@ -87,5 +86,12 @@ select, ng-select {
 .nav-link:not(.active) { //  text-light
   --bs-text-opacity: 1;
     color: rgba(var(--bs-light-rgb), var(--bs-text-opacity)) !important;
+}
+
+.list-group-item {
+  h6 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 }
 
