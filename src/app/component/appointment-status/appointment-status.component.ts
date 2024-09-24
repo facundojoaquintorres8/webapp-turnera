@@ -18,19 +18,19 @@ export class AppointmentStatusComponent {
     if (appointment) {
       switch (this.appointmentStatusEnum[appointment.lastAppointmentStatus.status]) {
         case AppointmentStatusEnum.BOOKED:
-          result = 'bg-warning';
+          result = 'bg-primary text-white';
           break;
         case AppointmentStatusEnum.ABSENT:
-          result = 'bg-dark';
+          result = 'bg-dark text-white';
           break;
         case AppointmentStatusEnum.CANCELLED:
-          result = 'bg-danger';
+          result = 'bg-danger text-white';
           break;
         case AppointmentStatusEnum.IN_ATTENTION:
-          result = 'bg-info';
+          result = 'bg-info text-white';
           break;
         case AppointmentStatusEnum.FINALIZED:
-          result = 'bg-success';
+          result = 'bg-success text-white';
           break;
       }
     }

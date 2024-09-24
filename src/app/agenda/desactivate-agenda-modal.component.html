@@ -1,7 +1,6 @@
 <form *ngIf="agenda" name="desactivateForm" (ngSubmit)="confirmDesactivate(agenda.id!)">
-    <div class="modal-header">
+    <div class="modal-header bg-danger text-white">
         <h4 class="modal-title">Confirmar operación</h4>
-        <button type="button" class="btn-close" (click)="cancel()" title="Cancelar"></button>
     </div>
 
     <div class="modal-body">
