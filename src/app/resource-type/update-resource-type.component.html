@@ -1,37 +1,46 @@
-<div class="container-fluid">
-    <form name="myForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="myForm">
-        <h2 *ngIf="!myForm.get('id')!.value">Crear Tipo de Recurso</h2>
-        <h2 *ngIf="myForm.get('id')!.value">Editar Tipo de Recurso</h2>
+<div class="m-sm-1">
+    <div class="card">
+        <div class="card-header bg-dark text-white">
+            <h1 class="card-title" *ngIf="!myForm.get('id')!.value">Crear Tipo de Recurso</h1>
+            <h1 class="card-title" *ngIf="myForm.get('id')!.value">Editar Tipo de Recurso</h1>
+        </div>
+        <div class="card-body">
+            <form name="myForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="myForm">
 
-        <div class="row">
-            <div class="col-lg-4">
-                <div class="mb-3">
-                    <label class="required" for="description">Descripción</label>
-                    <input type="text" class="form-control" name="description" id="description"
-                        formControlName="description" />
-                    <div
-                        *ngIf="myForm.get('description')!.invalid && (myForm.get('description')!.dirty || myForm.get('description')!.touched)">
-                        <small class="form-text text-danger" *ngIf="myForm.get('description')?.errors?.required">
-                            El campo es requerido.
-                        </small>
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="mb-3">
+                            <label class="required" for="description">Descripción</label>
+                            <input type="text" class="form-control" name="description" id="description"
+                                formControlName="description" />
+                            <div
+                                *ngIf="myForm.get('description')!.invalid && (myForm.get('description')!.dirty || myForm.get('description')!.touched)">
+                                <small class="form-text text-danger"
+                                    *ngIf="myForm.get('description')?.errors?.required">
+                                    El campo es requerido.
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-1 d-flex align-items-center" *ngIf="myForm.get('id')!.value">
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" name="active" id="active"
+                                formControlName="active" />
+                            <label class="form-check-label" for="active">Activo</label>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-1 d-flex align-items-center" *ngIf="myForm.get('id')!.value">
-                <div class="form-check">
-                    <input type="checkbox" class="form-check-input" name="active" id="active" formControlName="active" />
-                    <label class="form-check-label" for="active">Activo</label>
-                </div>
-            </div>
-        </div>
 
-        <div class="button-form mt-4">
-            <button type="button" class="btn btn-secondary" (click)="previousState()" title="Cancelar">
-                <i class="bi bi-ban"></i>&nbsp;Cancelar
-            </button>
-            <button type="submit" [disabled]="myForm.invalid || isSaving" class="btn btn-primary" title="Guardar">
-                <i class="bi bi-floppy"></i>&nbsp;Guardar
-            </button>
+                <div class="button-form mt-4">
+                    <button type="button" class="btn btn-secondary" (click)="previousState()" title="Cancelar">
+                        <i class="bi bi-ban"></i>&nbsp;Cancelar
+                    </button>
+                    <button type="submit" [disabled]="myForm.invalid || isSaving" class="btn btn-primary"
+                        title="Guardar">
+                        <i class="bi bi-floppy"></i>&nbsp;Guardar
+                    </button>
+                </div>
+            </form>
         </div>
-    </form>
+    </div>
 </div>

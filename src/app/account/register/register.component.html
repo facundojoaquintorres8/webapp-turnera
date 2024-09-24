@@ -36,17 +36,17 @@
         <div class="row">
           <div class="col-lg-12">
             <div class="mb-3">
-              <label class="required" for="username">Correo Electrónico</label>
+              <label class="required" for="username">Correo electrónico</label>
               <input type="email" class="form-control" name="username" id="username" formControlName="username" />
               <div *ngIf="myForm.get('username')!.invalid && (myForm.get('username')!.dirty || myForm.get('username')!.touched)">
                 <small class="form-text text-danger" *ngIf="myForm.get('username')?.errors?.required">
                   El campo es requerido.
                 </small>
                 <small class="form-text text-danger" *ngIf="myForm.get('username')?.errors?.maxlength">
-                  El Correo Electrónico no puede contener más de 50 caracteres.
+                  El correo electrónico no puede contener más de 50 caracteres.
                 </small>
                 <small class="form-text text-danger" *ngIf="myForm.get('username')!.touched && myForm.get('username')?.errors?.email">
-                  El Correo Electrónico es inválido.
+                  El correo electrónico es inválido.
                 </small>
               </div>
             </div>
@@ -55,7 +55,7 @@
         <div class="row">
           <div class="col-lg-12">
             <div class="mb-3">
-              <label class="required" for="businessName">Razón Social</label>
+              <label class="required" for="businessName">Razón social</label>
               <input type="text" class="form-control" name="businessName" id="businessName" formControlName="businessName" />
               <div
                 *ngIf="myForm.get('businessName')!.invalid && (myForm.get('businessName')!.dirty || myForm.get('businessName')!.touched)">

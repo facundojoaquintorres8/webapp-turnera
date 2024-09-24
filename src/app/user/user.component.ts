@@ -42,14 +42,14 @@ export class UserComponent implements OnInit {
 
   ngOnInit(): void {
     this.filterInputs = [
-      { label: 'Correo Electrónico', type: InputTypeEnum.TEXT, name: 'username', width: 4 },
+      { label: 'Correo electrónico', type: InputTypeEnum.TEXT, name: 'username', width: 4 },
       { label: 'Apellido', type: InputTypeEnum.TEXT, name: 'lastName', width: 3 },
       { label: 'Nombre', type: InputTypeEnum.TEXT, name: 'firstName', width: 3 },
       { label: 'Activos', type: InputTypeEnum.LIST, name: 'active', width: 2, itemList: getListToBoolean() },
     ];
 
     this.headers = [
-      { label: 'Correo Electrónico', colName: 'username', canSort: true },
+      { label: 'Correo electrónico', colName: 'username', canSort: true },
       { label: 'Apellido', colName: 'lastName', canSort: true },
       { label: 'Nombre', colName: 'firstName', canSort: true },
       { label: 'Activo', colName: 'active', canSort: true }

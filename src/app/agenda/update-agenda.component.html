@@ -1,141 +1,154 @@
-<div class="container-fluid">
-    <form name="myForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="myForm">
-        <h2>Actualizar Disponibilidades</h2>
-
-        <div class="row">
-            <div class="col-lg-6">
-                <div class="mb-3">
-                    <label class="required" for="resource">Recurso</label>
-                    <ng-select [items]="resources" bindLabel="description" notFoundText="Sin items" clearAllText="Limpiar" id="resource"
-                        formControlName="resource" (ngModelChange)="onResourceChange()">
-                    </ng-select>
-                    <div
-                        *ngIf="myForm.get('resource')!.invalid && (myForm.get('resource')!.dirty || myForm.get('resource')!.touched)">
-                        <small class="form-text text-danger" *ngIf="myForm.get('resource')?.errors?.required">
-                            El campo es requerido.
-                        </small>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-6">
-                <div class="mb-3">
-                    <label class="required" for="resourceType">Tipo de recurso</label>
-                    <ng-select [items]="resourcesTypes" bindLabel="description" notFoundText="Sin items" clearAllText="Limpiar" id="resourceType"
-                        formControlName="resourceType">
-                    </ng-select>
-                    <div
-                        *ngIf="myForm.get('resourceType')!.invalid && (myForm.get('resourceType')!.dirty || myForm.get('resourceType')!.touched)">
-                        <small class="form-text text-danger" *ngIf="myForm.get('resourceType')?.errors?.required">
-                            El campo es requerido.
-                        </small>
-                    </div>
-                </div>
-            </div>
+<div class="m-sm-1">
+    <div class="card">
+        <div class="card-header bg-dark text-white">
+            <h1 class="card-title">Editar Disponibilidad</h1>
         </div>
+        <div class="card-body">
+            <form name="myForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="myForm">
 
-        <div class="row">
-            <div class="col-lg-2">
-                <div class="mb-3">
-                    <label class="required">Fecha inicio</label>
-                    <div class="input-group">
-                        <input class="form-control" placeholder="yyyy-mm-dd" name="startDate"
-                            formControlName="startDate" ngbDatepicker #startDate="ngbDatepicker"
-                            [maxDate]="maxDate()" (ngModelChange)="validateDates()">
-                        <div class="input-group-append">
-                            <button class="btn btn-primary" (click)="startDate.toggle()" type="button"
-                                title="Abrir Calendario">
-                                <i class="bi bi-calendar3"></i>
-                            </button>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="mb-3">
+                            <label class="required" for="resource">Recurso</label>
+                            <ng-select [items]="resources" bindLabel="description" notFoundText="Sin items"
+                                clearAllText="Limpiar" id="resource" formControlName="resource"
+                                (ngModelChange)="onResourceChange()">
+                            </ng-select>
+                            <div
+                                *ngIf="myForm.get('resource')!.invalid && (myForm.get('resource')!.dirty || myForm.get('resource')!.touched)">
+                                <small class="form-text text-danger" *ngIf="myForm.get('resource')?.errors?.required">
+                                    El campo es requerido.
+                                </small>
+                            </div>
                         </div>
                     </div>
-                    <div
-                        *ngIf="myForm.get('startDate')!.invalid && (myForm.get('startDate')!.dirty || myForm.get('startDate')!.touched)">
-                        <small class="form-text text-danger" *ngIf="myForm.get('startDate')?.errors?.required">
-                            El campo es requerido.
-                        </small>
-                        <small class="form-text text-danger" *ngIf="myForm.get('startDate')?.errors?.ngbDate?.maxDate">
-                            La fecha de inicio debe ser menor o igual a la de fin.
-                        </small>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-lg-auto">
-                <div class="mb-3">
-                    <label class="required">Hora inicio</label>
-                    <ngb-timepicker name="startHour" id="startHour" formControlName="startHour" [spinners]="false"
-                        (ngModelChange)="validateDates()">
-                    </ngb-timepicker>
-                    <div
-                        *ngIf="myForm.get('startHour')!.invalid && (myForm.get('startHour')!.dirty || myForm.get('startHour')!.touched)">
-                        <small class="form-text text-danger" *ngIf="myForm.get('startHour')?.errors?.required">
-                            El campo es requerido.
-                        </small>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-2">
-                <div class="mb-3">
-                    <label class="required">Fecha fin</label>
-                    <div class="input-group">
-                        <input class="form-control" placeholder="yyyy-mm-dd" name="endDate"
-                            formControlName="endDate" ngbDatepicker #endDate="ngbDatepicker" [minDate]="minDate()" (ngModelChange)="validateDates()">
-                        <div class="input-group-append">
-                            <button class="btn btn-primary" (click)="endDate.toggle()" type="button"
-                                title="Abrir Calendario">
-                                <i class="bi bi-calendar3"></i>
-                            </button>
+
+                    <div class="col-lg-6">
+                        <div class="mb-3">
+                            <label class="required" for="resourceType">Tipo de recurso</label>
+                            <ng-select [items]="resourcesTypes" bindLabel="description" notFoundText="Sin items"
+                                clearAllText="Limpiar" id="resourceType" formControlName="resourceType">
+                            </ng-select>
+                            <div
+                                *ngIf="myForm.get('resourceType')!.invalid && (myForm.get('resourceType')!.dirty || myForm.get('resourceType')!.touched)">
+                                <small class="form-text text-danger"
+                                    *ngIf="myForm.get('resourceType')?.errors?.required">
+                                    El campo es requerido.
+                                </small>
+                            </div>
                         </div>
                     </div>
-                    <div
-                        *ngIf="myForm.get('endDate')!.invalid && (myForm.get('endDate')!.dirty || myForm.get('endDate')!.touched)">
-                        <small class="form-text text-danger" *ngIf="myForm.get('endDate')?.errors?.required">
-                            El campo es requerido.
-                        </small>
-                        <small class="form-text text-danger" *ngIf="myForm.get('endDate')?.errors?.ngbDate?.minDate">
-                            La fecha de fin debe ser mayor o igual a la de inicio.
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-2">
+                        <div class="mb-3">
+                            <label class="required">Fecha inicio</label>
+                            <div class="input-group">
+                                <input class="form-control" placeholder="yyyy-mm-dd" name="startDate"
+                                    formControlName="startDate" ngbDatepicker #startDate="ngbDatepicker"
+                                    [maxDate]="maxDate()" (ngModelChange)="validateDates()">
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary" (click)="startDate.toggle()" type="button"
+                                        title="Abrir Calendario">
+                                        <i class="bi bi-calendar3"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div
+                                *ngIf="myForm.get('startDate')!.invalid && (myForm.get('startDate')!.dirty || myForm.get('startDate')!.touched)">
+                                <small class="form-text text-danger" *ngIf="myForm.get('startDate')?.errors?.required">
+                                    El campo es requerido.
+                                </small>
+                                <small class="form-text text-danger"
+                                    *ngIf="myForm.get('startDate')?.errors?.ngbDate?.maxDate">
+                                    La fecha de inicio debe ser menor o igual a la de fin.
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-auto">
+                        <div class="mb-3">
+                            <label class="required">Hora inicio</label>
+                            <ngb-timepicker name="startHour" id="startHour" formControlName="startHour"
+                                [spinners]="false" (ngModelChange)="validateDates()">
+                            </ngb-timepicker>
+                            <div
+                                *ngIf="myForm.get('startHour')!.invalid && (myForm.get('startHour')!.dirty || myForm.get('startHour')!.touched)">
+                                <small class="form-text text-danger" *ngIf="myForm.get('startHour')?.errors?.required">
+                                    El campo es requerido.
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="mb-3">
+                            <label class="required">Fecha fin</label>
+                            <div class="input-group">
+                                <input class="form-control" placeholder="yyyy-mm-dd" name="endDate"
+                                    formControlName="endDate" ngbDatepicker #endDate="ngbDatepicker"
+                                    [minDate]="minDate()" (ngModelChange)="validateDates()">
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary" (click)="endDate.toggle()" type="button"
+                                        title="Abrir Calendario">
+                                        <i class="bi bi-calendar3"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div
+                                *ngIf="myForm.get('endDate')!.invalid && (myForm.get('endDate')!.dirty || myForm.get('endDate')!.touched)">
+                                <small class="form-text text-danger" *ngIf="myForm.get('endDate')?.errors?.required">
+                                    El campo es requerido.
+                                </small>
+                                <small class="form-text text-danger"
+                                    *ngIf="myForm.get('endDate')?.errors?.ngbDate?.minDate">
+                                    La fecha de fin debe ser mayor o igual a la de inicio.
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-auto">
+                        <div class="mb-3">
+                            <label class="required">Hora fin</label>
+                            <ngb-timepicker name="endHour" id="endHour" formControlName="endHour" [spinners]="false"
+                                (ngModelChange)="validateDates()">
+                            </ngb-timepicker>
+                            <div
+                                *ngIf="myForm.get('endHour')!.invalid && (myForm.get('endHour')!.dirty || myForm.get('endHour')!.touched)">
+                                <small class="form-text text-danger" *ngIf="myForm.get('endHour')?.errors?.required">
+                                    El campo es requerido.
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-lg-auto d-grid align-content-center">
+                        <small class="text-info">{{ myForm.get('zoneId')!.value }}</small>
+                        <small class="form-text text-danger" *ngIf="showDateValidation">
+                            La fecha de inicio no puede ser igual o mayor a la de fin.
                         </small>
                     </div>
-                </div>
-            </div>
-            <div class="col-12 col-lg-auto">
-                <div class="mb-3">
-                    <label class="required">Hora fin</label>
-                    <ngb-timepicker name="endHour" id="endHour" formControlName="endHour" [spinners]="false"
-                        (ngModelChange)="validateDates()">
-                    </ngb-timepicker>
-                    <div
-                        *ngIf="myForm.get('endHour')!.invalid && (myForm.get('endHour')!.dirty || myForm.get('endHour')!.touched)">
-                        <small class="form-text text-danger" *ngIf="myForm.get('endHour')?.errors?.required">
-                            El campo es requerido.
-                        </small>
+
+                    <div class="col-12 col-lg-auto d-flex align-items-center">
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" name="active" id="active"
+                                formControlName="active" />
+                            <label class="form-check-label" for="active">Activa</label>
+                        </div>
                     </div>
+
                 </div>
-            </div>
 
-            <div class="col-12 col-lg-auto d-grid align-content-center">
-                <small class="text-info">{{ myForm.get('zoneId')!.value }}</small>
-                <small class="form-text text-danger" *ngIf="showDateValidation">
-                    La fecha de inicio no puede ser igual o mayor a la de fin.
-                </small>
-            </div>
-
-            <div class="col-12 col-lg-auto d-flex align-items-center">
-                <div class="form-check">
-                    <input type="checkbox" class="form-check-input" name="active" id="active" formControlName="active" />
-                    <label class="form-check-label" for="active">Activa</label>
+                <div class="button-form mt-4">
+                    <button type="button" class="btn btn-secondary" (click)="previousState()" title="Cancelar">
+                        <i class="bi bi-ban"></i>&nbsp;Cancelar
+                    </button>
+                    <button type="submit" [disabled]="myForm.invalid || isSaving || showDateValidation"
+                        class="btn btn-primary" title="Guardar">
+                        <i class="bi bi-floppy"></i>&nbsp;Guardar
+                    </button>
                 </div>
-            </div>
-
+            </form>
         </div>
-
-        <div class="button-form mt-4">
-            <button type="button" class="btn btn-secondary" (click)="previousState()" title="Cancelar">
-                <i class="bi bi-ban"></i>&nbsp;Cancelar
-            </button>
-            <button type="submit" [disabled]="myForm.invalid || isSaving || showDateValidation" class="btn btn-primary" title="Guardar">
-                <i class="bi bi-floppy"></i>&nbsp;Guardar
-            </button>
-        </div>
-    </form>
+    </div>
 </div>

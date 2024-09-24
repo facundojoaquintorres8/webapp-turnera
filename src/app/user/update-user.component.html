@@ -1,78 +1,88 @@
-<div class="container-fluid">
-    <form name="myForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="myForm">
-        <h2 *ngIf="!myForm.get('id')!.value">Crear Usuario</h2>
-        <h2 *ngIf="myForm.get('id')!.value">Editar Usuario</h2>
+<div class="m-sm-1">
+    <div class="card">
+        <div class="card-header bg-dark text-white">
+            <h1 class="card-title" *ngIf="!myForm.get('id')!.value">Crear Usuario</h1>
+            <h1 class="card-title" *ngIf="myForm.get('id')!.value">Editar Usuario</h1>
+        </div>
+        <div class="card-body">
+            <form name="myForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="myForm">
 
-        <div class="row">
-            <div class="col-lg-4">
-                <div class="mb-3">
-                    <label class="required" for="email">Correo Electrónico</label>
-                    <input type="email" class="form-control" name="email" id="email" formControlName="email" />
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="mb-3">
+                            <label class="required" for="email">Correo electrónico</label>
+                            <input type="email" class="form-control" name="email" id="email" formControlName="email" />
 
-                    <div
-                        *ngIf="myForm.get('email')!.invalid && (myForm.get('email')!.dirty || myForm.get('email')!.touched)">
-                        <small class="form-text text-danger" *ngIf="myForm.get('email')?.errors?.required">
-                            El campo es requerido.
-                        </small>
-                        <small class="form-text text-danger" *ngIf="myForm.get('email')?.errors?.maxlength">
-                            El Correo Electrónico no puede contener más de 50 caracteres.
-                        </small>
-                        <small class="form-text text-danger"
-                            *ngIf="myForm.get('email')!.touched && myForm.get('email')?.errors?.email">
-                            El Correo Electrónico es inválido.
-                        </small>
+                            <div
+                                *ngIf="myForm.get('email')!.invalid && (myForm.get('email')!.dirty || myForm.get('email')!.touched)">
+                                <small class="form-text text-danger" *ngIf="myForm.get('email')?.errors?.required">
+                                    El campo es requerido.
+                                </small>
+                                <small class="form-text text-danger" *ngIf="myForm.get('email')?.errors?.maxlength">
+                                    El correo electrónico no puede contener más de 50 caracteres.
+                                </small>
+                                <small class="form-text text-danger"
+                                    *ngIf="myForm.get('email')!.touched && myForm.get('email')?.errors?.email">
+                                    El correo electrónico es inválido.
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="mb-3">
+                            <label class="required" for="lastName">Apellido</label>
+                            <input type="text" class="form-control" name="lastName" id="lastName"
+                                formControlName="lastName" />
+                            <div
+                                *ngIf="myForm.get('lastName')!.invalid && (myForm.get('lastName')!.dirty || myForm.get('lastName')!.touched)">
+                                <small class="form-text text-danger" *ngIf="myForm.get('lastName')?.errors?.required">
+                                    El campo es requerido.
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="mb-3">
+                            <label class="required" for="firstName">Nombre</label>
+                            <input type="text" class="form-control" name="firstName" id="firstName"
+                                formControlName="firstName" />
+                            <div
+                                *ngIf="myForm.get('firstName')!.invalid && (myForm.get('firstName')!.dirty || myForm.get('firstName')!.touched)">
+                                <small class="form-text text-danger" *ngIf="myForm.get('firstName')?.errors?.required">
+                                    El campo es requerido.
+                                </small>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-4">
-                <div class="mb-3">
-                    <label class="required" for="lastName">Apellido</label>
-                    <input type="text" class="form-control" name="lastName" id="lastName" formControlName="lastName" />
-                    <div
-                        *ngIf="myForm.get('lastName')!.invalid && (myForm.get('lastName')!.dirty || myForm.get('lastName')!.touched)">
-                        <small class="form-text text-danger" *ngIf="myForm.get('lastName')?.errors?.required">
-                            El campo es requerido.
-                        </small>
+                <div class="row">
+                    <div class="col-lg-1 d-flex align-items-center" *ngIf="myForm.get('id')!.value">
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" name="active" id="active"
+                                formControlName="active" />
+                            <label class="form-check-label" for="active">Activo</label>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-4">
-                <div class="mb-3">
-                    <label class="required" for="firstName">Nombre</label>
-                    <input type="text" class="form-control" name="firstName" id="firstName"
-                        formControlName="firstName" />
-                    <div
-                        *ngIf="myForm.get('firstName')!.invalid && (myForm.get('firstName')!.dirty || myForm.get('firstName')!.touched)">
-                        <small class="form-text text-danger" *ngIf="myForm.get('firstName')?.errors?.required">
-                            El campo es requerido.
-                        </small>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-1 d-flex align-items-center" *ngIf="myForm.get('id')!.value">
-                <div class="form-check">
-                    <input type="checkbox" class="form-check-input" name="active" id="active" formControlName="active" />
-                    <label class="form-check-label" for="active">Activo</label>
-                </div>
-            </div>
-        </div>
 
-        <h3>Perfiles</h3>
-        <span class="lead pointer pe-2" *ngFor="let profile of profiles" (click)="selectProfile(profile)">
-            <span class="badge rounded-pill" [class.bg-primary]="profile.selected" [class.bg-light]="!profile.selected"
-                [class.text-dark]="!profile.selected" [class.border]="!profile.selected"
-                [class.border-dark]="!profile.selected">{{ profile.description }}</span>
-        </span>
+                <h3>Perfiles</h3>
+                <span class="lead pointer pe-2" *ngFor="let profile of profiles" (click)="selectProfile(profile)">
+                    <span class="badge rounded-pill" [class.bg-primary]="profile.selected"
+                        [class.bg-light]="!profile.selected" [class.text-dark]="!profile.selected"
+                        [class.border]="!profile.selected" [class.border-dark]="!profile.selected">{{
+                        profile.description }}</span>
+                </span>
 
-        <div class="button-form mt-4">
-            <button type="button" class="btn btn-secondary" (click)="previousState()" title="Cancelar">
-                <i class="bi bi-ban"></i>&nbsp;Cancelar
-            </button>
-            <button type="submit" [disabled]="myForm.invalid || isSaving" class="btn btn-primary" title="Guardar">
-                <i class="bi bi-floppy"></i>&nbsp;Guardar
-            </button>
+                <div class="button-form mt-4">
+                    <button type="button" class="btn btn-secondary" (click)="previousState()" title="Cancelar">
+                        <i class="bi bi-ban"></i>&nbsp;Cancelar
+                    </button>
+                    <button type="submit" [disabled]="myForm.invalid || isSaving" class="btn btn-primary"
+                        title="Guardar">
+                        <i class="bi bi-floppy"></i>&nbsp;Guardar
+                    </button>
+                </div>
+            </form>
         </div>
-    </form>
+    </div>
 </div>

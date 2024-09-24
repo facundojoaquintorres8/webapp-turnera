@@ -1,252 +1,267 @@
-<div class="container-fluid">
-    <form name="myForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="myForm">
-        <h2>Crear Disponibilidades</h2>
-
-        <div class="row">
-            <div class="col-lg-6">
-                <div class="mb-3">
-                    <label class="required" for="resource">Recurso</label>
-                    <ng-select [items]="resources" bindLabel="description" notFoundText="Sin items" clearAllText="Limpiar" id="resource"
-                        formControlName="resource" (ngModelChange)="onResourceChange()">
-                    </ng-select>
-                    <div
-                        *ngIf="myForm.get('resource')!.invalid && (myForm.get('resource')!.dirty || myForm.get('resource')!.touched)">
-                        <small class="form-text text-danger" *ngIf="myForm.get('resource')?.errors?.required">
-                            El campo es requerido.
-                        </small>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-6">
-                <div class="mb-3">
-                    <label class="required" for="resourceType">Tipo de recurso</label>
-                    <ng-select [items]="resourcesTypes" bindLabel="description" notFoundText="Sin items" clearAllText="Limpiar" id="resourceType"
-                        formControlName="resourceType">
-                    </ng-select>
-                    <div
-                        *ngIf="myForm.get('resourceType')!.invalid && (myForm.get('resourceType')!.dirty || myForm.get('resourceType')!.touched)">
-                        <small class="form-text text-danger" *ngIf="myForm.get('resourceType')?.errors?.required">
-                            El campo es requerido.
-                        </small>
-                    </div>
-                </div>
-            </div>
+<div class="m-sm-1">
+    <div class="card">
+        <div class="card-header bg-dark text-white">
+            <h1 class="card-title">Crear Disponibilidades</h1>
         </div>
+        <div class="card-body">
+            <form name="myForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="myForm">
 
-        <div class="row">
-            <div class="col-lg-2">
-                <div class="mb-3">
-                    <label class="required">Fecha inicio</label>
-                    <div class="input-group">
-                        <input class="form-control" placeholder="yyyy-mm-dd" name="startDate"
-                            formControlName="startDate" ngbDatepicker #startDate="ngbDatepicker"
-                            (ngModelChange)="onStartDateChange()">
-                        <div class="input-group-append">
-                            <button class="btn btn-primary" (click)="startDate.toggle()" type="button"
-                                title="Abrir Calendario">
-                                <i class="bi bi-calendar3"></i>
-                            </button>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="mb-3">
+                            <label class="required" for="resource">Recurso</label>
+                            <ng-select [items]="resources" bindLabel="description" notFoundText="Sin items"
+                                clearAllText="Limpiar" id="resource" formControlName="resource"
+                                (ngModelChange)="onResourceChange()">
+                            </ng-select>
+                            <div
+                                *ngIf="myForm.get('resource')!.invalid && (myForm.get('resource')!.dirty || myForm.get('resource')!.touched)">
+                                <small class="form-text text-danger" *ngIf="myForm.get('resource')?.errors?.required">
+                                    El campo es requerido.
+                                </small>
+                            </div>
                         </div>
                     </div>
-                    <div
-                        *ngIf="myForm.get('startDate')!.invalid && (myForm.get('startDate')!.dirty || myForm.get('startDate')!.touched)">
-                        <small class="form-text text-danger" *ngIf="myForm.get('startDate')?.errors?.required">
-                            El campo es requerido.
-                        </small>
-                    </div>
-                    <small class="text-info">{{ myForm.get('zoneId')!.value }}</small>
-                </div>
-            </div>
-            <div class="col-lg-2">
-                <div class="mb-3">
-                    <label class="required">Hora inicio</label>
-                    <ngb-timepicker name="startHour" id="startHour" formControlName="startHour" [spinners]="false">
-                    </ngb-timepicker>
-                    <div
-                        *ngIf="myForm.get('startHour')!.invalid && (myForm.get('startHour')!.dirty || myForm.get('startHour')!.touched)">
-                        <small class="form-text text-danger" *ngIf="myForm.get('startHour')?.errors?.required">
-                            El campo es requerido.
-                        </small>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-2">
-                <div class="mb-3">
-                    <label class="required">Hora fin</label>
-                    <ngb-timepicker name="endHour" id="endHour" formControlName="endHour" [spinners]="false">
-                    </ngb-timepicker>
-                    <div
-                        *ngIf="myForm.get('endHour')!.invalid && (myForm.get('endHour')!.dirty || myForm.get('endHour')!.touched)">
-                        <small class="form-text text-danger" *ngIf="myForm.get('endHour')?.errors?.required">
-                            El campo es requerido.
-                        </small>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-2">
-                <div class="mb-3">
-                    <label for="segmented" class="mt-30 d-flex">
-                        <input type="checkbox" class="checkbox ms-1" id="segmented" name="segmented"
-                            formControlName="segmented" (ngModelChange)="onSegmentedChange()">
-                        ¿Segmentado?
-                    </label>
-                </div>
-            </div>
 
-            <div class="col-lg-2">
-                <div class="mb-3" *ngIf="myForm.get('segmented')!.value">
-                    <label class="required" for="duration">Duración (min.)</label>
-                    <input type="number" class="form-control text-end" name="duration" id="duration"
-                        formControlName="duration" pattern="[0-9]*" />
-                    <div
-                        *ngIf="myForm.get('duration')!.invalid && (myForm.get('duration')!.dirty || myForm.get('duration')!.touched)">
-                        <small class="form-text text-danger" *ngIf="myForm.get('duration')?.errors?.required">
-                            El campo es requerido.
-                        </small>
-                        <small class="form-text text-danger" *ngIf="myForm.get('duration')?.errors?.min">
-                            La Duración debe ser mayor o igual a 5.
-                        </small>
-                    </div>
-                </div>
-            </div>
-        </div>
-            
-        <div class="row">
-            <div class="col-lg-2">
-                <div class="mb-3">
-                    <label for="omitHolidays" class="mt-30 d-flex">
-                        <input type="checkbox" class="checkbox ms-1" id="omitHolidays" name="omitHolidays"
-                            formControlName="omitHolidays">
-                        ¿Omitir feriados?
-                    </label>
-                </div>
-            </div>
-            
-            <div class="col-lg-2">
-                <div class="mb-3">
-                    <label for="repeat" class="mt-30 d-flex">
-                        <input type="checkbox" class="checkbox ms-1" id="repeat" name="repeat" formControlName="repeat"
-                            (ngModelChange)="onRepeatChange()">
-                        ¿Se repite?
-                    </label>
-                </div>
-            </div>
-
-            <div class="col-lg-3">
-                <div class="mb-3" *ngIf="myForm.get('repeat')!.value">
-                    <label class="required" for="repeatType">Cada</label>
-                    <ng-select [items]="repeatTypesList" bindValue="id" bindLabel="value" notFoundText="Sin items" clearAllText="Limpiar"
-                        id="repeatType" formControlName="repeatType" (ngModelChange)="onRepeatTypeChange()">
-                    </ng-select>
-                    <small class="text-info">{{ dayOfTheMonthText }}</small>
-                </div>
-            </div>
-
-            <div class="col-lg-2">
-                <div class="mb-3" *ngIf="myForm.get('repeat')!.value">
-                    <label class="required">Hasta</label>
-                    <div class="input-group">
-                        <input class="form-control" placeholder="yyyy-mm-dd" name="finalize" formControlName="finalize"
-                            ngbDatepicker #finalize="ngbDatepicker" [minDate]="minDateToFinalize()" [maxDate]="maxDateToFinalize()">
-                        <div class="input-group-append">
-                            <button class="btn btn-primary" (click)="finalize.toggle()" type="button" title="Abrir Calendario">
-                                <i class="bi bi-calendar3"></i>
-                            </button>
+                    <div class="col-lg-6">
+                        <div class="mb-3">
+                            <label class="required" for="resourceType">Tipo de recurso</label>
+                            <ng-select [items]="resourcesTypes" bindLabel="description" notFoundText="Sin items"
+                                clearAllText="Limpiar" id="resourceType" formControlName="resourceType">
+                            </ng-select>
+                            <div
+                                *ngIf="myForm.get('resourceType')!.invalid && (myForm.get('resourceType')!.dirty || myForm.get('resourceType')!.touched)">
+                                <small class="form-text text-danger"
+                                    *ngIf="myForm.get('resourceType')?.errors?.required">
+                                    El campo es requerido.
+                                </small>
+                            </div>
                         </div>
                     </div>
-                    <div
-                        *ngIf="myForm.get('finalize')!.invalid && (myForm.get('finalize')!.dirty || myForm.get('finalize')!.touched)">
-                        <small class="form-text text-danger" *ngIf="myForm.get('finalize')?.errors?.required">
-                            El campo es requerido.
-                        </small>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-2">
+                        <div class="mb-3">
+                            <label class="required">Fecha inicio</label>
+                            <div class="input-group">
+                                <input class="form-control" placeholder="yyyy-mm-dd" name="startDate"
+                                    formControlName="startDate" ngbDatepicker #startDate="ngbDatepicker"
+                                    (ngModelChange)="onStartDateChange()">
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary" (click)="startDate.toggle()" type="button"
+                                        title="Abrir Calendario">
+                                        <i class="bi bi-calendar3"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div
+                                *ngIf="myForm.get('startDate')!.invalid && (myForm.get('startDate')!.dirty || myForm.get('startDate')!.touched)">
+                                <small class="form-text text-danger" *ngIf="myForm.get('startDate')?.errors?.required">
+                                    El campo es requerido.
+                                </small>
+                            </div>
+                            <small class="text-info">{{ myForm.get('zoneId')!.value }}</small>
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="mb-3">
+                            <label class="required">Hora inicio</label>
+                            <ngb-timepicker name="startHour" id="startHour" formControlName="startHour"
+                                [spinners]="false">
+                            </ngb-timepicker>
+                            <div
+                                *ngIf="myForm.get('startHour')!.invalid && (myForm.get('startHour')!.dirty || myForm.get('startHour')!.touched)">
+                                <small class="form-text text-danger" *ngIf="myForm.get('startHour')?.errors?.required">
+                                    El campo es requerido.
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="mb-3">
+                            <label class="required">Hora fin</label>
+                            <ngb-timepicker name="endHour" id="endHour" formControlName="endHour" [spinners]="false">
+                            </ngb-timepicker>
+                            <div
+                                *ngIf="myForm.get('endHour')!.invalid && (myForm.get('endHour')!.dirty || myForm.get('endHour')!.touched)">
+                                <small class="form-text text-danger" *ngIf="myForm.get('endHour')?.errors?.required">
+                                    El campo es requerido.
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="mb-3">
+                            <label for="segmented" class="mt-30 d-flex">
+                                <input type="checkbox" class="checkbox ms-1" id="segmented" name="segmented"
+                                    formControlName="segmented" (ngModelChange)="onSegmentedChange()">
+                                ¿Segmentado?
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-2">
+                        <div class="mb-3" *ngIf="myForm.get('segmented')!.value">
+                            <label class="required" for="duration">Duración (min.)</label>
+                            <input type="number" class="form-control text-end" name="duration" id="duration"
+                                formControlName="duration" pattern="[0-9]*" />
+                            <div
+                                *ngIf="myForm.get('duration')!.invalid && (myForm.get('duration')!.dirty || myForm.get('duration')!.touched)">
+                                <small class="form-text text-danger" *ngIf="myForm.get('duration')?.errors?.required">
+                                    El campo es requerido.
+                                </small>
+                                <small class="form-text text-danger" *ngIf="myForm.get('duration')?.errors?.min">
+                                    La duración debe ser mayor o igual a 5.
+                                </small>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
 
+                <div class="row">
+                    <div class="col-lg-2">
+                        <div class="mb-3">
+                            <label for="omitHolidays" class="mt-30 d-flex">
+                                <input type="checkbox" class="checkbox ms-1" id="omitHolidays" name="omitHolidays"
+                                    formControlName="omitHolidays">
+                                ¿Omitir feriados?
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-2">
+                        <div class="mb-3">
+                            <label for="repeat" class="mt-30 d-flex">
+                                <input type="checkbox" class="checkbox ms-1" id="repeat" name="repeat"
+                                    formControlName="repeat" (ngModelChange)="onRepeatChange()">
+                                ¿Se repite?
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3">
+                        <div class="mb-3" *ngIf="myForm.get('repeat')!.value">
+                            <label class="required" for="repeatType">Cada</label>
+                            <ng-select [items]="repeatTypesList" bindValue="id" bindLabel="value"
+                                notFoundText="Sin items" clearAllText="Limpiar" id="repeatType"
+                                formControlName="repeatType" (ngModelChange)="onRepeatTypeChange()">
+                            </ng-select>
+                            <small class="text-info">{{ dayOfTheMonthText }}</small>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-2">
+                        <div class="mb-3" *ngIf="myForm.get('repeat')!.value">
+                            <label class="required">Hasta</label>
+                            <div class="input-group">
+                                <input class="form-control" placeholder="yyyy-mm-dd" name="finalize"
+                                    formControlName="finalize" ngbDatepicker #finalize="ngbDatepicker"
+                                    [minDate]="minDateToFinalize()" [maxDate]="maxDateToFinalize()">
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary" (click)="finalize.toggle()" type="button"
+                                        title="Abrir Calendario">
+                                        <i class="bi bi-calendar3"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div
+                                *ngIf="myForm.get('finalize')!.invalid && (myForm.get('finalize')!.dirty || myForm.get('finalize')!.touched)">
+                                <small class="form-text text-danger" *ngIf="myForm.get('finalize')?.errors?.required">
+                                    El campo es requerido.
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="row mb--3" *ngIf="myForm.get('repeat')!.value && showDaysOfWeek">
+                    <div class="col-12">
+                        <div class="mb-3">
+                            <label class="required">¿Qué días se repite?</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid-container" *ngIf="myForm.get('repeat')!.value && showDaysOfWeek">
+
+                    <div class="sunday">
+                        <div class="mb-3">
+                            <label for="sunday" class="mt-30 d-flex pointer">
+                                <input type="checkbox" class="checkbox ms-1" id="sunday" name="sunday"
+                                    formControlName="sunday">
+                                Domingo
+                            </label>
+                        </div>
+                    </div>
+                    <div class="monday">
+                        <div class="mb-3">
+                            <label for="monday" class="mt-30 d-flex pointer">
+                                <input type="checkbox" class="checkbox ms-1" id="monday" name="monday"
+                                    formControlName="monday">
+                                Lunes
+                            </label>
+                        </div>
+                    </div>
+                    <div class="tuesday">
+                        <div class="mb-3">
+                            <label for="tuesday" class="mt-30 d-flex pointer">
+                                <input type="checkbox" class="checkbox ms-1" id="tuesday" name="tuesday"
+                                    formControlName="tuesday">
+                                Martes
+                            </label>
+                        </div>
+                    </div>
+                    <div class="wednesday">
+                        <div class="mb-3">
+                            <label for="wednesday" class="mt-30 d-flex pointer">
+                                <input type="checkbox" class="checkbox ms-1" id="wednesday" name="wednesday"
+                                    formControlName="wednesday">
+                                Miércoles
+                            </label>
+                        </div>
+                    </div>
+                    <div class="thursday">
+                        <div class="mb-3">
+                            <label for="thursday" class="mt-30 d-flex pointer">
+                                <input type="checkbox" class="checkbox ms-1" id="thursday" name="thursday"
+                                    formControlName="thursday">
+                                Jueves
+                            </label>
+                        </div>
+                    </div>
+                    <div class="friday">
+                        <div class="mb-3">
+                            <label for="friday" class="mt-30 d-flex pointer">
+                                <input type="checkbox" class="checkbox ms-1" id="friday" name="friday"
+                                    formControlName="friday">
+                                Viernes
+                            </label>
+                        </div>
+                    </div>
+                    <div class="saturday">
+                        <div class="mb-3">
+                            <label for="saturday" class="mt-30 d-flex pointer">
+                                <input type="checkbox" class="checkbox ms-1" id="saturday" name="saturday"
+                                    formControlName="saturday">
+                                Sábado
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="button-form mt-4">
+                    <button type="button" class="btn btn-secondary" (click)="previousState()" title="Cancelar">
+                        <i class="bi bi-ban"></i>&nbsp;Cancelar
+                    </button>
+                    <button type="submit" [disabled]="myForm.invalid || isSaving || !hasAnyDaySelected()"
+                        class="btn btn-primary">
+                        <i class="bi bi-floppy"></i>&nbsp;Guardar
+                    </button>
+                </div>
+            </form>
         </div>
-
-
-        <div class="row mb--3" *ngIf="myForm.get('repeat')!.value && showDaysOfWeek">
-            <div class="col-12">
-                <div class="mb-3">
-                    <label class="required">¿Qué días se repite?</label>
-                </div>
-            </div>
-        </div>
-
-        <div class="grid-container" *ngIf="myForm.get('repeat')!.value && showDaysOfWeek">
-
-            <div class="sunday">
-                <div class="mb-3">
-                    <label for="sunday" class="mt-30 d-flex pointer">
-                        <input type="checkbox" class="checkbox ms-1" id="sunday" name="sunday" formControlName="sunday">
-                        Domingo
-                    </label>
-                </div>
-            </div>
-            <div class="monday">
-                <div class="mb-3">
-                    <label for="monday" class="mt-30 d-flex pointer">
-                        <input type="checkbox" class="checkbox ms-1" id="monday" name="monday" formControlName="monday">
-                        Lunes
-                    </label>
-                </div>
-            </div>
-            <div class="tuesday">
-                <div class="mb-3">
-                    <label for="tuesday" class="mt-30 d-flex pointer">
-                        <input type="checkbox" class="checkbox ms-1" id="tuesday" name="tuesday"
-                            formControlName="tuesday">
-                        Martes
-                    </label>
-                </div>
-            </div>
-            <div class="wednesday">
-                <div class="mb-3">
-                    <label for="wednesday" class="mt-30 d-flex pointer">
-                        <input type="checkbox" class="checkbox ms-1" id="wednesday" name="wednesday"
-                            formControlName="wednesday">
-                        Miércoles
-                    </label>
-                </div>
-            </div>
-            <div class="thursday">
-                <div class="mb-3">
-                    <label for="thursday" class="mt-30 d-flex pointer">
-                        <input type="checkbox" class="checkbox ms-1" id="thursday" name="thursday"
-                            formControlName="thursday">
-                        Jueves
-                    </label>
-                </div>
-            </div>
-            <div class="friday">
-                <div class="mb-3">
-                    <label for="friday" class="mt-30 d-flex pointer">
-                        <input type="checkbox" class="checkbox ms-1" id="friday" name="friday" formControlName="friday">
-                        Viernes
-                    </label>
-                </div>
-            </div>
-            <div class="saturday">
-                <div class="mb-3">
-                    <label for="saturday" class="mt-30 d-flex pointer">
-                        <input type="checkbox" class="checkbox ms-1" id="saturday" name="saturday"
-                            formControlName="saturday">
-                        Sábado
-                    </label>
-                </div>
-            </div>
-        </div>
-
-        <div class="button-form mt-4">
-            <button type="button" class="btn btn-secondary" (click)="previousState()" title="Cancelar">
-                <i class="bi bi-ban"></i>&nbsp;Cancelar
-            </button>
-            <button type="submit" [disabled]="myForm.invalid || isSaving || !hasAnyDaySelected()" 
-                 class="btn btn-primary">
-                <i class="bi bi-floppy"></i>&nbsp;Guardar
-            </button>
-        </div>
-    </form>
+    </div>
 </div>

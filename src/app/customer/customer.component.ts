@@ -38,17 +38,17 @@ export class CustomerComponent implements OnInit {
 
   ngOnInit(): void {
     this.filterInputs = [
-      { label: 'Razón Social', type: InputTypeEnum.TEXT, name: 'businessName', width: 4 },
+      { label: 'Razón social', type: InputTypeEnum.TEXT, name: 'businessName', width: 4 },
       { label: 'Marca', type: InputTypeEnum.TEXT, name: 'brandName', width: 4 },
-      { label: 'Correo Electrónico', type: InputTypeEnum.TEXT, name: 'email', width: 4 },
+      { label: 'Correo electrónico', type: InputTypeEnum.TEXT, name: 'email', width: 4 },
       { label: 'Teléfono 1', type: InputTypeEnum.TEXT, name: 'phone1', width: 4 },
       { label: 'Activos', type: InputTypeEnum.LIST, name: 'active', width: 2, itemList: getListToBoolean() },
     ];
 
     this.headers = [
-      { label: 'Razón Social', colName: 'businessName', canSort: true },
+      { label: 'Razón social', colName: 'businessName', canSort: true },
       { label: 'Marca', colName: 'brandName', canSort: true },
-      { label: 'Correo Electrónico', colName: 'email', canSort: true },
+      { label: 'Correo electrónico', colName: 'email', canSort: true },
       { label: 'Teléfono 1', colName: 'phone1', canSort: true },
       { label: 'Activo', colName: 'active', canSort: true }
     ];
