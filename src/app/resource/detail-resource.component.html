@@ -8,6 +8,11 @@
             <i class="bi bi-eye"></i>&nbsp;Detalle
           </a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" data-bs-toggle="tab" href="#appointments" (click)="getHistory()">
+            <i class="bi bi-list-task"></i>&nbsp;Historial de turnos
+          </a>
+        </li>
       </ul>
     </div>
     <div class="card-body tab-content">
@@ -45,6 +50,27 @@
           <button *hasPermission="['resources.write']" type="button" [routerLink]="['../../', resource.id, 'edit']"
             class="btn btn-primary" title="Editar">
             <i class="bi bi-pencil"></i>&nbsp;Editar
+          </button>
+        </div>
+      </div>
+      <div class="tab-pane" id="appointments">
+        <div class="row">
+          <app-table *ngIf="resource" [headers]="headers" [bodyTemplate]="customBody" [sort]="sort" [queryItems]="query" #tableComponent>
+            <ng-template #customBody let-items>
+              <tr *ngFor="let appointment of items">
+                <td>{{ appointment.agenda.startDate | date: 'dd/MM/yyyy HH:mm' }}</td>
+                <td>{{ appointment.agenda.endDate | date: 'dd/MM/yyyy HH:mm' }}</td>
+                <td>{{ appointment.customer.businessName }}</td>
+                <td>{{ appointment.agenda.resourceType.description }}</td>
+                <td><app-appointment-status [appointment]="appointment"></app-appointment-status></td>
+              </tr>
+            </ng-template>
+          </app-table>
+        </div>
+
+        <div class="button-form">
+          <button type="button" class="btn btn-secondary" (click)="previousState()" title="Volver">
+            <i class="bi bi-arrow-left-short"></i>&nbsp;Volver
           </button>
         </div>
       </div>
