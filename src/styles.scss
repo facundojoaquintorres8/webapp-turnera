@@ -15,20 +15,21 @@ body {
   background-color: #0e2238 !important;
 }
 
-@media screen and (max-width: 991px) {
-  .form-public {
-    width: 100% !important;
-  }
+.form-public { 
+  height: fit-content;
+  width: 40vw;
+}
 
-  .input-group {
-    min-width: 120px;
+@media screen and (max-width: 768px) {
+  .form-public {
+      width: 100vw;
   }
 }
 
-.form-public {
-  margin-left: auto;
-  margin-right: auto;
-  width: 40%;
+@media screen and (max-width: 991px) {
+  .input-group {
+    min-width: 120px;
+  }
 }
 
 .button-form {

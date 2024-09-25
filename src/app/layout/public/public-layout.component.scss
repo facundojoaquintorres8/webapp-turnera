@@ -6,3 +6,14 @@ img.background-image {
     top: 0;
     z-index: -1000;
 }
+
+@media screen and (max-width: 991px) {
+    .layout-public {
+        width: 100% !important;
+    }
+}
+
+.layout-public {
+    flex-wrap: wrap;
+    min-height: 100vh;
+}
