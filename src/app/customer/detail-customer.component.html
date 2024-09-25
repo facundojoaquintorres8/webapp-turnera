@@ -53,7 +53,7 @@
                 <td>{{ appointment.agenda.endDate | date: 'dd/MM/yyyy HH:mm' }}</td>
                 <td>{{ appointment.agenda.resource.description }}</td>
                 <td>{{ appointment.agenda.resourceType.description }}</td>
-                <td><app-appointment-status [appointment]="appointment"></app-appointment-status></td>
+                <td><app-appointment-status [status]="appointment.lastAppointmentStatus"></app-appointment-status></td>
               </tr>
             </ng-template>
           </app-table>

@@ -2,7 +2,7 @@
   <div class="card">
     <div class="card-header bg-dark text-white">
       <h1 class="card-title">
-        Seguimiento de Turnos
+        Seguimiento de Disponibilidades
       </h1>
     </div>
     <div class="card-body">
@@ -19,7 +19,7 @@
             <td>{{ agenda.endDate | date: 'dd/MM/yyyy HH:mm' }}</td>
             <td>{{ agenda.lastAppointment ? agenda.lastAppointment.customerBusinessName : '-'}}</td>
             <td>
-              <app-appointment-status [appointment]="agenda.lastAppointment"></app-appointment-status>
+              <app-appointment-status [status]="agenda.lastAppointment ? agenda.lastAppointment.lastAppointmentStatus : null"></app-appointment-status>
               <ng-container *ngIf="agenda.lastAppointment && agenda.lastAppointment.lastAppointmentStatus.observations">
                 <i class="bi bi-chat-text text-primary ms-1 pointer"
                   (click)="seeObservations(agenda.lastAppointment.lastAppointmentStatus.observations)"
@@ -28,6 +28,7 @@
             </td>
 
             <td class="text-end">
+
               <button type="button" *ngIf="canBook(agenda)" (click)="book(agenda)" class="btn btn-primary btn-icon ms-1"
                 title="Reservar turno">
                 <i class="bi bi-plus-lg"></i>
@@ -68,8 +69,13 @@
                 <i class="bi bi-calendar-plus"></i>
               </button>
 
+              <button *hasPermission="['agendas.read']" type="button" [routerLink]="['../agendas', agenda.id, 'view']"
+                class="btn btn-info btn-icon ms-1" title="Ver disponibilidad">
+                <i class="bi bi-eye"></i>
+              </button>
+
               <button *hasPermission="['agendas.write']" type="button" [routerLink]="['../agendas', agenda.id, 'edit']"
-                class="btn btn-info btn-icon ms-1" title="Editar disponibilidad">
+                class="btn btn-primary btn-icon ms-1" title="Editar disponibilidad">
                 <i class="bi bi-pencil"></i>
               </button>
             </td>

@@ -7,9 +7,10 @@ import { UpdateAgendaComponent } from './update-agenda.component';
 import { DeleteAgendaModalComponent } from './delete-agenda-modal.component';
 import { DesactivateAgendaModalComponent } from './desactivate-agenda-modal.component';
 import { ActivateAgendaModalComponent } from './activate-agenda-modal.component';
+import { DetailAgendaComponent } from './detail-agenda.component';
 
 @NgModule({
-    declarations: [CreateAgendaComponent, UpdateAgendaComponent, DeleteAgendaModalComponent, DesactivateAgendaModalComponent, ActivateAgendaModalComponent],
+    declarations: [CreateAgendaComponent, UpdateAgendaComponent, DetailAgendaComponent, DeleteAgendaModalComponent, DesactivateAgendaModalComponent, ActivateAgendaModalComponent],
     imports: [SharedModule, RouterModule.forChild(agendaRoutes)]
 })
 export class AgendaModule { }

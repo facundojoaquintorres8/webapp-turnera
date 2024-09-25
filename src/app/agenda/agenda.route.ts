@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { AuthGuard } from '../security/auth-guard';
 import { CreateAgendaComponent } from './create-agenda.component';
 import { UpdateAgendaComponent } from './update-agenda.component';
+import { DetailAgendaComponent } from './detail-agenda.component';
 
 export const agendaRoutes: Routes = [
   {
@@ -22,4 +23,13 @@ export const agendaRoutes: Routes = [
     },
     canActivate: [AuthGuard]
   },
+  {
+    path: ':id/view',
+    component: DetailAgendaComponent,
+    data: {
+      title: 'Detalle de Disponibilidad',
+      permissions: ['agendas.read']
+    },
+    canActivate: [AuthGuard]
+  }
 ];

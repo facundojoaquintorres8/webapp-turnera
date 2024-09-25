@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { AppointmentStatusEnum, IAppointment } from 'src/app/models/appointment.model';
+import { AppointmentStatusEnum, IAppointmentStatus } from 'src/app/models/appointment.model';
 
 @Component({
   selector: 'app-appointment-status',
@@ -8,15 +8,15 @@ import { AppointmentStatusEnum, IAppointment } from 'src/app/models/appointment.
 })
 export class AppointmentStatusComponent {
 
-  @Input() appointment!: IAppointment;
+  @Input() status!: IAppointmentStatus;
   appointmentStatusEnum: any = AppointmentStatusEnum;
 
   constructor() { }
 
-  appointmentStatusColor(appointment: IAppointment): string {
+  appointmentStatusColor(status: IAppointmentStatus): string {
     let result = 'bg-white border border-primary'; // Free
-    if (appointment) {
-      switch (this.appointmentStatusEnum[appointment.lastAppointmentStatus.status]) {
+    if (status) {
+      switch (this.appointmentStatusEnum[status.status]) {
         case AppointmentStatusEnum.BOOKED:
           result = 'bg-primary text-white';
           break;

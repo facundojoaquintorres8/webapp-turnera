@@ -1,10 +1,12 @@
 import { IAgenda } from './agenda.models';
-import { IQuickCustomer } from './customer.models';
+import { ICustomer, IQuickCustomer } from './customer.models';
 import { IListItem } from './list.models';
 
 export interface IAppointment {
     id: number;
     customerBusinessName: string;
+    customer: ICustomer;
+    appointmentStatus: IAppointmentStatus[];
     lastAppointmentStatus: IAppointmentStatus;
 }
 
@@ -22,6 +24,7 @@ export interface IAppointmentStatus {
     id: number;
     observations: string;
     status: AppointmentStatusEnum;
+    createdDate: string;
 }
 
 export enum AppointmentStatusEnum {

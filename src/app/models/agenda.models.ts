@@ -10,6 +10,7 @@ export interface IAgenda {
   startDate: Date;
   endDate: Date;
   lastAppointment: IAppointment;
+  appointments: IAppointment[];
   active: boolean;
 }
 

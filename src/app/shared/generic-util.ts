@@ -86,15 +86,19 @@ export function getPermissionActionOrder(value: string): number {
     name: "orderBy"
 })
 export class OrderByPipe implements PipeTransform {
-    transform(array: any, field: string): any[] | undefined {
+    transform(array: any, field: string, sort?: string): any[] | undefined {
         if (!Array.isArray(array)) {
           return;
         }
+        if (!sort) {
+            sort = 'asc';
+        }
+        const isAsc: boolean = sort === 'asc';
         array.sort((a: any, b: any) => {
           if (a[field] < b[field]) {
-            return -1;
+            return isAsc ? -1 : 1;
           } else if (a[field] > b[field]) {
-            return 1;
+            return isAsc ? 1 : -1;
           } else {
             return 0;
           }

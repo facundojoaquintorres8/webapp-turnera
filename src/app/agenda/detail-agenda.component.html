@@ -1,0 +1,84 @@
+<div class="m-sm-1">
+    <div class="card">
+        <div class="card-header bg-dark text-white">
+            <h1 class="card-title">Disponibilidad: <span *ngIf="agenda">{{ agenda.startDate | date: 'dd/MM/yyyy HH:mm'
+                    }} - {{ agenda.endDate | date: 'dd/MM/yyyy HH:mm' }}</span></h1>
+            <ul class="nav nav-tabs card-header-tabs" data-bs-tabs="tabs">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="true" data-bs-toggle="tab" href="#detail">
+                        <i class="bi bi-eye"></i>&nbsp;Detalle
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="card-body tab-content">
+            <div class="tab-pane active" id="detail">
+                <ul class="list-group list-group-flush" *ngIf="agenda">
+                    <li class="list-group-item d-flex justify-content-between">
+                        <h5>Fecha inicio</h5>
+                        <h6>{{ agenda.startDate | date: 'dd/MM/yyyy HH:mm' }}</h6>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between">
+                        <h5>Fecha fin</h5>
+                        <h6>{{ agenda.endDate | date: 'dd/MM/yyyy HH:mm' }}</h6>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between">
+                        <h5>Recurso</h5>
+                        <h6>{{ agenda.resource.description }}</h6>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between">
+                        <h5>Tipo de Recurso</h5>
+                        <h6>{{ agenda.resourceType.description }}</h6>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between">
+                        <h5>Activa</h5>
+                        <i *ngIf="agenda.active" class="bi bi-check-square text-success"></i>
+                        <i *ngIf="!agenda.active" class="bi bi-square text-danger outline"></i>
+                    </li>
+                    <li class="list-group-item border-0">
+                        <h5>Historial de Turnos asignados</h5>
+                      </li>
+                      <li class="list-group-item">
+                        <div class="table-responsive">
+                          <table class="table table-light table-striped">
+                            <thead>
+                              <tr>
+                                <th scope="col">Cliente</th>
+                                <th scope="col">Estados</th>
+                              </tr>
+                            </thead>
+                            <tbody class="table-group-divider">
+                              <tr *ngFor="let appo of agenda.appointments | orderBy:'id':'desc'">
+                                <td>{{ appo.customer.businessName }}</td>
+                                <td>
+                                  <div *ngFor="let status of appo.appointmentStatus | orderBy:'createdDate':'desc'">
+                                    <app-appointment-status [status]="status"></app-appointment-status>
+                                    {{ status.createdDate | date: 'dd/MM/yyyy HH:mm' }}
+                                    <ng-container *ngIf="status.observations">
+                                        <i class="bi bi-chat-text text-primary ms-1 pointer"
+                                          (click)="seeObservations(status.observations)"
+                                          ngbTooltip="{{ 'Observaciones: ' + status.observations }}"></i>
+                                      </ng-container>
+                                  </div>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </li>
+                </ul>
+                <div class="button-form m-0" *ngIf="agenda">
+                    <button type="button" class="btn btn-secondary" (click)="previousState()" title="Volver">
+                        <i class="bi bi-arrow-left-short"></i>&nbsp;Volver
+                    </button>
+
+                    <button *hasPermission="['agendas.write']" type="button"
+                        [routerLink]="['../../', agenda.id, 'edit']" class="btn btn-primary" title="Editar">
+                        <i class="bi bi-pencil"></i>&nbsp;Editar
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
