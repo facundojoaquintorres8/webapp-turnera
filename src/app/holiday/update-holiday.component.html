@@ -44,16 +44,14 @@
                         </div>
                     </div>
                     <div class="col-auto d-flex align-items-center">
-                        <div class="form-check">
-                            <input type="checkbox" class="form-check-input" name="useInAgenda" id="useInAgenda"
-                                formControlName="useInAgenda" />
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" id="useInAgenda" name="useInAgenda" formControlName="useInAgenda">
                             <label class="form-check-label" for="useInAgenda">Usar en Agenda</label>
                         </div>
                     </div>
                     <div class="col-auto d-flex align-items-center" *ngIf="myForm.get('id')!.value">
-                        <div class="form-check">
-                            <input type="checkbox" class="form-check-input" name="active" id="active"
-                                formControlName="active" />
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" id="active" name="active" formControlName="active">
                             <label class="form-check-label" for="active">Activo</label>
                         </div>
                     </div>

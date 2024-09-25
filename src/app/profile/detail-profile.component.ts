@@ -8,8 +8,7 @@ import { getPermissionActionOrder, translateEntityFromPermission } from '../shar
 
 @Component({
   selector: 'app-detail-profile',
-  templateUrl: './detail-profile.component.html',
-  styleUrls: ['./profile.scss']
+  templateUrl: './detail-profile.component.html'
 })
 export class DetailProfileComponent implements OnInit {
   profile!: IProfile;

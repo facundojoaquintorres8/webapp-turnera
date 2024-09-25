@@ -23,9 +23,8 @@
                         </div>
                     </div>
                     <div class="col-auto d-flex align-items-center" *ngIf="myForm.get('id')!.value">
-                        <div class="form-check">
-                            <input type="checkbox" class="form-check-input" name="active" id="active"
-                                formControlName="active" />
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" id="active" name="active" formControlName="active">
                             <label class="form-check-label" for="active">Activo</label>
                         </div>
                     </div>
@@ -49,10 +48,11 @@
                     </div>
                     <div class="row">
                         <ng-container *ngFor="let permissionByEntity of permissionsByEntities">
-                            <div class="col-lg-3 d-flex border">
-                                <input type="checkbox" class="form-check-input" name="selectAll" id="selectAll"
-                                    (change)="selectAllEntity(permissionByEntity)"
-                                    [checked]="permissionByEntity.selected" />
+                            <div class="col-lg-3 d-flex border align-items-center">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="selectAll" name="selectAll"
+                                        (change)="selectAllEntity(permissionByEntity)" [checked]="permissionByEntity.selected">
+                                </div>
                                 <span class="lead pointer" [ngSwitch]="permissionByEntity.name"
                                     (click)="selectAllEntity(permissionByEntity)">
                                     <span *ngSwitchCase="'users'"
@@ -80,27 +80,19 @@
                             <div class="col-lg-3 border">
                                 <div class="row" *ngFor="let action of permissionByEntity.actions; let index = index">
                                     <div class="col-lg-12 d-flex">
-                                        <input type="checkbox" class="form-check-input" name="select + {{index}}"
-                                            id="select + {{index}}"
-                                            (change)="select(action.permission, permissionByEntity)"
-                                            [checked]="action.permission.selected" />
-                                        <span class="lead pointer" [ngSwitch]="action.action"
-                                            (click)="select(action.permission, permissionByEntity)">
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" id="select + {{index}}" name="select + {{index}}"
+                                                (change)="select(action.permission, permissionByEntity)" [checked]="action.permission.selected">
+                                        </div>
+                                        <span class="lead pointer" [ngSwitch]="action.action" (click)="select(action.permission, permissionByEntity)">
                                             <span *ngSwitchCase="'read'" class="badge rounded-pill bg-info">Ver</span>
-                                            <span *ngSwitchCase="'write'"
-                                                class="badge rounded-pill bg-primary">Actualizar</span>
-                                            <span *ngSwitchCase="'delete'"
-                                                class="badge rounded-pill bg-danger">Eliminar</span>
-                                            <span *ngSwitchCase="'book'"
-                                                class="badge rounded-pill bg-primary">Reservar</span>
-                                            <span *ngSwitchCase="'absent'"
-                                                class="badge rounded-pill bg-dark">Ausentar</span>
-                                            <span *ngSwitchCase="'cancel'"
-                                                class="badge rounded-pill bg-danger">Cancelar</span>
-                                            <span *ngSwitchCase="'attend'"
-                                                class="badge rounded-pill bg-info">Atender</span>
-                                            <span *ngSwitchCase="'finalize'"
-                                                class="badge rounded-pill bg-success">Finalizar</span>
+                                            <span *ngSwitchCase="'write'" class="badge rounded-pill bg-primary">Actualizar</span>
+                                            <span *ngSwitchCase="'delete'" class="badge rounded-pill bg-danger">Eliminar</span>
+                                            <span *ngSwitchCase="'book'" class="badge rounded-pill bg-primary">Reservar</span>
+                                            <span *ngSwitchCase="'absent'" class="badge rounded-pill bg-dark">Ausentar</span>
+                                            <span *ngSwitchCase="'cancel'" class="badge rounded-pill bg-danger">Cancelar</span>
+                                            <span *ngSwitchCase="'attend'" class="badge rounded-pill bg-info">Atender</span>
+                                            <span *ngSwitchCase="'finalize'" class="badge rounded-pill bg-success">Finalizar</span>
                                         </span>
                                     </div>
                                 </div>

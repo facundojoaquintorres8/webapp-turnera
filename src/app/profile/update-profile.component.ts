@@ -10,8 +10,7 @@ import { IResponse } from '../models/response.models';
 
 @Component({
   selector: 'app-update-profile',
-  templateUrl: './update-profile.component.html',
-  styleUrls: ['./profile.scss']
+  templateUrl: './update-profile.component.html'
 })
 export class UpdateProfileComponent implements OnInit {
   isSaving = false;

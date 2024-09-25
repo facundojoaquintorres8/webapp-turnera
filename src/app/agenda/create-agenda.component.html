@@ -93,11 +93,11 @@
                     </div>
                     <div class="col-lg-2">
                         <div class="mb-3">
-                            <label for="segmented" class="mt-30 d-flex">
-                                <input type="checkbox" class="checkbox ms-1" id="segmented" name="segmented"
-                                    formControlName="segmented" (ngModelChange)="onSegmentedChange()">
-                                ¿Segmentado?
-                            </label>
+                            <div class="form-check form-switch mt-30">
+                                <input class="form-check-input" type="checkbox" id="segmented" name="segmented" formControlName="segmented"
+                                    (ngModelChange)="onSegmentedChange()">
+                                <label class="form-check-label" for="segmented">¿Segmentado?</label>
+                            </div>
                         </div>
                     </div>
 
@@ -122,21 +122,21 @@
                 <div class="row">
                     <div class="col-lg-2">
                         <div class="mb-3">
-                            <label for="omitHolidays" class="mt-30 d-flex">
-                                <input type="checkbox" class="checkbox ms-1" id="omitHolidays" name="omitHolidays"
+                            <div class="form-check form-switch mt-30">
+                                <input class="form-check-input" type="checkbox" id="omitHolidays" name="omitHolidays"
                                     formControlName="omitHolidays">
-                                ¿Omitir feriados?
-                            </label>
+                                <label class="form-check-label" for="omitHolidays">¿Omitir feriados?</label>
+                            </div>
                         </div>
                     </div>
 
                     <div class="col-lg-2">
                         <div class="mb-3">
-                            <label for="repeat" class="mt-30 d-flex">
-                                <input type="checkbox" class="checkbox ms-1" id="repeat" name="repeat"
-                                    formControlName="repeat" (ngModelChange)="onRepeatChange()">
-                                ¿Se repite?
-                            </label>
+                            <div class="form-check form-switch mt-30">
+                                <input class="form-check-input" type="checkbox" id="repeat" name="repeat" formControlName="repeat"
+                                    (ngModelChange)="onRepeatChange()">
+                                <label class="form-check-label" for="repeat">¿Se repite?</label>
+                            </div>
                         </div>
                     </div>
 
@@ -177,7 +177,7 @@
                 </div>
 
 
-                <div class="row mb--3" *ngIf="myForm.get('repeat')!.value && showDaysOfWeek">
+                <div class="row mb--2" *ngIf="myForm.get('repeat')!.value && showDaysOfWeek">
                     <div class="col-12">
                         <div class="mb-3">
                             <label class="required">¿Qué días se repite?</label>
@@ -185,69 +185,62 @@
                     </div>
                 </div>
 
-                <div class="grid-container" *ngIf="myForm.get('repeat')!.value && showDaysOfWeek">
+                <div class="grid-container mt-30" *ngIf="myForm.get('repeat')!.value && showDaysOfWeek">
 
                     <div class="sunday">
                         <div class="mb-3">
-                            <label for="sunday" class="mt-30 d-flex pointer">
-                                <input type="checkbox" class="checkbox ms-1" id="sunday" name="sunday"
-                                    formControlName="sunday">
-                                Domingo
-                            </label>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="sunday" name="sunday" formControlName="sunday">
+                                <label class="form-check-label" for="sunday">Domingo</label>
+                            </div>
                         </div>
                     </div>
                     <div class="monday">
                         <div class="mb-3">
-                            <label for="monday" class="mt-30 d-flex pointer">
-                                <input type="checkbox" class="checkbox ms-1" id="monday" name="monday"
-                                    formControlName="monday">
-                                Lunes
-                            </label>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="monday" name="monday" formControlName="monday">
+                                <label class="form-check-label" for="monday">Lunes</label>
+                            </div>
                         </div>
                     </div>
                     <div class="tuesday">
                         <div class="mb-3">
-                            <label for="tuesday" class="mt-30 d-flex pointer">
-                                <input type="checkbox" class="checkbox ms-1" id="tuesday" name="tuesday"
-                                    formControlName="tuesday">
-                                Martes
-                            </label>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="tuesday" name="tuesday" formControlName="tuesday">
+                                <label class="form-check-label" for="tuesday">Martes</label>
+                            </div>
                         </div>
                     </div>
                     <div class="wednesday">
                         <div class="mb-3">
-                            <label for="wednesday" class="mt-30 d-flex pointer">
-                                <input type="checkbox" class="checkbox ms-1" id="wednesday" name="wednesday"
-                                    formControlName="wednesday">
-                                Miércoles
-                            </label>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="wednesday" name="wednesday" formControlName="wednesday">
+                                <label class="form-check-label" for="wednesday">Miércoles</label>
+                            </div>
                         </div>
                     </div>
                     <div class="thursday">
                         <div class="mb-3">
-                            <label for="thursday" class="mt-30 d-flex pointer">
-                                <input type="checkbox" class="checkbox ms-1" id="thursday" name="thursday"
-                                    formControlName="thursday">
-                                Jueves
-                            </label>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="thursday" name="thursday" formControlName="thursday">
+                                <label class="form-check-label" for="thursday">Jueves</label>
+                            </div>
                         </div>
                     </div>
                     <div class="friday">
                         <div class="mb-3">
-                            <label for="friday" class="mt-30 d-flex pointer">
-                                <input type="checkbox" class="checkbox ms-1" id="friday" name="friday"
-                                    formControlName="friday">
-                                Viernes
-                            </label>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="friday" name="friday" formControlName="friday">
+                                <label class="form-check-label" for="friday">Viernes</label>
+                            </div>
                         </div>
                     </div>
                     <div class="saturday">
                         <div class="mb-3">
-                            <label for="saturday" class="mt-30 d-flex pointer">
-                                <input type="checkbox" class="checkbox ms-1" id="saturday" name="saturday"
-                                    formControlName="saturday">
-                                Sábado
-                            </label>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="saturday" name="saturday" formControlName="saturday">
+                                <label class="form-check-label" for="saturday">Sábado</label>
+                            </div>
                         </div>
                     </div>
                 </div>
