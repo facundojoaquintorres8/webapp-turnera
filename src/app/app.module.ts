@@ -8,12 +8,13 @@ import { FooterComponent } from './layout/footer/footer.component';
 import { PrivateLayoutComponent } from './layout/private/private-layout.component';
 import { PublicLayoutComponent } from './layout/public/public-layout.component';
 import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
-import { TokenInterceptor } from './security/token-interceptor';
 import { ToastComponent } from './component/toast/toast.component';
 import localeEsAr from '@angular/common/locales/es-AR';
 import { registerLocaleData } from '@angular/common';
 import { PermissionModule } from './security/permission.module';
 import { AuthGuard } from './security/auth-guard';
+import { TokenInterceptor } from './shared/interceptor/token-interceptor';
+import { LoadingInterceptor } from './shared/interceptor/loading.interceptor';
 
 const APP_CONTAINERS = [
     PrivateLayoutComponent,
@@ -39,6 +40,11 @@ registerLocaleData(localeEsAr, 'es');
         {
             provide: HTTP_INTERCEPTORS,
             useClass: TokenInterceptor,
+            multi: true
+        },
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: LoadingInterceptor,
             multi: true
         },
         { provide: LOCALE_ID, useValue: 'es' },

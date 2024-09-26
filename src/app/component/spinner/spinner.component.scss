@@ -1,0 +1,30 @@
+.spinner-border {
+    width: 5rem;
+    height: 5rem;
+}
+
+.spinner-container {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    justify-content: center;
+}
+
+::ng-deep {
+    .modal-spinner {
+        .modal-dialog {
+            height: 100%;
+        }
+    
+        .modal-content {
+            background-color: transparent;
+            border: 0;
+            height: 100%;
+        }
+    
+        app-spinner {
+            height: 100%;
+        }
+    }
+
+}
