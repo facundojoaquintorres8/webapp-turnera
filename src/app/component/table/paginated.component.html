@@ -16,17 +16,17 @@
             </button>
         </li>
         <li class="page-item" *ngIf="page - 1 > 0">
-            <button type="button" (click)="goToPage(page - 1)" class="btn btn-outline-dark btn-icon" title="{{ page - 1 }}">
+            <button type="button" (click)="goToPage(page - 1)" class="btn btn-outline-dark" title="{{ page - 1 }}">
                 {{ page - 1 }}
             </button>
         </li>
         <li class="page-item">
-            <button type="button" [disabled]="true" class="btn btn-dark btn-icon" title="Página actual">
+            <button type="button" [disabled]="true" class="btn btn-dark" title="Página actual">
                 {{ totalPages === 0 ? '-' : page }}
             </button>
         </li>
         <li class="page-item" *ngIf="page + 1 <= totalPages">
-            <button type="button" (click)="goToPage(page + 1)" class="btn btn-outline-dark btn-icon" title="{{ page + 1 }}">
+            <button type="button" (click)="goToPage(page + 1)" class="btn btn-outline-dark" title="{{ page + 1 }}">
                 {{ page + 1 }}
             </button>
         </li>
